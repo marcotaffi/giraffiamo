@@ -1,0 +1,12 @@
+2) Verifica preliminare
+   - Individua l'argomento centrale su cui scrivere
+   - Individua il tipo di prodotto atteso. Esempi: 
+      - Annuncio di un evento futuro da rilanciare 
+      - Comunicato stampa
+      - Dichiarazione ufficiale o presa di posizione
+      - Articolo di cronaca
+      - Intervista, storia, racconto, testimonianza
+      - Dossier di approfondimento
+   - Individua un unico tool da utilizzare, relativo al prodotto atteso, per produrre un solo articolo sull'unico argomento scelto.
+       - è obbligatorio utilizzare sempre 1 e 1 solo dei tuoi tool per produrre il contenuto giornalistico.
+   - Individua URL fonte originale, se noto.

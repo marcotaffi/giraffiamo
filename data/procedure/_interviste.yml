@@ -1,0 +1,9 @@
+name: interviste
+description: multitask per giornalista di interviste/testimonianze
+type: sequenziale
+tasks:
+  - name: interviste
+    type: step
+  - name: genera_titoli_apg23
+    type: step
+

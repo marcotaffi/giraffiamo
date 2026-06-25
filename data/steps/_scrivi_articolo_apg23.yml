@@ -1,0 +1,5 @@
+name: scrivi_articolo_apg23
+type: prompt
+description: "Scrivi un nuovo articolo per il sito apg23"
+prompt: scrivi_articolo_apg23
+agentName: redattore

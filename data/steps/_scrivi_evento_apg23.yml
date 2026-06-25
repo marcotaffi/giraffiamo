@@ -1,0 +1,5 @@
+name: scrivi_evento_apg23
+type: prompt
+description: "Scrivi un nuovo evento per il sito apg23"
+prompt: scrivi_evento_apg23
+agentName: ufficiostampa

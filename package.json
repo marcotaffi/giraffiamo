@@ -1,0 +1,24 @@
+{
+  "name": "giraffiamo",
+  "version": "1.0.0",
+  "description": "Bot di giraffiamo.it",
+  "type": "module",
+  "main": "dist/giraffiamo.js",
+  "scripts": {
+    "start": "node dist/giraffiamo.js > /var/log/iooo/giraffiamo.log 2>&1 &",
+    "build": "npx tsc",
+    "dev": "npx tsc --watch"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "js-yaml": "^4.1.0",
+    "process": "^0.11.10",
+    "typescript": "^5.8.3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.15.21"
+  }
+}

@@ -1,0 +1,23 @@
+agentName: titolista
+agentDescription: "titolista professionale"
+apiClient: "gpt-response-dev"
+#assistant_id: "pmpt_690f45d1fb988190bc4b62562bbc55f40f0c5f030993c141"
+instructions: 
+  - instructions_titolista
+params:
+  model: "gpt-4o-mini"
+  tool_choice: "none"
+  type:
+    - title
+    - excerpt
+    - postType  
+    - date
+    - place_of_event
+    - yoast_title
+    - yoast_metadesc
+    - text
+    - author 
+    - image 
+    - status
+    - fonte
+

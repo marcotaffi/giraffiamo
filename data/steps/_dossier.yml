@@ -1,0 +1,5 @@
+name: dossier
+type: prompt
+description: "Scrivi un dossier"
+prompt: giornalista
+agentName: dossier

@@ -1,0 +1,10 @@
+firma: pubblicaapg23
+servizio: wordpress
+destinazione: apg23 #usato nel costruire la firma e i nomi delle procedure chiamabili come tools
+procedura: orchestra
+classificazione:
+  includi:
+    - hooks: ["semprenews.it/tag/Comunita-Papa-Giovanni-XXIII"]
+      type: "feeds"
+      flusso: "Instant"
+  escludi: []

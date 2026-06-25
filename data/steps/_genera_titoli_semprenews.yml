@@ -1,0 +1,5 @@
+name: genera_titoli_semprenews
+type: prompt
+description: "Genera titoli per semprenews"
+prompt: genera_titoli_semprenews
+agentName: titolista

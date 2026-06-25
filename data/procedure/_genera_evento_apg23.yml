@@ -1,0 +1,8 @@
+name: genera_evento_semprenews
+type: sequenziale
+tasks:
+  - name: scrivi_evento_apg23
+    type: step
+  - name: genera_titoli_apg23
+    type: step
+

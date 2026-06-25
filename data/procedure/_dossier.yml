@@ -1,0 +1,9 @@
+name: dossier
+description: multitask per giornalista di dossier
+type: sequenziale
+tasks:
+  - name: dossier
+    type: step
+  - name: genera_titoli_apg23
+    type: step
+

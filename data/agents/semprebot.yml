@@ -1,0 +1,16 @@
+agentName: semprebot
+agentDescription: "Avatar telegram di Sempre"
+apiClient: "gpt-response-dev"
+params:
+  model: "gpt-4o-mini"
+  type: "text"
+  temperature: 0.20
+  top_p: 0.20 
+  max_output_tokens: 6000
+instructions: 
+           - botinstructions
+toolNames: 
+           - gestoredate_now_readClock
+           - scraper_url_download
+           - websearch_italia_low
+           - wordpress_apg23

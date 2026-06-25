@@ -1,0 +1,8 @@
+name: genera_articolo_semprenews
+type: sequenziale
+tasks:
+  - name: scrivi_articolo_sempre
+    type: step
+  - name: genera_titoli_semprenews
+    type: step
+

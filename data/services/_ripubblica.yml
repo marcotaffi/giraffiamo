@@ -1,0 +1,20 @@
+firma: ripubblica
+servizio: wordpress
+opzioni:
+  sito: "www.apg23.org" # usato per costruire le descrizoni dei tools per ai
+  basic_auth: "APG23_WORDPRESS"
+  status: "draft"
+  postTypes: 
+    - posts #default
+    - eventi
+  #  - campagne
+  #  - storie
+  #  - persone
+  #  - progetti    
+procedura: ripubblica  #eseguita dalla run
+classificazione:
+  includi:
+    - hooks: ["semprenews.it/tag/Comunita-Papa-Giovanni-XXIII"]
+      type: "feeds"
+      flusso: "Instant"
+

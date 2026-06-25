@@ -1,0 +1,13 @@
+name: ripubblica
+description: ripubblica un articolo da semprenews a apg23 facendone sintesi
+type: sequenziale
+tasks:
+  - name: ripubblica
+    type: step
+  - name: genera_titoli_apg23
+    type: step
+  - name: formatta_ai
+    type: step
+
+
+
