@@ -1,16 +1,17 @@
-agentName: semprebot
-agentDescription: "Avatar telegram di Sempre"
+agentName: giraffiamo
+agentDescription: "Avatar telegram di Giraffiamo"
 apiClient: "gpt-response-dev"
 params:
   model: "gpt-4o-mini"
   type: "text"
-  temperature: 0.20
-  top_p: 0.20 
+  temperature: 0.70
+  top_p: 0.70 
   max_output_tokens: 6000
-instructions: 
-           - botinstructions
+instructions:
+           - giraffiamoinstructions
 toolNames: 
            - gestoredate_now_readClock
            - scraper_url_download
            - websearch_italia_low
-           - wordpress_apg23
+           - ghost_giraffiamo
+        

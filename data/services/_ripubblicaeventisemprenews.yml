@@ -1,9 +1,0 @@
-firma: ripubblicaeventisemprenews
-servizio: redazione
-destinazione: marcotassinari@apg23.org
-procedura: genera_evento_apg23
-classificazione:
-  includi:
-    - categories: ["eventi"]
-      type: "feeds"
-      flusso: "Instant"

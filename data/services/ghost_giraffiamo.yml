@@ -1,15 +1,14 @@
-firma: "wordpress_apg23"
-# Questo file definisce il bot telegram e il canale automatico
-servizio: "wordpress"
-destinazione: "apg23" #usata per costruire le firme chiamabili da ai
+firma: "ghost_giraffiamo"
+servizio: "ghost"
+destinazione: "giraffiamo" #usata per costruire le firme chiamabili da ai
 procedura: "ripubblica" #!!! procedura eseguita dalla run sia dal bot che dal canale
 opzioni:
-  sito: "www.apg23.org" # usato per costruire le descrizoni dei tools per ai
-  basic_auth: "APG23_WORDPRESS"
+  sito: "https://giraffiamo.ghost.io" # usato per costruire le descrizoni dei tools per ai
+  basic_auth: "GIRAFFIAMO_GHOST"
   status: "draft"
   postTypes: 
-    - posts #default
-    - eventi
+  #  - posts #default
+  #  - eventi
   #  - campagne
   #  - storie
   #  - persone

@@ -181,10 +181,10 @@ feeds = [
 */
 
 //SISTEMA MODERNO
-    const NotizieApg23 = await ServiceFactory.create("wordpress_apg23") as CanaleExtendsServizio;
+    const NotizieGiraffiamo = await ServiceFactory.create("ghost_giraffiamo") as CanaleExtendsServizio;
 
    // const NotizieApg23 = await ServiceFactory.create("ripubblicaconorchestratore") as CanaleExtendsServizio;
-    NotizieApg23.start(credenziali);
+    NotizieGiraffiamo.start(credenziali);
 
  
 
@@ -356,7 +356,7 @@ aiManager.setDefaultParams({ assistant_id: assistantID }, "chatgpt-assistants-ap
 
 
   debug(3, "*Aggiungo i canali al bot*"); 
-    const elencoCanali : CanaleExtendsServizio[]=[NotizieApg23,]; // NotizieMail];
+    const elencoCanali : CanaleExtendsServizio[]=[NotizieGiraffiamo,]; // NotizieMail];
 
    bot.aggiungiCanali(elencoCanali, credenziali);
 
