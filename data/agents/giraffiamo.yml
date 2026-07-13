@@ -11,7 +11,7 @@ instructions:
            - giraffiamoinstructions
 toolNames: 
            - gestoredate_now_readClock
-           - scraper_url_download
+          # - scraper_url_download
            - websearch_italia_low
            - ghost_giraffiamo
         
