@@ -18,8 +18,8 @@ opzioni:
 
 classificazione: #configurazione del canale automatico
   includi:
-    - hooks: ["semprenews.it/tag/Comunita-Papa-Giovanni-XXIII"]
+   -  categories: ["cnv"]
       type: "feeds"
-      flusso: "Instant"
+      flusso: "RaggruppaSimili"
 
 

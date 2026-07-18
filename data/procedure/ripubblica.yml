@@ -1,13 +1,10 @@
 name: ripubblica
-description: ripubblica un articolo da semprenews a apg23 facendone sintesi
+description: ripubblica eventi e notizie CNV su giraffiamo.it (Ghost) facendone sintesi
 type: sequenziale
 tasks:
   - name: ripubblica
     type: step
-  - name: genera_titoli_apg23
+  - name: genera_titoli_ghost
     type: step
-  - name: formatta_ai
+  - name: formatta_ghost
     type: step
-
-
-

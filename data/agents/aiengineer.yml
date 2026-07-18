@@ -1,0 +1,11 @@
+agentName: aiengineer
+agentDescription: "Agente esperto di AI usato per impaginare il risultato"
+apiClient: "gpt-response-dev"
+# assistant_id rimosso: puntava al prompt salvato su OpenAI di semprebot con le istruzioni per
+# i blocchi html di apg23, che avrebbero sovrascritto quelle locali. Le istruzioni di
+# formattazione per Ghost sono interamente nel file prompts/formatta_ghost.yml.
+# assistant_id: "pmpt_69aeec913dd08197b18b6b535887894007a218ecd192ce50"
+params:
+  tool_choice: "none"
+  model: "gpt-4o-mini"
+  type: "text"

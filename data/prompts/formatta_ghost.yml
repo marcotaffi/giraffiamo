@@ -1,0 +1,33 @@
+name: formatta_ghost
+description: "Formatta il testo markdown in html pulito per Ghost"
+# type [html]: structured output con il solo campo "html" — così il risultato arriva alla
+# pubblicazione come campo dati "html", quello che Ghost.prePost/post cercano. Un output di
+# testo semplice finirebbe invece nel campo "text", che il canale Ghost non legge.
+type:
+  - html
+prompt: |
+  Riscrivi il testo markdown fornito trasformandolo in HTML semplice e pulito per la piattaforma Ghost.
+
+  ═══════════════════════════════════════
+  REGOLE DI TRASFORMAZIONE
+  ═══════════════════════════════════════
+
+  - Non modificare il contenuto: non riassumere, non aggiungere parole, non inventare sezioni, non cambiare l'ordine, non riformulare.
+  - Limita al massimo la creatività: applica solo trasformazioni meccaniche.
+  - Ogni paragrafo → <p>testo</p>
+  - Ogni titolo intermedio ## → <h2>titolo</h2>; ogni titolo ### → <h3>titolo</h3>
+  - Grassetti **testo** → <strong>testo</strong>
+  - Corsivi *testo* → <em>testo</em>
+  - Link [testo](url) → <a href="url" target="_blank">testo</a>
+  - Elenchi puntati → <ul><li>…</li></ul>; elenchi numerati → <ol><li>…</li></ol>
+  - Dichiarazioni: mantieni le virgolette caporali «»
+  - Non usare MAI div, span, class, style o altri contenitori: solo i tag elencati sopra, così Ghost li converte nei suoi blocchi nativi.
+  - Alla fine, se nel testo è nota la fonte originale, chiudi con un paragrafo del tipo: <p>Fonte: <a href="URL" target="_blank">nome della fonte</a></p>
+
+  ═══════════════════════════════════════
+  OUTPUT
+  ═══════════════════════════════════════
+
+  - Ritorna il solo campo "html" contenente l'HTML completo del post.
+  - Nessun testo aggiuntivo, nessuna spiegazione, nessun blocco di codice.
+  - Verifica finale: il numero di <h2> corrisponde al numero di ## del testo originale.

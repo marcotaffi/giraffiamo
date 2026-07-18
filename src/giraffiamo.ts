@@ -117,6 +117,46 @@ feeds = [
   categories: ["apg23", "eventi"],
   lingua: "it"
  }*/
+ {
+  hooks: ["https://comunicazionenonviolenta.org/prossimi-eventi/"],
+  categories: ["cnv"],
+  lingua: "it"
+ },
+ {
+  hooks: ["https://www.centroesserci.it/categoria-prodotto/corsi/online-2026/"],
+  categories: ["cnv"],
+  lingua: "it"
+ },
+ {
+  hooks: ["https://www.centroesserci.it/categoria-prodotto/corsi/in-presenza-2026/"],
+  categories: ["cnv"],
+  lingua: "it"
+ },
+ {
+  hooks: ["https://facciamolapace.com/eventi"],
+  categories: ["cnv"],
+  lingua: "it"
+ },
+ {
+  hooks: ["https://www.giraffe-cnv.it/"],
+  categories: ["cnv"],
+  lingua: "it"
+ },
+ {
+  hooks: ["https://ch4sportingclub.it/news/comunicazione-nonviolenta/"],
+  categories: ["cnv"],
+  lingua: "it"
+ },
+ {
+  hooks: ["https://www.cnv-arpa.it/"],
+  categories: ["cnv"],
+  lingua: "it"
+ },
+ {
+  hooks: ["https://www.cnvc.org/it/news"],
+  categories: ["cnv"],
+  lingua: "it"
+ },
 
 
   ];

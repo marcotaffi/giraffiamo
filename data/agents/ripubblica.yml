@@ -1,16 +1,19 @@
 agentName: ripubblica
 agentDescription: "pubblica un lancio"
 apiClient: "gpt-response-dev"
-instructions: 
+instructions:
   - instructions_ripubblica
   - fogliodistile
   - formato_markdown
 params:
   tool_choice: "auto"
   model: "gpt-4o-mini"
-vectoreStores: 
-  - vs_7rCG39exRfvB9geL5N2hsWwY
-toolNames: 
+# vectoreStores rimosso: puntava allo store con la conoscenza apg23/semprenews di semprebot,
+# fuori tema per i rilanci CNV di giraffiamo. Riattivare quando esisterà uno store con
+# materiale CNV/giraffiamo.
+# vectoreStores:
+#   - vs_7rCG39exRfvB9geL5N2hsWwY
+toolNames:
            - gestoredate_now_readClock
            - scraper_url_download
            - websearch_italia_low

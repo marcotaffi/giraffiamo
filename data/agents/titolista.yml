@@ -1,23 +1,15 @@
 agentName: titolista
 agentDescription: "titolista professionale"
 apiClient: "gpt-response-dev"
-#assistant_id: "pmpt_690f45d1fb988190bc4b62562bbc55f40f0c5f030993c141"
-instructions: 
+instructions:
   - instructions_titolista
 params:
   model: "gpt-4o-mini"
   tool_choice: "none"
+  # Campi del post Ghost (vedi CreateGhostPostParams in taffitools/canali/ghost.ts).
+  # Il campo html NON va qui: lo produce lo step successivo formatta_ghost.
   type:
     - title
-    - excerpt
-    - postType  
-    - date
-    - place_of_event
-    - yoast_title
-    - yoast_metadesc
-    - text
-    - author 
-    - image 
-    - status
-    - fonte
-
+    - custom_excerpt
+    - feature_image
+    - slug

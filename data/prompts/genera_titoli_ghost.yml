@@ -1,0 +1,4 @@
+name: genera_titoli_ghost
+description: "Genera i campi titolo per la pubblicazione su Ghost"
+prompt: >
+  Genera tutti i campi titolo necessari per la pubblicazione, in formato JSON.

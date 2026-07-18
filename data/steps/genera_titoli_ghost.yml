@@ -1,0 +1,5 @@
+name: genera_titoli_ghost
+type: prompt
+description: "Genera i campi titolo per giraffiamo.it, vale sia per eventi che per articoli"
+prompt: genera_titoli_ghost
+agentName: titolista
