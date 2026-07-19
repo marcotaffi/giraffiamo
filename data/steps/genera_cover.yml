@@ -1,0 +1,9 @@
+# FILE DI ESEMPIO — inerte finché nessuna procedura lo elenca nei tasks.
+# Richiede l'agente "photoeditor" attivo (vedi agents/_photoeditor.yml).
+name: genera_cover
+type: photoeditor
+description: "Genera la cover dell'articolo con GPT-image"
+# Il prompt viene preso dal campo promptImmagine prodotto dallo step precedente
+# (structured output), oppure caricato da file dichiarando qui `prompt: <nomefile>`.
+agentName: photoeditor
+photoEditor: cover_giraffiamo

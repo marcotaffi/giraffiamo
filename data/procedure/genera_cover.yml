@@ -1,0 +1,12 @@
+# FILE DI ESEMPIO — inerte finché nessuno la esegue (per firma o come task).
+# Procedura minima per generare una cover: eseguibile da sola (es. da ProceduraTool,
+# vedi services/proceduratool_coverdesigner.yml) o inseribile come task in una
+# procedura più ampia dopo lo step di scrittura, così promptImmagine arriva dalla
+# storia di sessione (es.):
+#   tasks:
+#     - name: scrivi_articolo_sempre
+#       type: step
+#     - name: genera_cover
+#       type: step
+name: genera_cover
+type: step

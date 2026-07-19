@@ -1,0 +1,7 @@
+# FILE DI ESEMPIO — il prefisso "_" lo esclude dal caricamento al bootstrap.
+# Per attivarlo: rinominalo in gpt-image-dev.yml (insieme all'agente _photoeditor.yml).
+clientName: gpt-image-dev
+clientDescription: Generatore di immagini GPT-image (Images API)
+apiType: gpt-image
+apiKeyEnvVar: OPENAI_API_KEY
+providerType: openai

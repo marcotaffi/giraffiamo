@@ -1,0 +1,18 @@
+# FILE DI ESEMPIO — inerte finché nessuno step lo referenzia con `photoEditor: cover_giraffiamo`.
+# Configurazione del generatore immagini per le cover di giraffiamo.
+name: cover_giraffiamo
+description: "Cover orizzontali per gli articoli, nello stile giraffiamo"
+model: gpt-image-1-mini      # gpt-image-1 | gpt-image-1-mini | gpt-image-1.5 | gpt-image-2 | chatgpt-image-latest
+size: 1536x1024              # 1024x1024 | 1536x1024 | 1024x1536 | auto
+quality: medium              # low | medium | high | auto  (attenzione: high costa ~4x medium)
+
+# Immagini DINAMICHE dell'input (foto inviate su Telegram, immagini degli articoli del
+# gruppo): se true vengono passate al generatore come riferimenti via images.edit.
+useReferences: false
+
+# Riferimenti STATICI di stile: sempre usati quando dichiarati (a prescindere da
+# useReferences). Percorsi relativi a data/ oppure URL http(s). Massimo 16 immagini
+# totali (statici + dinamici). Scommenta e metti i PNG/JPG in data/referenceimages/.
+#referenceImages:
+#  - referenceimages/stile-giraffiamo-1.png
+#  - referenceimages/stile-giraffiamo-2.png

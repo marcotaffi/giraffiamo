@@ -1,0 +1,9 @@
+# FILE DI ESEMPIO — il prefisso "_" lo esclude dal caricamento al bootstrap.
+# Per attivarlo: rinominalo in photoeditor.yml (richiede il client _gpt-image-dev.yml attivato).
+agentName: photoeditor
+agentDescription: "Agente per la generazione di immagini e cover"
+apiClient: "gpt-image-dev"
+# params.model qui vale come default dell'agente; il file photoeditor dello step
+# (data/photoeditors/*.yml) lo sovrascrive. Senza nulla vale gpt-image-1-mini.
+#params:
+#  model: "gpt-image-1-mini"
