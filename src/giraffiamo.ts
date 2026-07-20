@@ -107,11 +107,11 @@ feeds = [
     hooks: ["https://www.semprenews.it/it.xml"],  //provo me stesso, che userò per social di Sempre
     lingua: "it"
     },*/
- {
+/* {
   hooks: ["https://www.semprenews.it/tag/Comunita-Papa-Giovanni-XXIII.html"],
   categories: ["apg23"],
   lingua: "it"
- },
+ },*/
  /*{
   hooks: ["https://www.semprenews.it/event-it.xml"],
   categories: ["apg23", "eventi"],
