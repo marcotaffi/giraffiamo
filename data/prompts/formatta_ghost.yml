@@ -1,19 +1,19 @@
 name: formatta_ghost
-description: "Formatta il testo markdown in html pulito per Ghost"
-# type [html]: structured output con il solo campo "html" — così il risultato arriva alla
-# pubblicazione come campo dati "html", quello che Ghost.prePost/post cercano. Un output di
-# testo semplice finirebbe invece nel campo "text", che il canale Ghost non legge.
+description: "Formatta il testo markdown in blocchi html puliti per Ghost, inserendo l'eventuale immagine (locandina o originale) a metà articolo"
+# type [blocks]: campo riservato, array di blocchi Multimedia (vedi buildParamsFromOverride
+# in taffitools/ai/openai/chatgptresponse.ts). Ogni blocco arriva già come Multimedia vero
+# (html o immagine) a prePost/post, senza passare da un campo "html" piatto.
 type:
-  - html
+  - blocks
 prompt: |
-  Riscrivi il testo markdown fornito trasformandolo in HTML semplice e pulito per la piattaforma Ghost.
+  Trasforma il testo markdown fornito in blocchi pronti per la pubblicazione su Ghost.
 
   ═══════════════════════════════════════
-  REGOLE DI TRASFORMAZIONE
+  REGOLE DI TRASFORMAZIONE DEL TESTO (meccaniche, per ogni blocco di tipo html)
   ═══════════════════════════════════════
 
   - Non modificare il contenuto: non riassumere, non aggiungere parole, non inventare sezioni, non cambiare l'ordine, non riformulare.
-  - Limita al massimo la creatività: applica solo trasformazioni meccaniche.
+  - Limita al massimo la creatività nella riscrittura: applica solo trasformazioni meccaniche.
   - Ogni paragrafo → <p>testo</p>
   - Ogni titolo intermedio ## → <h2>titolo</h2>; ogni titolo ### → <h3>titolo</h3>
   - Grassetti **testo** → <strong>testo</strong>
@@ -22,12 +22,38 @@ prompt: |
   - Elenchi puntati → <ul><li>…</li></ul>; elenchi numerati → <ol><li>…</li></ol>
   - Dichiarazioni: mantieni le virgolette caporali «»
   - Non usare MAI div, span, class, style o altri contenitori: solo i tag elencati sopra, così Ghost li converte nei suoi blocchi nativi.
-  - Alla fine, se nel testo è nota la fonte originale, chiudi con un paragrafo del tipo: <p>Fonte: <a href="URL" target="_blank">nome della fonte</a></p>
+  - Alla fine del testo, se nota la fonte originale, chiudi con un paragrafo del tipo: <p>Fonte: <a href="URL" target="_blank">nome della fonte</a></p>
+
+  ═══════════════════════════════════════
+  IMMAGINE A METÀ ARTICOLO (opzionale)
+  ═══════════════════════════════════════
+
+  Cerca nel materiale, in quest'ordine di priorità:
+  1) Un file allegato dall'utente in questa conversazione (locandina, volantino, foto): se presente, usalo come blocco immagine con multimediaContentType:"fileId" e multimediaContent uguale al fileId ESATTO dell'allegato ricevuto.
+  2) Altrimenti, un'indicazione tipo "Immagine originale: URL" nel materiale fornito: se presente, usala come blocco immagine con multimediaContentType:"url" e multimediaContent uguale a quell'URL.
+  3) Se non trovi né un allegato né un'immagine originale, NON generare alcun blocco immagine.
+
+  Questa immagine non è mai la cover del post (feature_image, decisa altrove): è un'immagine dentro il corpo dell'articolo.
+
+  Se generi il blocco immagine, imposta anche:
+  - alt: frase descrittiva breve dell'immagine.
+  - caption: frase più estesa, legata al contenuto dell'articolo o dell'evento.
+
+  ═══════════════════════════════════════
+  COMPOSIZIONE DEI BLOCCHI
+  ═══════════════════════════════════════
+
+  - Se NON c'è alcuna immagine (vedi sopra): produci un solo blocco, multimediaContentType:"html", con multimediaContent uguale a tutto il testo trasformato in html.
+  - Se C'È un'immagine: dividi il testo in due parti in un punto narrativamente sensato (tipicamente dopo l'introduzione) e produci ESATTAMENTE 3 blocchi in quest'ordine:
+      1. multimediaContentType:"html" — prima parte del testo (introduzione).
+      2. il blocco immagine (fileId o url, come sopra).
+      3. multimediaContentType:"html" — resto del testo, fino alla fine (incluso l'eventuale paragrafo "Fonte:").
+  - Ogni blocco è un oggetto con TUTTE le chiavi richieste dallo schema (multimediaContent, multimediaContentType, interfaceId, alt, caption): usa null per le chiavi non applicabili (es. interfaceId, alt e caption nei blocchi di solo testo).
 
   ═══════════════════════════════════════
   OUTPUT
   ═══════════════════════════════════════
 
-  - Ritorna il solo campo "html" contenente l'HTML completo del post.
+  - Ritorna il solo campo "blocks", nell'ordine esatto in cui i blocchi devono comparire nell'articolo.
   - Nessun testo aggiuntivo, nessuna spiegazione, nessun blocco di codice.
-  - Verifica finale: il numero di <h2> corrisponde al numero di ## del testo originale.
+  - Verifica finale: il numero complessivo di <h2> nei blocchi di testo corrisponde al numero di ## del testo originale.

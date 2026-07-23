@@ -1,8 +1,0 @@
-name: genera_articolo_apg23
-type: sequenziale
-tasks:
-  - name: scrivi_articolo_apg23
-    type: step
-  - name: genera_titoli_apg23
-    type: step
-

@@ -1,6 +1,0 @@
-name: genera_titoli_apg23
-type: prompt
-description: "Genera titoli per apg23, vale sia per eventi che per articoli"
-prompt: genera_titoli_apg23
-agentName: titolista
-

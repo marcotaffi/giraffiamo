@@ -1,5 +1,0 @@
-name: scrivi_articolo
-type: prompt
-description: "Scrivi un nuovo articolo"
-prompt: scrivi_articolo
-agentName: redattore
