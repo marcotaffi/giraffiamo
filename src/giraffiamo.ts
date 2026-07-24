@@ -118,46 +118,77 @@ feeds = [
   lingua: "it"
  }*/
  {
+  // Non sono riuscito a verificare lo schema dei link reali di questa pagina: il sito risponde 403
+  // (blocco bot/WAF) a qualunque richiesta automatizzata che ho provato io stesso da questo ambiente,
+  // pur non risultando bloccato dal taffiserver (nei log non compare mai un errore per questo hook).
+  // Lascio senza filtro (equivale a "*", prende tutto) finché qualcuno non controlla manualmente
+  // lo schema degli URL degli eventi su questa pagina.
   hooks: ["https://comunicazionenonviolenta.org/prossimi-eventi/"],
   categories: ["cnv"],
   lingua: "it"
  },
  {
+  // I corsi veri sono tutti sotto /shop/<slug>/ (verificato scaricando la pagina): le altre voci
+  // sono menu di navigazione (/categoria-prodotto/..., /blog/, /feed/ ecc.) e non c'entrano.
   hooks: ["https://www.centroesserci.it/categoria-prodotto/corsi/online-2026/"],
   categories: ["cnv"],
-  lingua: "it"
+  lingua: "it",
+  includiLink: ["/shop/"],
  },
  {
+  // Stesso schema della pagina "online-2026" qui sopra.
   hooks: ["https://www.centroesserci.it/categoria-prodotto/corsi/in-presenza-2026/"],
   categories: ["cnv"],
-  lingua: "it"
+  lingua: "it",
+  includiLink: ["/shop/"],
  },
  {
+  // ATTENZIONE: questo sito è una SPA React/Next.js. L'HTML statico che il taffiserver scarica con
+  // axios/cheerio non contiene i link agli eventi, solo i bundle JS che li generano a runtime nel
+  // browser (verificato: la pagina scaricata ha solo un pugno di riferimenti a file _assets/*.js).
+  // Nessun filtro includiLink/escludiLink può risolverlo: servirebbe un fetch con browser headless
+  // (es. Puppeteer/Playwright) per eseguire il JS, il taffiserver oggi non lo fa. Il filtro qui sotto
+  // non ha quindi alcun effetto pratico finché non si cambia il metodo di scaricamento della pagina.
   hooks: ["https://facciamolapace.com/eventi"],
   categories: ["cnv"],
   lingua: "it"
  },
  {
+  // Articoli con permalink a data /AAAA/MM/GG/slug/ (WordPress). Il filtro qui è per sottostringa,
+  // non supporta una regex "qualunque anno" come faceva il vecchio filtro globale: uso "/20" che
+  // intercetta qualunque anno 20xx (fino al 2099) nel percorso. Escludo /wp-content/ e /wp-json/
+  // perché altrimenti verrebbero presi anche i link alle immagini caricate (es. /wp-content/uploads/2019/...)
+  // e alle risposte dell'API REST di WordPress, che contengono anch'essi "/20" per altri motivi.
   hooks: ["https://www.giraffe-cnv.it/"],
   categories: ["cnv"],
-  lingua: "it"
+  lingua: "it",
+  includiLink: ["/20"],
+  escludiLink: ["/wp-content/", "/wp-json/"],
  },
  {
+  // Articoli veri sotto /news/<slug>/. Escludo il feed RSS della pagina stessa (contiene "/news/"
+  // ma non è un articolo) e la voce "mantenimento-di-acrocirco": è un contenuto fisso della pagina,
+  // sempre rilistato, che non ci interessa mai pubblicare (vedi conversazione del 2026-07-23).
   hooks: ["https://ch4sportingclub.it/news/comunicazione-nonviolenta/"],
   categories: ["cnv"],
-  lingua: "it"
+  lingua: "it",
+  includiLink: ["/news/"],
+  escludiLink: ["/feed/", "mantenimento-di-acrocirco"],
  },
  {
+  // Pagina scaricata e ispezionata: non ha una vera sezione di notizie/eventi con uno schema di link
+  // riconoscibile (solo pagine statiche tipo /chi-siamo/, /praticare-cnv, e link esterni). Nessun
+  // filtro sensato da applicare: lascio senza includiLink (prende tutto quel poco che c'è).
   hooks: ["https://www.cnv-arpa.it/"],
   categories: ["cnv"],
   lingua: "it"
  },
- {
+/* { SITO CHE BLOCCA I BOT
   hooks: ["https://www.cnvc.org/it/news"],
   categories: ["cnv"],
   lingua: "it"
  },
-
+*/
 
   ];
 
