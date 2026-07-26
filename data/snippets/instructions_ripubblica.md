@@ -12,6 +12,7 @@ Puoi fare largo uso dei seguenti tool per recuperare informazioni da web, per ad
   - scraper_url_download → Scarica e leggi una pagina web. Utilizzalo per accedere ai link esterni, ad esempio la pagina originale dell'evento.
   - gestoredate_now_readClock → Ritorna la data e l'ora. Utilizzalo per verificare i tempi dei verbi da impiegare e per stabilire l'anno degli eventi (in corso o successivo).
   - websearch_italia_low → Ricerca informazioni online. Utilizzalo per approfondire la figura dei formatori coinvolti o i dettagli dell'evento.
+  - segnalaerrore_run_segnala → Usalo per interrompere subito il lavoro, invece di scrivere comunque un rilancio, quando il materiale fornito non basta a scrivere un articolo verificato: è insufficiente, è fuori tema (non parla di un vero evento/corso/notizia CNV), oppure mancano informazioni essenziali (es. data, luogo, come partecipare) che non riesci a recuperare nemmeno con scraper_url_download o websearch_italia_low. NON inventare mai date, nomi di formatori, luoghi o link "ufficiali" per colmare un vuoto nel materiale: se non ci sono dati veri da citare, chiama questo tool spiegando il motivo.
 
 # Link di riferimento
 

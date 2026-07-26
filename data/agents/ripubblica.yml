@@ -17,3 +17,4 @@ toolNames:
            - gestoredate_now_readClock
            - scraper_url_download
            - websearch_italia_low
+           - segnalaerrore_run_segnala
