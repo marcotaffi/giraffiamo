@@ -118,14 +118,48 @@ feeds = [
   lingua: "it"
  }*/
  {
-  // Non sono riuscito a verificare lo schema dei link reali di questa pagina: il sito risponde 403
-  // (blocco bot/WAF) a qualunque richiesta automatizzata che ho provato io stesso da questo ambiente,
-  // pur non risultando bloccato dal taffiserver (nei log non compare mai un errore per questo hook).
-  // Lascio senza filtro (equivale a "*", prende tutto) finché qualcuno non controlla manualmente
-  // lo schema degli URL degli eventi su questa pagina.
+  // Il sito continua a rispondere 403 a qualunque richiesta automatizzata da questo ambiente (stesso
+  // WAF di prima), ma un fetch fatto per un'altra via è riuscito a passare: gli eventi veri sono
+  // sotto /eventi/<slug>/ (es. /eventi/cnv-agosto-online/). Il nav ha anche un link nudo a /eventi/
+  // che passerebbe il filtro (prende anche quella pagina indice, innocuo).
   hooks: ["https://comunicazionenonviolenta.org/prossimi-eventi/"],
   categories: ["cnv"],
-  lingua: "it"
+  lingua: "it",
+  includiLink: ["/eventi/"],
+ },
+ {
+  // NUOVA FONTE. Centro Interdisciplinare Scienze per la Pace (Università di Pisa): pagina generale
+  // dei corsi di alta formazione, copre molti temi diversi (pace, migrazioni, giornalismo...) non solo
+  // CNV. Per questo il filtro include SOLO "comunicazione-nonviolenta" (che compare nello slug dei
+  // corsi CNV, es. ".../corso-la-comunicazione-nonviolenta-essere-me-incontrare-te/"), non un pattern
+  // largo tipo "corso-": altrimenti finirebbero nella categoria "cnv" anche corsi non-CNV del centro.
+  hooks: ["https://cisp.unipi.it/formazione/corsi-di-alta-formazione/"],
+  categories: ["cnv"],
+  lingua: "it",
+  includiLink: ["comunicazione-nonviolenta"],
+ },
+ {
+  // NUOVA FONTE. Blog personale di Anna Bassi, formatrice CNV: post con permalink a data
+  // /AAAA/MM/slug/ (stesso schema di giraffe-cnv.it). Escludo i link ai commenti (contengono "/20"
+  // per via dell'anno nell'URL del post, ma puntano allo stesso post, non a un nuovo contenuto) e
+  // gli asset/API di WordPress.
+  hooks: ["https://annabassi.com/"],
+  categories: ["cnv"],
+  lingua: "it",
+  includiLink: ["/20"],
+  escludiLink: ["/wp-content/", "/wp-json/", "#comment"],
+ },
+ {
+  // NUOVA FONTE. "Arte del Dialogo": laboratori CNV a offerta libera. Eventi veri sotto /eventi/<slug>/,
+  // ma il menu ha anche pagine di categoria sotto /eventi/categorie/... che vanno escluse esplicitamente
+  // perché contengono anch'esse "/eventi/". Anche questo sito mi ha risposto 403 dall'ambiente in cui
+  // lavoro (stesso WAF di comunicazionenonviolenta.org), verificato con un fetch alternativo: da
+  // monitorare dopo il deploy nel caso risulti bloccato anche per il taffiserver.
+  hooks: ["https://artedeldialogo.it"],
+  categories: ["cnv"],
+  lingua: "it",
+  includiLink: ["/eventi/"],
+  escludiLink: ["/eventi/categorie/"],
  },
  {
   // I corsi veri sono tutti sotto /shop/<slug>/ (verificato scaricando la pagina): le altre voci
