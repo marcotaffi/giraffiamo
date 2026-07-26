@@ -13,6 +13,7 @@
   - Per notizie brevi: piramide invertita; per approfondimenti: sezioni tematiche coerenti.  
   - Alterna ricostruzione dei fatti, dati, contesto e passaggi narrativi documentati (solo se presenti nel materiale).  
   - Precisione assoluta su nomi di persone, enti, progetti, eventi, numeri e riferimenti verificati.  
+  - Se il materiale descrive un evento o percorso con più fasi/incontri/sessioni su date diverse, verifica tutte le date citate nel materiale e usa nell'apertura l'intervallo complessivo (es. "dal 17 ottobre al 13 dicembre"), non la data del solo primo incontro — anche se il materiale riporta quella data isolata in un campo riassuntivo separato dal corpo del testo.  
   - Cita sempre autori e fonti dei dati utilizzati.  
   - Distingui chiaramente fatti, dati, dichiarazioni e analisi ricostruttiva.  
   - Non parafrasare le citazioni: riportale fedelmente, indicando sempre chi parla.  

@@ -44,10 +44,10 @@ prompt: |
   ═══════════════════════════════════════
 
   - Se NON c'è alcuna immagine (vedi sopra): produci un solo blocco, multimediaContentType:"html", con multimediaContent uguale a tutto il testo trasformato in html.
-  - Se C'È un'immagine: dividi il testo in due parti in un punto narrativamente sensato (tipicamente dopo l'introduzione) e produci ESATTAMENTE 3 blocchi in quest'ordine:
-      1. multimediaContentType:"html" — prima parte del testo (introduzione).
-      2. il blocco immagine (fileId o url, come sopra).
-      3. multimediaContentType:"html" — resto del testo, fino alla fine (incluso l'eventuale paragrafo "Fonte:").
+  - Se C'È un'immagine: dividi il testo in due parti in un punto narrativamente sensato (tipicamente dopo l'introduzione) e produci ESATTAMENTE 3 blocchi, IN QUESTO ORDINE nell'array "blocks" — il blocco immagine NON va mai per ultimo, va sempre in posizione centrale:
+      1. (primo elemento dell'array) multimediaContentType:"html" — prima parte del testo (introduzione).
+      2. (secondo elemento dell'array, MAI il terzo) il blocco immagine (fileId o url, come sopra).
+      3. (terzo elemento dell'array) multimediaContentType:"html" — resto del testo, fino alla fine (incluso l'eventuale paragrafo "Fonte:").
   - Ogni blocco è un oggetto con TUTTE le chiavi richieste dallo schema (multimediaContent, multimediaContentType, interfaceId, alt, caption): usa null per le chiavi non applicabili (es. interfaceId, alt e caption nei blocchi di solo testo).
 
   ═══════════════════════════════════════
@@ -56,4 +56,5 @@ prompt: |
 
   - Ritorna il solo campo "blocks", nell'ordine esatto in cui i blocchi devono comparire nell'articolo.
   - Nessun testo aggiuntivo, nessuna spiegazione, nessun blocco di codice.
-  - Verifica finale: il numero complessivo di <h2> nei blocchi di testo corrisponde al numero di ## del testo originale.
+  - Verifica finale 1: il numero complessivo di <h2> nei blocchi di testo corrisponde al numero di ## del testo originale.
+  - Verifica finale 2: se hai generato un blocco immagine, controlla che nell'array "blocks" sia il SECONDO elemento su tre — mai l'ultimo.

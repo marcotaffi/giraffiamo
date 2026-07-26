@@ -15,3 +15,4 @@ params:
     - feature_image_alt
     - feature_image_caption
     - slug
+    - tags
