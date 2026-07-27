@@ -1,7 +1,6 @@
 name: ripubblica
 prompt: |
-  Agisci come caporedattore ed esperto di comunicazione nonviolenta, per scrivere il testo di un rilancio dell'evento o della notizia CNV data, pronto per la pubblicazione sul sito giraffiamo.it.
-  Il materiale può contenere più testi simili sullo stesso evento provenienti da fonti diverse: individua l'evento o la notizia principale e unifica le informazioni senza ripeterle.
-  Se necessario, scarica il contenuto web della pagina originale fornita per ottenere tutte le informazioni necessarie per scrivere il testo di rilancio, e l'eventuale link all'immagine originale.
+  Agisci come caporedattore per giraffiamo.it. Segui le istruzioni di sistema per capire se il materiale qui sotto arriva dal monitoraggio automatico dei gruppi (rilancio di un evento/notizia, marcato da === INIZIO MATERIALE === / === FINE MATERIALE ===) oppure da una richiesta diretta dell'utente in chat, e comportati di conseguenza.
+  Se necessario, scarica il contenuto web di eventuali pagine originali fornite per recuperare informazioni mancanti o l'immagine originale.
 
-  Fornisci solo il testo del rilancio, senza titoli, conclusioni o commenti introduttivi, formattato in markdown, comprendendo sempre: le date con l'anno, il luogo o la modalità online, le informazioni per partecipare e un link alla fonte originale.
+  Fornisci solo il testo pronto per la pubblicazione, senza titoli, conclusioni o commenti introduttivi, formattato in markdown.

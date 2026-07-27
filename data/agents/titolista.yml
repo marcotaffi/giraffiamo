@@ -4,7 +4,9 @@ apiClient: "gpt-response-dev"
 instructions:
   - instructions_titolista
 params:
-  model: "gpt-4o-mini"
+  # Prima usavo "gpt-4o-mini": passato a gpt-5.4-mini (pinnato alla data per stabilità
+  # e per restare nel gruppo idoneo ai token gratuiti del programma data-sharing OpenAI).
+  model: "gpt-5.4-mini-2026-03-17"
   tool_choice: "none"
   # Campi del post Ghost (vedi CreateGhostPostParams in taffitools/canali/ghost.ts).
   # Il campo html NON va qui: lo produce lo step successivo formatta_ghost.

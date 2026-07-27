@@ -7,7 +7,9 @@ instructions:
   - formato_markdown
 params:
   tool_choice: "auto"
-  model: "gpt-4o-mini"
+  # Prima usavo "gpt-4o-mini": passato a gpt-5.4-mini (pinnato alla data per stabilità
+  # e per restare nel gruppo idoneo ai token gratuiti del programma data-sharing OpenAI).
+  model: "gpt-5.4-mini-2026-03-17"
 # vectoreStores rimosso: puntava allo store con la conoscenza apg23/semprenews di semprebot,
 # fuori tema per i rilanci CNV di giraffiamo. Riattivare quando esisterà uno store con
 # materiale CNV/giraffiamo.

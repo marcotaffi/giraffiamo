@@ -2,7 +2,9 @@ agentName: giraffiamo
 agentDescription: "Avatar telegram di Giraffiamo"
 apiClient: "gpt-response-dev"
 params:
-  model: "gpt-4o-mini"
+  # Prima usavo "gpt-4o-mini": passato a gpt-5.4-mini (pinnato alla data per stabilità
+  # e per restare nel gruppo idoneo ai token gratuiti del programma data-sharing OpenAI).
+  model: "gpt-5.4-mini-2026-03-17"
   type: "text"
   temperature: 0.70
   top_p: 0.70 
