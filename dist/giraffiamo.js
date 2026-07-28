@@ -90,56 +90,122 @@ feeds = [
         hooks: ["https://www.semprenews.it/it.xml"],  //provo me stesso, che userò per social di Sempre
         lingua: "it"
         },*/
-    {
-        hooks: ["https://www.semprenews.it/tag/Comunita-Papa-Giovanni-XXIII.html"],
-        categories: ["apg23"],
-        lingua: "it"
-    },
+    /* {
+      hooks: ["https://www.semprenews.it/tag/Comunita-Papa-Giovanni-XXIII.html"],
+      categories: ["apg23"],
+      lingua: "it"
+     },*/
     /*{
      hooks: ["https://www.semprenews.it/event-it.xml"],
      categories: ["apg23", "eventi"],
      lingua: "it"
     }*/
     {
+        // Il sito continua a rispondere 403 a qualunque richiesta automatizzata da questo ambiente (stesso
+        // WAF di prima), ma un fetch fatto per un'altra via è riuscito a passare: gli eventi veri sono
+        // sotto /eventi/<slug>/ (es. /eventi/cnv-agosto-online/). Il nav ha anche un link nudo a /eventi/
+        // che passerebbe il filtro (prende anche quella pagina indice, innocuo).
         hooks: ["https://comunicazionenonviolenta.org/prossimi-eventi/"],
         categories: ["cnv"],
-        lingua: "it"
+        lingua: "it",
+        includiLink: ["/eventi/"],
     },
     {
+        // NUOVA FONTE. Centro Interdisciplinare Scienze per la Pace (Università di Pisa): pagina generale
+        // dei corsi di alta formazione, copre molti temi diversi (pace, migrazioni, giornalismo...) non solo
+        // CNV. Per questo il filtro include SOLO "comunicazione-nonviolenta" (che compare nello slug dei
+        // corsi CNV, es. ".../corso-la-comunicazione-nonviolenta-essere-me-incontrare-te/"), non un pattern
+        // largo tipo "corso-": altrimenti finirebbero nella categoria "cnv" anche corsi non-CNV del centro.
+        hooks: ["https://cisp.unipi.it/formazione/corsi-di-alta-formazione/"],
+        categories: ["cnv"],
+        lingua: "it",
+        includiLink: ["comunicazione-nonviolenta"],
+    },
+    {
+        // NUOVA FONTE. Blog personale di Anna Bassi, formatrice CNV: post con permalink a data
+        // /AAAA/MM/slug/ (stesso schema di giraffe-cnv.it). Escludo i link ai commenti (contengono "/20"
+        // per via dell'anno nell'URL del post, ma puntano allo stesso post, non a un nuovo contenuto) e
+        // gli asset/API di WordPress.
+        hooks: ["https://annabassi.com/"],
+        categories: ["cnv"],
+        lingua: "it",
+        includiLink: ["/20"],
+        escludiLink: ["/wp-content/", "/wp-json/", "#comment"],
+    },
+    {
+        // NUOVA FONTE. "Arte del Dialogo": laboratori CNV a offerta libera. Eventi veri sotto /eventi/<slug>/,
+        // ma il menu ha anche pagine di categoria sotto /eventi/categorie/... che vanno escluse esplicitamente
+        // perché contengono anch'esse "/eventi/". Anche questo sito mi ha risposto 403 dall'ambiente in cui
+        // lavoro (stesso WAF di comunicazionenonviolenta.org), verificato con un fetch alternativo: da
+        // monitorare dopo il deploy nel caso risulti bloccato anche per il taffiserver.
+        hooks: ["https://artedeldialogo.it"],
+        categories: ["cnv"],
+        lingua: "it",
+        includiLink: ["/eventi/"],
+        escludiLink: ["/eventi/categorie/"],
+    },
+    {
+        // I corsi veri sono tutti sotto /shop/<slug>/ (verificato scaricando la pagina): le altre voci
+        // sono menu di navigazione (/categoria-prodotto/..., /blog/, /feed/ ecc.) e non c'entrano.
         hooks: ["https://www.centroesserci.it/categoria-prodotto/corsi/online-2026/"],
         categories: ["cnv"],
-        lingua: "it"
+        lingua: "it",
+        includiLink: ["/shop/"],
     },
     {
+        // Stesso schema della pagina "online-2026" qui sopra.
         hooks: ["https://www.centroesserci.it/categoria-prodotto/corsi/in-presenza-2026/"],
         categories: ["cnv"],
-        lingua: "it"
+        lingua: "it",
+        includiLink: ["/shop/"],
     },
     {
+        // ATTENZIONE: questo sito è una SPA React/Next.js. L'HTML statico che il taffiserver scarica con
+        // axios/cheerio non contiene i link agli eventi, solo i bundle JS che li generano a runtime nel
+        // browser (verificato: la pagina scaricata ha solo un pugno di riferimenti a file _assets/*.js).
+        // Nessun filtro includiLink/escludiLink può risolverlo: servirebbe un fetch con browser headless
+        // (es. Puppeteer/Playwright) per eseguire il JS, il taffiserver oggi non lo fa. Il filtro qui sotto
+        // non ha quindi alcun effetto pratico finché non si cambia il metodo di scaricamento della pagina.
         hooks: ["https://facciamolapace.com/eventi"],
         categories: ["cnv"],
         lingua: "it"
     },
     {
+        // Articoli con permalink a data /AAAA/MM/GG/slug/ (WordPress). Il filtro qui è per sottostringa,
+        // non supporta una regex "qualunque anno" come faceva il vecchio filtro globale: uso "/20" che
+        // intercetta qualunque anno 20xx (fino al 2099) nel percorso. Escludo /wp-content/ e /wp-json/
+        // perché altrimenti verrebbero presi anche i link alle immagini caricate (es. /wp-content/uploads/2019/...)
+        // e alle risposte dell'API REST di WordPress, che contengono anch'essi "/20" per altri motivi.
         hooks: ["https://www.giraffe-cnv.it/"],
         categories: ["cnv"],
-        lingua: "it"
+        lingua: "it",
+        includiLink: ["/20"],
+        escludiLink: ["/wp-content/", "/wp-json/"],
     },
     {
+        // Articoli veri sotto /news/<slug>/. Escludo il feed RSS della pagina stessa (contiene "/news/"
+        // ma non è un articolo) e la voce "mantenimento-di-acrocirco": è un contenuto fisso della pagina,
+        // sempre rilistato, che non ci interessa mai pubblicare (vedi conversazione del 2026-07-23).
         hooks: ["https://ch4sportingclub.it/news/comunicazione-nonviolenta/"],
         categories: ["cnv"],
-        lingua: "it"
+        lingua: "it",
+        includiLink: ["/news/"],
+        escludiLink: ["/feed/", "mantenimento-di-acrocirco"],
     },
     {
+        // Pagina scaricata e ispezionata: non ha una vera sezione di notizie/eventi con uno schema di link
+        // riconoscibile (solo pagine statiche tipo /chi-siamo/, /praticare-cnv, e link esterni). Nessun
+        // filtro sensato da applicare: lascio senza includiLink (prende tutto quel poco che c'è).
         hooks: ["https://www.cnv-arpa.it/"],
         categories: ["cnv"],
         lingua: "it"
     },
-    {
-        hooks: ["https://www.cnvc.org/it/news"],
-        categories: ["cnv"],
-        lingua: "it"
-    },
+    /* { SITO CHE BLOCCA I BOT
+      hooks: ["https://www.cnvc.org/it/news"],
+      categories: ["cnv"],
+      lingua: "it"
+     },
+    */
 ];
 /*
   news = [
