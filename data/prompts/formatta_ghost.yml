@@ -22,7 +22,10 @@ prompt: |
   - Elenchi puntati → <ul><li>…</li></ul>; elenchi numerati → <ol><li>…</li></ol>
   - Dichiarazioni: mantieni le virgolette caporali «»
   - Non usare MAI div, span, class, style o altri contenitori: solo i tag elencati sopra, così Ghost li converte nei suoi blocchi nativi.
-  - Alla fine del testo, se nota la fonte originale, chiudi con un paragrafo del tipo: <p>Fonte: <a href="URL" target="_blank">nome della fonte</a></p>
+  - Non dividere MAI il testo in un blocco html per paragrafo o per argomento: i paragrafi restano nello stesso blocco html, uno dopo l'altro, esattamente come nel FORMATO BLOCCHI qui sotto (l'unica cosa che può creare un secondo/terzo blocco html è l'eventuale immagine a metà articolo, vedi sotto).
+  - Non duplicare paragrafi: ogni frase del testo originale compare in output UNA VOLTA SOLA.
+  - Alla fine del testo, se nota la fonte originale, chiudi con un paragrafo del tipo: <p>Fonte: <a href="URL" target="_blank">nome della fonte</a></p>. Questo paragrafo va DENTRO l'ultimo blocco html già previsto (vedi COMPOSIZIONE DEI BLOCCHI): non è mai un blocco a sé.
+  - Ogni multimediaContent di tipo "html" è HTML puro: non avvolgerlo mai in un blocco di codice markdown (niente ```html né ```).
 
   ═══════════════════════════════════════
   IMMAGINE A METÀ ARTICOLO (opzionale)
@@ -58,3 +61,4 @@ prompt: |
   - Nessun testo aggiuntivo, nessuna spiegazione, nessun blocco di codice.
   - Verifica finale 1: il numero complessivo di <h2> nei blocchi di testo corrisponde al numero di ## del testo originale.
   - Verifica finale 2: se hai generato un blocco immagine, controlla che nell'array "blocks" sia il SECONDO elemento su tre — mai l'ultimo.
+  - Verifica finale 3: nessun multimediaContent di tipo "html" contiene div, span, class= o un blocco di codice markdown (```).

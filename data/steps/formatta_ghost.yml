@@ -3,3 +3,4 @@ type: prompt
 description: "Formatta il post in html pulito, convertibile nei blocchi nativi di Ghost"
 prompt: formatta_ghost
 agentName: aiengineer
+validate: formatta_ghost
