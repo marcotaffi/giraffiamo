@@ -1,0 +1,14 @@
+name: formatta_ghost
+description: "Regole di validazione per i blocchi html dello step formatta_ghost (Ghost)"
+
+estrazione:
+  tipo: html
+
+regole:
+  - id: tag_vietati
+    vietato: '<div\b|<span\b|class\s*='
+    messaggio: "Il blocco html contiene tag/attributi vietati (div, span o class): per Ghost sono ammessi solo p, h2, h3, strong, em, a, ul/ol/li."
+
+  - id: code_fence
+    vietato: '^```|```$'
+    messaggio: "Il contenuto html contiene un blocco di codice markdown (```): va restituito solo HTML puro."
