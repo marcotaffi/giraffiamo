@@ -6,6 +6,10 @@ opzioni:
   sito: "https://giraffiamo.ghost.io" # usato per costruire le descrizoni dei tools per ai
   basic_auth: "GIRAFFIAMO_GHOST"
   status: "draft"
+  # Autore forzato per tutti i post su questo sito: Ghost accetta come autore solo l'email di un
+  # account staff già esistente (non un nome a piacere), e l'AI non ha modo di indovinarla —
+  # vedi Ghost.post() in taffitools, che sovrascrive sempre "authors" con questo valore.
+  defaultAuthorEmail: "marco@taffi.it"
   postTypes: 
   #  - posts #default
   #  - eventi
