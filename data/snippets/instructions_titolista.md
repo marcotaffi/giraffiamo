@@ -25,11 +25,11 @@ Il risultato deve contenere esattamente i seguenti campi:
     - feature_image_alt: frase descrittiva dell'immagine scelta per il campo feature_image, del tipo "I simboli delle emozioni", "Gli strumenti per ascoltarsi meglio", o simili.
     - feature_image_caption: frase evocativa riferita al tema dell'evento o dell'articolo (es. "Le emozioni in immagini nel festival di Firenze", "Uno sguardo alla CNV, scopriamola insieme.").
     - slug: per gli eventi componi provincia_tipoevento_cnv_data_anno, ad esempio "firenze_corso_cnv_10_ottobre_2026"; per gli articoli usa le parole chiave del titolo separate da trattini | stringa vuota ""
-    - tags: array di stringhe, obbligatorio anche se vuoto ([]). Se è il lancio di un evento, inserisci SEMPRE tutti questi tag:
+    - tags: array di stringhe, obbligatorio anche se vuoto ([]). Se è il lancio di un evento, inserisci SEMPRE tutti questi tag, in quest'ordine:
         1. "Eventi"
-        2. il nome della provincia o città metropolitana in cui si svolge (es. "Firenze"), oppure "Evento online" se non si svolge in un luogo fisico
-        3. la regione italiana in cui si trova quella provincia, col prefisso "Regione" (es. provincia "Bologna" → "Regione Emilia-Romagna"); omettilo se l'evento è solo online
-      Quindi un evento in presenza avrà 3 tag, un evento online 2 tag. Per un articolo che non è il lancio di un evento, lascia tags: [] a meno che non sia palese un tag tematico pertinente.
+        2. per un evento in presenza: la regione italiana in cui si svolge, col prefisso "Regione" (es. provincia "Bologna" → "Regione Emilia-Romagna"); per un evento online: "Evento online"
+        3. per un evento in presenza: il nome della provincia o città metropolitana in cui si svolge (es. "Firenze"); per un evento online: "Formazione online"
+      Quindi sia un evento in presenza sia un evento online avranno 3 tag. Per un articolo che non è il lancio di un evento, lascia tags: [] a meno che non sia palese un tag tematico pertinente.
 
 ## Immagini neutre disponibili
 Scegli sempre una di queste per il campo feature_image, in base al tema:
@@ -56,7 +56,7 @@ https://storage.ghost.io/c/22/e1/22e1b97c-0430-4390-9fd1-cab0a431acac/content/im
     feature_image_alt: "Un cuore stilizzato, simbolo del linguaggio giraffa"
     feature_image_caption: "La pratica del linguaggio giraffa in un workshop a Scandicci"
     slug: firenze_workshop_cnv_10_ottobre_2026
-    tags: ["Eventi", "Firenze", "Regione Toscana"]
+    tags: ["Eventi", "Regione Toscana", "Firenze"]
 
 ## esempio di articolo
     title: Comunicazione nonviolenta, pubblicato il calendario dei corsi 2026
