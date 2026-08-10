@@ -53,5 +53,5 @@ parametri:
   labels:
     tipo: array
     obbligatorio: true
-    valoriAmmessi: ["Lombardia", "Veneto", "Provenienza: Passaparola", "Applicazione: A scuola"]
+    valoriAmmessi: ["Regione Lombardia", "Regione Veneto", "Firenze", "Provenienza: Passaparola", "Applicazione: A scuola"]
 ```
