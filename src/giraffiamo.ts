@@ -10,6 +10,10 @@ const botToken = process.env.TELEGRAM_TOKEN||"";
 //const chatGptApiKey = process.env.OPENAI_API_KEY||"";
 //const assistantID = process.env.ASSISTANT_ID||""; //l'assistente di questo bot
 const iftttKey = process.env.IFTTT_WEBHOOKKEY||"";
+// url del gateway chat del webserver (porta BOT_REGISTRATION_PORT, default 7070): senza,
+// aggiungieInizializzaInterfaccePredefinite non crea la WebChatInterface e il bot non si registra
+// sul ChatGateway — le azioni esterne (vedi data/azioniesterne/) arriverebbero sempre "bot non connesso".
+const webChatUrl = process.env.WEBCHAT_URL||"";
 //const IOOO = process.env.IOOO_WORDPRESS||"";
 
 //const DEBUG_LEVEL = process.env.DEBUG_LEVEL||6;
@@ -64,6 +68,7 @@ const promptsArticolo : PromptArticolo = {
 const credenziali : Credenziali = {
 iftttKey: iftttKey,
 botToken: botToken as string,
+webChatUrl: webChatUrl,
 //wordpress_sito: "https://www.apg23.org",
 //wordpress_basic_auth: IOOO,
 //categoryMapping,
