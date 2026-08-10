@@ -158,3 +158,10 @@ parametri:
       - "Applicazione: Relazioni familiari"
       - "Applicazione: Sul lavoro"
       - "Applicazione: Altro"
+  # Testo libero (i campi "Specifica"/"Altro" del form, mai come tag: nessuna valoriAmmessi qui
+  # apposta, non ha senso una whitelist su testo libero). ATTENZIONE: sostituisce integralmente
+  # la nota esistente sul membro, comprese eventuali annotazioni scritte a mano — per questo il
+  # form manda "note" solo quando ha davvero del testo da scrivere (vedi commento nello script).
+  note:
+    tipo: string
+    obbligatorio: false
