@@ -1,0 +1,14 @@
+name: iscrizione_preferenze
+description: registra le preferenze indicate da un iscritto nel form pubblico di giraffiamo.it
+type: sequenziale
+# Stateless: qui non c'è nessuna chat viva da continuare, ogni esecuzione parte pulita.
+stateful: false
+# Oggi un passo solo — la scrittura su Ghost — ed è già il punto: l'azione esterna
+# (azioniesterne/ghost_giraffiamo_modificamembro.yml) nomina QUESTA procedura, non il metodo del
+# canale. Aggiungere un passo (mail di benvenuto, nota scritta dall'AI, log su un altro canale)
+# significa aggiungere una riga qui, senza toccare il form pubblico né il webserver.
+# ATTENZIONE: se aggiungi step lenti (qualunque cosa chiami l'AI o mandi mail), metti
+# "modo: asincrono" nel permesso, altrimenti il chiamante va in timeout a 15 secondi.
+tasks:
+  - name: ghost_aggiorna_membro
+    type: step

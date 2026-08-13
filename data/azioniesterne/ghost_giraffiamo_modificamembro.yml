@@ -1,7 +1,15 @@
 firma: ghost_giraffiamo_modificamembro
 bot: bot-giraffiamo
-canale: ghost_giraffiamo
-metodo: modificaMembro
+# Il chiamante nomina SOLO la firma qui sopra. Cosa succede dietro lo decide questa riga, e può
+# cambiare senza toccare il form pubblico (che sta sul sito, non in questo repo).
+# La procedura oggi fa un passo solo — la scrittura su Ghost — ma è il posto dove aggiungere gli
+# altri (mail di conferma, doppio opt-in, log): vedi data/procedure/iscrizione_preferenze.yml.
+procedura: iscrizione_preferenze
+# Sincrono: un passo solo, nessuna AI, sta comodamente nei 15 secondi del relay e la persona
+# davanti al form riceve subito l'esito. Se la procedura si allunga (qualunque step che chiami
+# l'AI o mandi mail), passare ad "asincrono": il form riceve un 202 con un requestId e ritira
+# l'esito da GET /azioni/esito.
+modo: sincrono
 segreto: GHOST_GIRAFFIAMO_MODIFICAMEMBRO_SEGRETO
 parametri:
   email:

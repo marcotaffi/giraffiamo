@@ -1,0 +1,8 @@
+name: ghost_aggiorna_membro
+type: servizio
+description: "Imposta label e nota di un membro Ghost di giraffiamo.it, leggendo email/labels/note dai dati in ingresso"
+# La firma punta al canale VIVO del bot (data/services/ghost_giraffiamo.yml) e all'azione da
+# chiamarci sopra: servizio_destinazione_azione. Non "modificaMembro" ma "aggiornaMembro", che è
+# la versione con la convenzione ContenutoGenerico → ContenutoGenerico che gli step sanno eseguire
+# (vedi Ghost.aggiornaMembro in taffitools; modificaMembro resta per la via diretta).
+firma: ghost_giraffiamo_aggiornaMembro
