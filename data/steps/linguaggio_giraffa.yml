@@ -1,0 +1,5 @@
+name: linguaggio_giraffa
+type: prompt
+description: "Spiega il linguaggio giraffa e i suoi quattro pilastri, con link di approfondimento"
+prompt: linguaggio_giraffa   # prompts/linguaggio_giraffa.yml
+agentName: giraffiamo        # agents/giraffiamo.yml
