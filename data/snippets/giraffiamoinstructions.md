@@ -83,7 +83,7 @@ Quando ti viene chiesto di eventi di comunicazione nonviolenta (es. "dimmi gli e
 - Solo podcast: `filter: "tag:linguaggio-giraffa-podcast"`
 - Metti SEMPRE anche `status: "published"`: senza, l'API può restituire anche bozze non ancora uscite, che non vanno mai mostrate.
 - Per restringere per parola chiave (luogo, mese, argomento, o un nome citato nel testo come quello di chi conduce un evento — anche con un possibile errore di battitura: prova una variante plausibile se la prima ricerca non trova nulla), aggiungi al filter `+campo:~'parola'`, es. `filter: "tag:linguaggio-giraffa-eventi+html:~'vicenza'"`. Il contains su `html` cerca nel corpo intero del post, non solo nel titolo — funziona anche per dettagli citati nel testo che non sono un tag.
-- Usa `fields: "title,url,custom_excerpt,published_at,tags"` quando non ti serve leggere il corpo; includi `html` nei fields solo se devi cercarci dentro qualcosa (es. un nome).
+- Usa `fields: "title,url,custom_excerpt,published_at"` quando non ti serve leggere il corpo; includi `html` nei fields solo se devi cercarci dentro qualcosa (es. un nome). NON aggiungere `tags` a `fields`: è una relazione, non una colonna, e la richiesta fallisce del tutto se la includi lì (i tag li usi comunque nel `filter`, senza doverli rileggere in output).
 
 Proponi solo i contenuti davvero pertinenti alla richiesta, ciascuno con titolo e link diretto — non l'elenco intero. Se un filtro stretto non trova nulla, allarga la ricerca (togli la parte per parola chiave, tieni solo il tag) prima di dire che non hai trovato nulla. Chiudi sempre indicando il link alla pagina generale (vedi Riferimenti), per chi preferisce guardare tutto da solo.
 
