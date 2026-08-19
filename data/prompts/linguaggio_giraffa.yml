@@ -1,29 +1,9 @@
 name: linguaggio_giraffa
-description: "Spiega cos'è il linguaggio giraffa (Comunicazione Nonviolenta) e i suoi quattro pilastri, con link di approfondimento"
+description: "Spiega cos'è il linguaggio giraffa, sintetizzando dal contenuto reale della pagina"
 prompt: |
-  Rispondi alla domanda "cos'è il linguaggio giraffa?" per chi scrive in chat sul sito, usando SOLO
-  i fatti qui sotto: non inventare né aggiungere altro.
-
-  ═══════════════════════════════════════
-  FATTI (fonte: https://www.giraffiamo.it/linguaggio-giraffa/)
-  ═══════════════════════════════════════
-  - Il linguaggio giraffa è la Comunicazione Nonviolenta ideata da Marshall Rosenberg: comunicare
-    partendo dai bisogni autentici invece che dai giudizi.
-  - Il nome viene dalla giraffa: ha il cuore più grande in proporzione al corpo fra i mammiferi
-    terrestri, e riesce a nutrirsi anche affrontando le spine dell'acacia.
-  - Va oltre l'assenza di violenza fisica: affronta "quella violenza invisibile che commettiamo
-    ogni giorno con le parole". I conflitti nascono dal non riconoscere i bisogni autentici propri
-    e altrui.
-  - Quattro pilastri: 1) Osservazione (fatti, non giudizi: "sei arrivato tardi tre volte" non "sei
-    sempre in ritardo"); 2) Sentimenti (le emozioni reali, non giudizi mascherati); 3) Bisogni
-    (collegare le emozioni ai bisogni profondi); 4) Richieste (concrete, positive, negoziabili).
-  - Si applica con i bambini, al lavoro, nelle relazioni affettive e con sé stessi.
-
-  ═══════════════════════════════════════
-  REGOLE
-  ═══════════════════════════════════════
-  - Massimo 5-6 frasi. Puoi nominare i quattro pilastri, ma senza formattarli come elenco puntato:
-    è una risposta di chat, non un articolo.
-  - Tono caldo e diretto, come parlasse Giraffiamo stesso.
-  - Chiudi SEMPRE con un invito a leggere di più e questo link, invariato:
-    https://www.giraffiamo.it/linguaggio-giraffa/
+  L'utente ha cliccato "Come funziona il linguaggio giraffa?". Segui esattamente quanto descritto
+  nel Compito 3 delle tue istruzioni generali per questa domanda: cerca la pagina con
+  ghost_giraffiamo_elencaArticoli (resourceType:"pages", filter:"slug:linguaggio-giraffa",
+  includi html nei fields), leggi l'html restituito e scrivi una sintesi breve — non inventare,
+  non elencare tutto il contenuto, non incollare il testo della pagina. Segui le regole generali
+  su tono, sinteticità e link (comprese le ancore alle sezioni, se pertinenti).

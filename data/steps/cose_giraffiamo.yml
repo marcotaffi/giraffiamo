@@ -1,5 +1,5 @@
 name: cose_giraffiamo
 type: prompt
-description: "Spiega cos'è Giraffiamo, con link di approfondimento"
+description: "Spiega cos'è Giraffiamo, cercando il contenuto reale della pagina"
 prompt: cose_giraffiamo   # prompts/cose_giraffiamo.yml
 agentName: giraffiamo     # agents/giraffiamo.yml
