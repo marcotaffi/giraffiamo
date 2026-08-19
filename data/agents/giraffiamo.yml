@@ -11,9 +11,12 @@ params:
   max_output_tokens: 6000
 instructions:
            - giraffiamoinstructions
-toolNames: 
+toolNames:
            - gestoredate_now_readClock
           # - scraper_url_download
-           - websearch_italia_low
+          # - websearch_italia_low  # disattivato apposta: il bot lavora solo su giraffiamo.it,
+                                     # non su siti esterni — per contenuti del sito usa
+                                     # ghost_giraffiamo_elencaArticoli, per CNV in generale la
+                                     # propria conoscenza (vedi Compito 3 in giraffiamoinstructions)
            - ghost_giraffiamo
         
