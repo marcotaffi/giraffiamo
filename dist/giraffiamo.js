@@ -176,16 +176,19 @@ feeds = [
         lingua: "it"
     },
     {
-        // Articoli con permalink a data /AAAA/MM/GG/slug/ (WordPress). Il filtro qui è per sottostringa,
-        // non supporta una regex "qualunque anno" come faceva il vecchio filtro globale: uso "/20" che
-        // intercetta qualunque anno 20xx (fino al 2099) nel percorso. Escludo /wp-content/ e /wp-json/
-        // perché altrimenti verrebbero presi anche i link alle immagini caricate (es. /wp-content/uploads/2019/...)
-        // e alle risposte dell'API REST di WordPress, che contengono anch'essi "/20" per altri motivi.
+        // Il sito ha cambiato schema di permalink nel tempo: i post più vecchi restano sotto
+        // /AAAA/MM/GG/slug/ (dove "includiLink: ['/20']" li prendeva), ma i contenuti più recenti —
+        // eventi compresi, es. /parlare-pace-trieste/ — usano ora uno slug pulito senza data, che quel
+        // filtro non intercettava più: verificato scaricando la home, ci sono entrambi gli schemi
+        // mescolati. Passo da un filtro "prendi solo se" a "prendi tutto tranne le pagine di servizio":
+        // così coprono sia il vecchio schema sia il nuovo, senza dover indovinare il prossimo.
         hooks: ["https://www.giraffe-cnv.it/"],
         categories: ["cnv"],
         lingua: "it",
-        includiLink: ["/20"],
-        escludiLink: ["/wp-content/", "/wp-json/"],
+        escludiLink: [
+            "/wp-content/", "/wp-json/", "xmlrpc.php", // asset e API tecniche di WordPress
+            "/feed/", "/contatti/", "/privacy/", "/iscriviti-alla-newsletter", // pagine di servizio, non contenuti
+        ],
     },
     {
         // Articoli veri sotto /news/<slug>/. Escludo il feed RSS della pagina stessa (contiene "/news/"
