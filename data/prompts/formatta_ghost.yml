@@ -13,6 +13,7 @@ prompt: |
   ═══════════════════════════════════════
 
   - Non modificare il contenuto: non riassumere, non aggiungere parole, non inventare sezioni, non cambiare l'ordine, non riformulare.
+  - Il testo ricevuto è la fonte da trasferire integralmente: ogni sua frase deve comparire in uno dei blocchi html. Un blocco html vuoto o formato solo da <p></p> è sempre invalido: ricontrolla il testo sorgente prima di restituire blocks.
   - Limita al massimo la creatività nella riscrittura: applica solo trasformazioni meccaniche.
   - Ogni paragrafo → <p>testo</p>
   - Ogni titolo intermedio ## → <h2>titolo</h2>; ogni titolo ### → <h3>titolo</h3>

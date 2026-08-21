@@ -12,3 +12,7 @@ regole:
   - id: code_fence
     vietato: '^```|```$'
     messaggio: "Il contenuto html contiene un blocco di codice markdown (```): va restituito solo HTML puro."
+
+  - id: html_vuoto
+    vietato: '^\s*<p>\s*</p>\s*$|^\s*$'
+    messaggio: "Il blocco html è vuoto: il testo generato deve essere trasferito integralmente nei blocchi prima della pubblicazione."
