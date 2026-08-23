@@ -25,7 +25,7 @@ prompt: |
   - Non usare MAI div, span, class, style o altri contenitori: solo i tag elencati sopra, così Ghost li converte nei suoi blocchi nativi.
   - Non dividere MAI il testo in un blocco html per paragrafo o per argomento: i paragrafi restano nello stesso blocco html, uno dopo l'altro, esattamente come nel FORMATO BLOCCHI qui sotto (l'unica cosa che può creare un secondo/terzo blocco html è l'eventuale immagine a metà articolo, vedi sotto).
   - Non duplicare paragrafi: ogni frase del testo originale compare in output UNA VOLTA SOLA.
-  - Alla fine del testo, se nota la fonte originale, chiudi con un paragrafo del tipo: <p>Fonte: <a href="URL" target="_blank">nome della fonte</a></p>. Questo paragrafo va DENTRO l'ultimo blocco html già previsto (vedi COMPOSIZIONE DEI BLOCCHI): non è mai un blocco a sé.
+  - Se il testo cita già la fonte (di norma sì, vedi instructions_ripubblica.md): non riformularla né sostituirla con un template — trasformala meccanicamente in html come il resto del testo, dentro l'ultimo blocco html già previsto (vedi COMPOSIZIONE DEI BLOCCHI), mai come blocco a sé. Solo se manca del tutto e nel materiale c'è una fonte nota, aggiungi tu un invito diretto verso il link (es. <p>Vai al sito di Nome Ente per i dettagli: <a href="URL" target="_blank">link</a></p>), mai la formula fredda "Fonte: nome".
   - Ogni multimediaContent di tipo "html" è HTML puro: non avvolgerlo mai in un blocco di codice markdown (niente ```html né ```).
 
   ═══════════════════════════════════════
