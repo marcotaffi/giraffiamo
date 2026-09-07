@@ -106,14 +106,15 @@ feeds = [
      lingua: "it"
     }*/
     {
-        // Il sito continua a rispondere 403 a qualunque richiesta automatizzata da questo ambiente (stesso
-        // WAF di prima), ma un fetch fatto per un'altra via è riuscito a passare: gli eventi veri sono
-        // sotto /eventi/<slug>/ (es. /eventi/cnv-agosto-online/). Il nav ha anche un link nudo a /eventi/
-        // che passerebbe il filtro (prende anche quella pagina indice, innocuo).
-        hooks: ["https://comunicazionenonviolenta.org/prossimi-eventi/"],
+        // AGGIORNATO (2026-09-07): passato dallo scraping HTML di /prossimi-eventi/ (con filtro
+        // includiLink) al feed RSS dedicato agli eventi, che esiste ed è pulito — verificato con curl:
+        // /eventi/feed/ risponde 200 application/rss+xml con voci reali (title = "...- Eventi"). Un
+        // hook che punta a un feed RSS/Atom valido salta del tutto lo scraping+filtro HTML lato
+        // taffiserver (vedi commento su Trigger.includiLink in tipimarco.ts): niente più bisogno di
+        // indovinare pattern di URL.
+        hooks: ["https://comunicazionenonviolenta.org/eventi/feed/"],
         categories: ["cnv"],
         lingua: "it",
-        includiLink: ["/eventi/"],
     },
     {
         // NUOVA FONTE. Centro Interdisciplinare Scienze per la Pace (Università di Pisa): pagina generale
@@ -121,48 +122,45 @@ feeds = [
         // CNV. Per questo il filtro include SOLO "comunicazione-nonviolenta" (che compare nello slug dei
         // corsi CNV, es. ".../corso-la-comunicazione-nonviolenta-essere-me-incontrare-te/"), non un pattern
         // largo tipo "corso-": altrimenti finirebbero nella categoria "cnv" anche corsi non-CNV del centro.
+        // Controllato (2026-09-07) se esistesse un feed RSS più mirato: il /feed/ generale del sito è
+        // troppo ampio (stesso problema di temi misti), e /formazione/corsi-di-alta-formazione/feed/
+        // non è un feed di contenuti ma il feed dei COMMENTI a quella pagina (vuoto) — comportamento
+        // di default di WordPress per le pagine statiche. Resta quindi lo scraping HTML con filtro.
         hooks: ["https://cisp.unipi.it/formazione/corsi-di-alta-formazione/"],
         categories: ["cnv"],
         lingua: "it",
         includiLink: ["comunicazione-nonviolenta"],
     },
     {
-        // NUOVA FONTE. Blog personale di Anna Bassi, formatrice CNV: post con permalink a data
-        // /AAAA/MM/slug/ (stesso schema di giraffe-cnv.it). Escludo i link ai commenti (contengono "/20"
-        // per via dell'anno nell'URL del post, ma puntano allo stesso post, non a un nuovo contenuto) e
-        // gli asset/API di WordPress.
-        hooks: ["https://annabassi.com/"],
+        // AGGIORNATO (2026-09-07): passato allo scraping HTML del feed RSS di WordPress, verificato
+        // pulito e attivo (curl: /feed/ → 200 application/rss+xml, voci reali tipo "Coltivare la CNV").
+        hooks: ["https://annabassi.com/feed/"],
         categories: ["cnv"],
         lingua: "it",
-        includiLink: ["/20"],
-        escludiLink: ["/wp-content/", "/wp-json/", "#comment"],
     },
     {
-        // NUOVA FONTE. "Arte del Dialogo": laboratori CNV a offerta libera. Eventi veri sotto /eventi/<slug>/,
-        // ma il menu ha anche pagine di categoria sotto /eventi/categorie/... che vanno escluse esplicitamente
-        // perché contengono anch'esse "/eventi/". Anche questo sito mi ha risposto 403 dall'ambiente in cui
-        // lavoro (stesso WAF di comunicazionenonviolenta.org), verificato con un fetch alternativo: da
-        // monitorare dopo il deploy nel caso risulti bloccato anche per il taffiserver.
-        hooks: ["https://artedeldialogo.it"],
+        // AGGIORNATO (2026-09-07): il sito rispondeva 403 solo dall'ambiente di test usato per il primo
+        // controllo, non dal taffiserver in produzione (verificato dopo il deploy, come segnalato qui).
+        // Passato inoltre dallo scraping HTML con filtro al feed RSS dedicato, verificato pulito e attivo.
+        hooks: ["https://artedeldialogo.it/feed/"],
         categories: ["cnv"],
         lingua: "it",
-        includiLink: ["/eventi/"],
-        escludiLink: ["/eventi/categorie/"],
     },
     {
-        // I corsi veri sono tutti sotto /shop/<slug>/ (verificato scaricando la pagina): le altre voci
-        // sono menu di navigazione (/categoria-prodotto/..., /blog/, /feed/ ecc.) e non c'entrano.
-        hooks: ["https://www.centroesserci.it/categoria-prodotto/corsi/online-2026/"],
+        // AGGIORNATO (2026-09-07): passato dallo scraping HTML (filtro /shop/) al feed RSS di questa
+        // categoria WooCommerce specifica, verificato pulito e scoperto per caso: esiste ed è ricco
+        // (curl: .../online-2026/feed/ → 200 application/rss+xml, 60KB, voci tipo "Ottobre-Dicembre",
+        // "6-8 Ottobre" — niente contenuti di altre categorie del sito).
+        hooks: ["https://www.centroesserci.it/categoria-prodotto/corsi/online-2026/feed/"],
         categories: ["cnv"],
         lingua: "it",
-        includiLink: ["/shop/"],
     },
     {
-        // Stesso schema della pagina "online-2026" qui sopra.
-        hooks: ["https://www.centroesserci.it/categoria-prodotto/corsi/in-presenza-2026/"],
+        // Stesso schema della categoria "online-2026" qui sopra: feed RSS dedicato, non il /feed/
+        // generico del sito.
+        hooks: ["https://www.centroesserci.it/categoria-prodotto/corsi/in-presenza-2026/feed/"],
         categories: ["cnv"],
         lingua: "it",
-        includiLink: ["/shop/"],
     },
     {
         // ATTENZIONE: questo sito è una SPA React/Next.js. L'HTML statico che il taffiserver scarica con
@@ -181,19 +179,23 @@ feeds = [
         // eventi compresi, es. /parlare-pace-trieste/ — usano ora uno slug pulito senza data, che quel
         // filtro non intercettava più: verificato scaricando la home, ci sono entrambi gli schemi
         // mescolati. Passo da un filtro "prendi solo se" a "prendi tutto tranne le pagine di servizio":
-        // così coprono sia il vecchio schema sia il nuovo, senza dover indovinare il prossimo.
-        hooks: ["https://www.giraffe-cnv.it/"],
+        // AGGIORNATO (2026-09-07): il /feed/ che qui sotto veniva escluso come "pagina di servizio"
+        // durante lo scraping HTML è in realtà il modo giusto per leggere questo sito: verificato
+        // pulito e attivo (curl: /feed/ → 200 application/rss+xml, voci reali tipo "Il potere che
+        // cambia la classe"). Passo il feed stesso come hook, niente più bisogno di indovinare schemi
+        // di permalink che cambiano nel tempo.
+        hooks: ["https://www.giraffe-cnv.it/feed/"],
         categories: ["cnv"],
         lingua: "it",
-        escludiLink: [
-            "/wp-content/", "/wp-json/", "xmlrpc.php", // asset e API tecniche di WordPress
-            "/feed/", "/contatti/", "/privacy/", "/iscriviti-alla-newsletter", // pagine di servizio, non contenuti
-        ],
     },
     {
         // Articoli veri sotto /news/<slug>/. Escludo il feed RSS della pagina stessa (contiene "/news/"
         // ma non è un articolo) e la voce "mantenimento-di-acrocirco": è un contenuto fisso della pagina,
         // sempre rilistato, che non ci interessa mai pubblicare (vedi conversazione del 2026-07-23).
+        // Controllato (2026-09-07): il /feed/ generale del sito è troppo ampio (centro sportivo, non
+        // solo CNV), e .../comunicazione-nonviolenta/feed/ è il feed dei COMMENTI a quella pagina
+        // (vuoto), non un feed di contenuti — stesso comportamento di default WordPress visto su
+        // cisp.unipi.it. Resta lo scraping HTML con filtro.
         hooks: ["https://ch4sportingclub.it/news/comunicazione-nonviolenta/"],
         categories: ["cnv"],
         lingua: "it",
@@ -201,10 +203,44 @@ feeds = [
         escludiLink: ["/feed/", "mantenimento-di-acrocirco"],
     },
     {
-        // Pagina scaricata e ispezionata: non ha una vera sezione di notizie/eventi con uno schema di link
-        // riconoscibile (solo pagine statiche tipo /chi-siamo/, /praticare-cnv, e link esterni). Nessun
-        // filtro sensato da applicare: lascio senza includiLink (prende tutto quel poco che c'è).
-        hooks: ["https://www.cnv-arpa.it/"],
+        // AGGIORNATO (2026-09-07): la homepage non aveva una sezione news/eventi riconoscibile via
+        // link, ma il sito ha comunque un feed RSS valido (curl: /feed/ → 200 application/rss+xml,
+        // voci come "Coltivare la pace"). Passo il feed come hook invece della homepage.
+        hooks: ["https://www.cnv-arpa.it/feed/"],
+        categories: ["cnv"],
+        lingua: "it"
+    },
+    {
+        // NUOVA FONTE (2026-09-07). ArtoRise: laboratori/workshop di CNV (area Milano). Eventi veri
+        // sotto /project/<slug>/, la pagina indice è /events/. Il sito ha un /feed/ RSS valido, ma
+        // copre il blog generale (clima, geopolitica, attualità...), non solo i laboratori CNV:
+        // verificato coi titoli restituiti, niente a che vedere con CNV nella maggior parte dei casi.
+        // Meglio lo scraping mirato di /events/ col filtro qui sotto.
+        hooks: ["https://www.artorise.org/events/"],
+        categories: ["cnv"],
+        lingua: "it",
+        includiLink: ["/project/"],
+    },
+    {
+        // NUOVA FONTE (2026-09-07). Giovanna Castoldi, formatrice CNV certificata (compare anche tra
+        // gli eventi di comunicazionenonviolenta.org, es. "AD.AGIO CON..."). Il dominio non ha un
+        // /feed/ generico (risponde con l'HTML della home, feed disattivato lì), ma la sezione /cnv/
+        // sì: verificato pulito e attivo (curl: /cnv/feed/ → 200 application/rss+xml, voce reale "Un
+        // Viaggio nella Trasformazione dei Conflitti"). Un solo hook copre sia corsi che laboratori
+        // pratici, niente bisogno di due voci separate con includiLink diversi.
+        hooks: ["https://www.giovannacastoldi.it/cnv/feed/"],
+        categories: ["cnv"],
+        lingua: "it",
+    },
+    {
+        // NUOVA FONTE (2026-09-07). Giacomo Poleschi, formatore CNV certificato, collabora con Centro
+        // Esserci (Reggio Emilia, già fonte esistente sopra). Pagina eventi: /wp/eventi-workshop/.
+        // Il sito ha un /wp/feed/ RSS valido ma vuoto (0 voci, canale attivo: "Formazione,
+        // Facilitazione, Mediazione CNV" — probabilmente aggiorna solo la pagina statica eventi, non
+        // pubblica sul blog): niente da guadagnare passando al feed. Schema URL delle singole pagine
+        // evento non verificato con certezza: nessun filtro includiLink per ora, da restringere dopo
+        // il primo giro reale se produce link fuori tema.
+        hooks: ["https://www.giacomopoleschi.com/wp/eventi-workshop/"],
         categories: ["cnv"],
         lingua: "it"
     },
