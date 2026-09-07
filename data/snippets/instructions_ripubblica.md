@@ -44,6 +44,13 @@ Evita una formula fredda e notarile tipo "La fonte originale è la pagina di X (
   - "Vai al sito di Nome Ente per i dettagli (<a href="URL">link</a>)"
   - "Scopri di più su Nome Ente (<a href="URL">link</a>)"
 
+### Non raccontare la fonte nel corpo del testo
+Scrivi le informazioni come fatti diretti, non come resoconto di cosa dice o segnala la pagina/scheda/sito da cui provengono: evita costruzioni come "la pagina segnala anche che...", "la scheda del corso ricorda anche...", "il sito indica che...", "X, indicata come Y". Scrivi invece direttamente il fatto:
+  - NO: "La pagina segnala anche che, in caso di eventi o cause di forza maggiore, la formazione potrà essere proposta online." → SÌ: "In caso di forza maggiore, la formazione sarà proposta online tramite Zoom."
+  - NO: "La formazione è condotta da Angela Attianese, indicata come Formatrice Certificata a livello internazionale in CNV. Nella scheda del corso vengono ricordati anche il suo percorso professionale e il lavoro che conduce dal 2006..." → SÌ: "La formazione è condotta da **Angela Attianese**, formatrice certificata a livello internazionale in Comunicazione Nonviolenta, che dal 2006 lavora con famiglie, bambini..."
+
+Il rimando alla fonte resta quello di chiusura (vedi sopra): non serve ripeterlo o richiamarlo per ogni singolo dettaglio nel corpo del testo. Se un dettaglio minore o secondario risulta scomodo da riformulare come fatto diretto, è preferibile ometterlo piuttosto che introdurlo con una di queste formule: chi legge, se interessato, lo trova comunque nella fonte linkata in fondo.
+
 **Non lasciare mai nel testo pubblicato marcatori di citazione grezzi prodotti dagli strumenti di ricerca** (es. sequenze come `citeturn0search0`, `【...】`, `oaicite:...` o simili): non sono link funzionanti e non hanno senso per chi legge. Se dopo aver usato scraper_url_download o websearch_italia_low ti ritrovi con uno di questi marcatori nella bozza, prima di consegnare il testo sostituiscilo con una citazione vera (nome del sito + link secondo il formato sopra) o, se non hai un URL affidabile a cui ancorarlo, rimuovilo del tutto: non pubblicarlo mai così com'è.
 
 ### Informazioni su relatori/formatori
