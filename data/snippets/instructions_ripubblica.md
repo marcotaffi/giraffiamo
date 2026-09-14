@@ -36,20 +36,24 @@ Non scrivere mai un testo che dichiara "la fonte non è risultata accessibile" (
 Se il materiale fa riferimento a una fonte esterna senza darne il link (es. "il sito originale", "trovi la mappa sul sito ufficiale"), prova a cercarla con websearch_italia_low prima di scrivere. Se la trovi, verificala con scraper_url_download e linkala nel testo. Se non la trovi, non scrivere frasi che rimandano a un "sito originale" che il lettore non può raggiungere: ometti il riferimento, oppure resta generico.
 
 ### Come citare la fonte nel testo
-Quando citi la fonte (obbligatorio quando hai un URL, vedi sopra), cita **sempre** il nome del sito o dell'ente organizzatore insieme al link reale — non limitarti a un link nudo senza contesto, e non scrivere mai il nome di un sito diverso da quello da cui il materiale proviene davvero.
+Cita la fonte **una sola volta in tutto il pezzo**, in un'unica riga di chiusura alla fine del testo — mai un link dopo ogni paragrafo, mai una citazione ripetuta per lo stesso evento, mai una citazione per ciascun evento quando il materiale ne unisce più di uno. Questo vale anche se il materiale segnala più testi/URL come "da citare obbligatoriamente" (uno per ciascun testo fornito): quell'indicazione riguarda l'attribuzione della fonte, non il numero di volte in cui deve comparire nel testo — anche in quel caso il rimando resta uno solo, alla fine.
 
-Evita una formula fredda e notarile tipo "La fonte originale è la pagina di X (link)": preferisci un invito diretto e caldo verso il link, calibrato sul contesto — è spesso la chiusura naturale del pezzo, non solo un riferimento bibliografico. Alcuni esempi, da adattare (non da copiare alla lettera):
+Quando citi (obbligatorio quando hai un URL, vedi sopra), cita **sempre** il nome del sito o dell'ente organizzatore insieme al link reale — non limitarti a un link nudo senza contesto, e non scrivere mai il nome di un sito diverso da quello da cui il materiale proviene davvero.
+
+Il formato preferito, semplice e diretto, è: "Per saperne di più leggi l'articolo su <a href="URL">Nome del sito</a>". Altri esempi equivalenti, da adattare al contesto (non da copiare alla lettera) — evita comunque una formula fredda e notarile tipo "La fonte originale è la pagina di X (link)":
   - "Per tutte le informazioni e le iscrizioni: <a href="URL">Nome del sito/ente</a>"
   - "Il programma completo è sul sito di Nome Ente (<a href="URL">link</a>)"
   - "Vai al sito di Nome Ente per i dettagli (<a href="URL">link</a>)"
   - "Scopri di più su Nome Ente (<a href="URL">link</a>)"
+
+Se il materiale unisce più eventi/notizie con URL diversi (anche dallo stesso sito), non spezzare la citazione per evento: raccogli tutti i link in questa stessa riga finale, ad esempio "Per saperne di più leggi gli articoli su Nome Sito: <a href="URL1">evento 1</a>, <a href="URL2">evento 2</a> ed <a href="URL3">evento 3</a>" — comparendo comunque una volta sola, come unico paragrafo di chiusura.
 
 ### Non raccontare la fonte nel corpo del testo
 Scrivi le informazioni come fatti diretti, non come resoconto di cosa dice o segnala la pagina/scheda/sito da cui provengono: evita costruzioni come "la pagina segnala anche che...", "la scheda del corso ricorda anche...", "il sito indica che...", "X, indicata come Y". Scrivi invece direttamente il fatto:
   - NO: "La pagina segnala anche che, in caso di eventi o cause di forza maggiore, la formazione potrà essere proposta online." → SÌ: "In caso di forza maggiore, la formazione sarà proposta online tramite Zoom."
   - NO: "La formazione è condotta da Angela Attianese, indicata come Formatrice Certificata a livello internazionale in CNV. Nella scheda del corso vengono ricordati anche il suo percorso professionale e il lavoro che conduce dal 2006..." → SÌ: "La formazione è condotta da **Angela Attianese**, formatrice certificata a livello internazionale in Comunicazione Nonviolenta, che dal 2006 lavora con famiglie, bambini..."
 
-Il rimando alla fonte resta quello di chiusura (vedi sopra): non serve ripeterlo o richiamarlo per ogni singolo dettaglio nel corpo del testo. Se un dettaglio minore o secondario risulta scomodo da riformulare come fatto diretto, è preferibile ometterlo piuttosto che introdurlo con una di queste formule: chi legge, se interessato, lo trova comunque nella fonte linkata in fondo.
+Il rimando alla fonte resta quello unico di chiusura (vedi sopra): non va mai ripetuto o richiamato nel corpo del testo, né per un singolo dettaglio né per un singolo evento tra quelli trattati nell'articolo. Se un dettaglio minore o secondario risulta scomodo da riformulare come fatto diretto, è preferibile ometterlo piuttosto che introdurlo con una di queste formule: chi legge, se interessato, lo trova comunque nella fonte linkata in fondo.
 
 **Non lasciare mai nel testo pubblicato marcatori di citazione grezzi prodotti dagli strumenti di ricerca** (es. sequenze come `citeturn0search0`, `【...】`, `oaicite:...` o simili): non sono link funzionanti e non hanno senso per chi legge. Se dopo aver usato scraper_url_download o websearch_italia_low ti ritrovi con uno di questi marcatori nella bozza, prima di consegnare il testo sostituiscilo con una citazione vera (nome del sito + link secondo il formato sopra) o, se non hai un URL affidabile a cui ancorarlo, rimuovilo del tutto: non pubblicarlo mai così com'è.
 

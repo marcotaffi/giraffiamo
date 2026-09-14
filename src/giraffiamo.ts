@@ -129,9 +129,16 @@ feeds = [
   // hook che punta a un feed RSS/Atom valido salta del tutto lo scraping+filtro HTML lato
   // taffiserver (vedi commento su Trigger.includiLink in tipimarco.ts): niente più bisogno di
   // indovinare pattern di URL.
+  // AGGIORNATO (2026-09-14): il sito ha iniziato a rispondere 403 al controllo giornaliero da
+  // produzione (verificato nei log di taffiserver, 12 e 13 settembre, stesso orario ~16:58,
+  // mentre le altre fonti nello stesso ciclo scaricano regolarmente) — sembra un rate-limit/anti-bot
+  // lato loro, non un problema nostro. Intervallo allungato a 4 giorni (contro il default di 24h)
+  // per ridurre la pressione sul loro sito; gli eventi CNV vengono di norma pubblicati con largo
+  // anticipo, quindi non serve controllare più spesso. Regolare qui se il blocco persiste o rientra.
   hooks: ["https://comunicazionenonviolenta.org/eventi/feed/"],
   categories: ["cnv"],
   lingua: "it",
+  intervalloControllo: 4 * 24 * 60 * 60 * 1000, // 4 giorni
  },
  {
   // NUOVA FONTE. Centro Interdisciplinare Scienze per la Pace (Università di Pisa): pagina generale
