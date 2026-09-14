@@ -1,0 +1,6 @@
+name: ghost_scrivi
+type: servizio
+# Riusa direttamente l'azione "run" già esposta dal canale ghost_giraffiamo esistente (Ghost
+# extends Writer): non duplica nessuna logica, chiama lo stesso metodo che gira già in
+# produzione. Qui diventa un passo di un flusso invece che un metodo fisso di una sottoclasse.
+firma: ghost_giraffiamo_run

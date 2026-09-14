@@ -1,0 +1,6 @@
+name: prova_ghost_scrivi
+description: "Scrive una bozza Ghost (riusa ghost_giraffiamo_run) - prova del canale generico"
+type: sequenziale
+tasks:
+  - name: ghost_scrivi
+    type: step

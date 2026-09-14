@@ -342,6 +342,16 @@ feeds = [
    // const NotizieApg23 = await ServiceFactory.create("ripubblicaconorchestratore") as CanaleExtendsServizio;
     NotizieGiraffiamo.start(credenziali);
 
+//-----------------
+// PROVA: stesso canale Ghost (stesso sito, stesse credenziali, stessa azione run/post), ma
+// richiamato tramite il canale generico CanaleFlusso invece che come metodo fisso della
+// sottoclasse Ghost — vedi taffitools/src/canali/canaleflusso.ts e data/services/
+// prova_ghost_giraffiamo.yml. Non tocca NotizieGiraffiamo: è un canale a sé, solo per chat
+// (nessuna classificazione/feed), da provare da Telegram con due azioni separate ("scrivi" e
+// "invia" del canale "ghost_giraffiamo" in prova_ghost_giraffiamo).
+    const provaGhostFlusso = await ServiceFactory.create("prova_ghost_giraffiamo") as CanaleExtendsServizio;
+    provaGhostFlusso.start(credenziali);
+
  
 
 
@@ -511,8 +521,8 @@ aiManager.setDefaultParams({ assistant_id: assistantID }, "chatgpt-assistants-ap
   await bot.aggiungieInizializzaInterfaccePredefinite(credenziali); 
 
 
-  debug(3, "*Aggiungo i canali al bot*"); 
-    const elencoCanali : CanaleExtendsServizio[]=[NotizieGiraffiamo,]; // NotizieMail];
+  debug(3, "*Aggiungo i canali al bot*");
+    const elencoCanali : CanaleExtendsServizio[]=[NotizieGiraffiamo, provaGhostFlusso]; // NotizieMail];
 
    bot.aggiungiCanali(elencoCanali, credenziali);
 

@@ -1,0 +1,14 @@
+firma: prova_ghost_giraffiamo
+servizio: canaleflusso
+destinazione: ghost_giraffiamo
+# Due flussi separati (non uno solo): "scrivi" prepara la bozza, "invia" la pubblica per davvero
+# su un CMS reale — un confine esplicito fra le due azioni, richiamabili singolarmente da chat,
+# invece di una pipeline unica che pubblicherebbe in automatico appena scritta (vedi la
+# discussione su CanaleFlusso: mai una pausa nascosta a metà flusso per un'azione irreversibile,
+# meglio due azioni AI-callable distinte).
+flussi:
+  scrivi: prova_ghost_scrivi
+  invia: prova_ghost_pubblica
+# Nessuna "classificazione": questo canale di prova è pensato per essere richiamato solo da chat
+# (i due flussi sopra), non per ricevere automaticamente articoli dal feed — quello lo fa già il
+# canale "ghost_giraffiamo" esistente, che resta invariato.

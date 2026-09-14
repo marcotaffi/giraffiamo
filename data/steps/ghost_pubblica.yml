@@ -1,0 +1,8 @@
+name: ghost_pubblica
+type: servizio
+# Riusa direttamente l'azione "post" già esposta dal canale ghost_giraffiamo esistente. Ghost.post
+# legge titolo/html/blocks SOLO dal contenuto che riceve in questa chiamata (nessun accesso alla
+# sessione, vedi Ghost.post in taffitools/src/canali/ghost.ts): perché funzioni davvero da
+# Telegram dopo "ghost_scrivi", il materiale scritto va ripassato esplicitamente qui — vedi la
+# description generata da CanaleFlusso.generaDescrizione, che lo segnala all'AI.
+firma: ghost_giraffiamo_post

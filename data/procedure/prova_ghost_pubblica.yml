@@ -1,0 +1,6 @@
+name: prova_ghost_pubblica
+description: "Pubblica su Ghost (riusa ghost_giraffiamo_post) - prova del canale generico"
+type: sequenziale
+tasks:
+  - name: ghost_pubblica
+    type: step
