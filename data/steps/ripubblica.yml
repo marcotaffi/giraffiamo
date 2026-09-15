@@ -4,3 +4,10 @@ description: "Scrivi un rilancio dell'articolo"
 prompt: ripubblica
 agentName: ripubblica
 validate: ripubblica
+# Backstop deterministico (2026-09-15): primo step della propria procedura (ripubblica →
+# genera_titoli_ghost → formatta_ghost) — riceve il materiale vero SOLO da qui ("materialeIniziale",
+# preparato da CanaleFlusso.preRun quando il canale gira in automatico dal feed — il caso reale
+# di questo canale, vedi ghost_giraffiamo/prova_ghost_giraffiamo), mai dagli step successivi
+# della catena. Stesso schema, stessa protezione di scrivi_rilancio in marcotassinaribot — vedi
+# il suo commento in taffitools/src/procedure/step.ts.
+richiedeMateriale: true
