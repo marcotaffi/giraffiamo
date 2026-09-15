@@ -1,0 +1,15 @@
+firma: websearch_italia_low
+servizio: websearch
+destinazione: italia
+azione: low
+opzioni:
+  # Ricerca ristretta al solo giraffiamo.it (2026-09-15): questo bot ha un ambito dichiarato — vedi
+  # giraffiamoinstructions.md, "Non accedi a siti esterni" — la ricerca web generica non c'entra
+  # con quello scopo. Diverso da marcotassinaribot, che non ha questo file e quindi usa
+  # websearch_italia_low senza restrizioni (vedi il commento in websearch.ts).
+  # NOTA: resta comunque un tool nativo OpenAI (type:"web_search") il cui risultato non viene mai
+  # salvato nella cronologia locale della sessione (vedi chatgptresponse.ts) — per questo motivo
+  # resta ESCLUSO dagli agenti che scrivono contenuti pubblicabili (ripubblica.yml): solo per la
+  # chat generale (giraffiamo.yml), dove quel limite non ha conseguenze.
+  allowedDomains:
+    - "www.giraffiamo.it"

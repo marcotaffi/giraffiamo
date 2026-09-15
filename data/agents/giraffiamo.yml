@@ -14,10 +14,13 @@ instructions:
 toolNames:
            - gestoredate_now_readClock
           # - scraper_url_download
-          # - websearch_italia_low  # disattivato apposta: il bot lavora solo su giraffiamo.it,
-                                     # non su siti esterni — per contenuti del sito usa
-                                     # ghost_giraffiamo_elencaArticoli, per CNV in generale la
-                                     # propria conoscenza (vedi Compito 3 in giraffiamoinstructions)
+           # websearch_italia_low riattivato il 2026-09-15, ma RISTRETTO al solo giraffiamo.it
+           # (vedi data/services/websearch_italia_low.yml, opzioni.allowedDomains) — non una
+           # ricerca web generica: resta vero che "il bot lavora solo su giraffiamo.it, non su
+           # siti esterni" (vedi giraffiamoinstructions.md), questo è solo un secondo modo di
+           # cercarci dentro, utile per la chat quando ghost_giraffiamo_elencaArticoli (la via
+           # preferita per contenuti del sito, vedi Compito 3) non è la scelta più diretta.
+           - websearch_italia_low
            - ghost_giraffiamo
            # Canale di prova (CanaleFlusso) per testare da chat ghost_giraffiamo_run/_post come
            # step di una procedura invece che come metodo fisso della sottoclasse Ghost — vedi

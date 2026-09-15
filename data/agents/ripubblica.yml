@@ -18,5 +18,18 @@ params:
 toolNames:
            - gestoredate_now_readClock
            - scraper_url_download
-           - websearch_italia_low
+           # websearch_italia_low rimosso il 2026-09-15 (era solo segnato con un TODO da rivedere,
+           # non ancora rimosso): è un tool nativo OpenAI (type:"web_search") il cui uso ha una
+           # conseguenza strutturale che nessuna istruzione in prosa può evitare — quando il
+           # modello lo usa, la Responses API annota automaticamente le frasi con citazioni tipo
+           # "([sito](url))", UNA PER OGNI PARAGRAFO che ha usato un risultato di ricerca. Non è
+           # testo scritto dal modello (che potrebbe "ricordarsi" di non farlo): è generato
+           # dall'API stessa, quindi "cita una sola volta" (vedi instructions_ripubblica.md) non
+           # basta a impedirlo. Visto in produzione: un rilancio con la stessa fonte citata 5
+           # volte, una per paragrafo, proprio perché questo agente aveva usato web_search invece
+           # di scraper_url_download come richiesto — il validatore "ripubblica" (stepvalidators.ts)
+           # in più non riconosceva ancora quella sintassi di citazione, quindi il difetto è
+           # passato inosservato: corretto anche quello, ma restare esposti al problema alla radice
+           # non ha senso quando scraper_url_download (il cui risultato persiste correttamente in
+           # sessione, vedi CanaleFlusso/Step._esegui) copre lo stesso bisogno.
            - segnalaerrore_run_segnala
