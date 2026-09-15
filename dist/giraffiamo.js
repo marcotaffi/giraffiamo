@@ -276,6 +276,10 @@ feeds = [
 // ******************************** main **************************************
 (async () => {
     try {
+        // MARCATORE_DEPLOY_GIRAFFIAMO_2026_09_15: presente solo per verificare che questo file
+        // venga davvero ricompilato/ridistribuito — cerca questa stringa nel log dopo un deploy.
+        // Toglila quando il deploy risulta confermato (vedi anche prova_ghost_giraffiamo poco sotto).
+        debug(1, "MARCATORE_DEPLOY_GIRAFFIAMO_2026_09_15: giraffiamo.ts di questa build include prova_ghost_giraffiamo");
         debug(3, "*Creo i canali:* ");
         //   const procedureManager = new ProcedureManager();
         //   const listaPromptFiles : Files = await procedureManager.elencaFiles("yml");
