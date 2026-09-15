@@ -9,6 +9,24 @@ destinazione: ghost_giraffiamo
 flussi:
   scrivi: prova_ghost_scrivi
   invia: prova_ghost_pubblica
-# Nessuna "classificazione": questo canale di prova è pensato per essere richiamato solo da chat
-# (i due flussi sopra), non per ricevere automaticamente articoli dal feed — quello lo fa già il
-# canale "ghost_giraffiamo" esistente, che resta invariato.
+  # "principale" (Tappa 1 della sostituzione, 2026-09-15): riusa TALE QUALE la stessa procedura
+  # "ripubblica" già usata dal canale ghost_giraffiamo esistente (stessi 3 step: scrivi rilancio,
+  # genera_titoli_ghost, formatta_ghost) — nessun nuovo file necessario, verificato che il prompt
+  # dello step "ripubblica" si aspetta esattamente i marcatori "=== INIZIO/FINE MATERIALE ==="
+  # prodotti da CanaleFlusso.preRun (stessa convenzione di Writer.preRun, per progetto).
+  # Attenzione — questo flusso NON pubblica nulla: CanaleFlusso.post() è un pass-through vuoto
+  # (a differenza di Ghost.post(), che qui NON viene ereditato: questo canale non estende Ghost).
+  # Per la Tappa 1 va bene così, anzi è il punto: scrive l'articolo per confronto ma non tocca
+  # Ghost, zero rischio di bozze duplicate durante l'osservazione in parallelo (vedi
+  # "classificazione" sotto). Quando si passerà davvero alla pubblicazione (tappa successiva,
+  # non ancora fatta) servirà aggiungere un task finale che chiami ghost_giraffiamo_post.
+  principale: ripubblica
+# Tappa 2 della sostituzione: STESSA classificazione di ghost_giraffiamo (sotto), quindi questo
+# canale riceve GLI STESSI gruppi dal feed semprenews.it, in parallelo al canale esistente, per
+# poter confrontare l'output — senza toglierla al canale esistente, che continua a pubblicare
+# come sempre. Sicuro per il motivo spiegato sopra: "principale" scrive ma non pubblica.
+classificazione:
+  includi:
+   -  categories: ["cnv"]
+      type: "feeds"
+      flusso: "RaggruppaSimili"

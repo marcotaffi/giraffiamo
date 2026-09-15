@@ -19,4 +19,16 @@ toolNames:
                                      # ghost_giraffiamo_elencaArticoli, per CNV in generale la
                                      # propria conoscenza (vedi Compito 3 in giraffiamoinstructions)
            - ghost_giraffiamo
-        
+           # Canale di prova (CanaleFlusso) per testare da chat ghost_giraffiamo_run/_post come
+           # step di una procedura invece che come metodo fisso della sottoclasse Ghost — vedi
+           # data/services/prova_ghost_giraffiamo.yml. Aggiunto il 2026-09-15: il canale era già
+           # registrato all'avvio (bot.aggiungiCanali) ma senza questa riga non risultava mai
+           # nell'elenco tool dell'AI — verificato nei log: "usa il tool di prova" chiamava
+           # comunque ghost_giraffiamo_run (quello vero), perché l'unico tool disponibile con
+           # quel nome era quello. La firma qui è quella PROPRIA del canale (come ghost_giraffiamo
+           # sopra), non quella delle singole azioni esposte (canaleflusso_ghost_giraffiamo_scrivi/
+           # _invia, vedi CanaleFlusso.generaDescrizione): creaEAvviaServizio cerca prima un
+           # servizio già registrato con .firma identica a questa stringa esatta, lo trova
+           # (registrato da aggiungiCanali) e riusa quello — un'altra firma qui creerebbe invece
+           # un servizio NUOVO, mai configurato, quasi certamente un errore all'avvio.
+           - prova_ghost_giraffiamo
