@@ -3,7 +3,13 @@ type: prompt
 description: "Scrivi un rilancio dell'articolo"
 prompt: ripubblica
 agentName: ripubblica
-validate: ripubblica
+# "ripubblica" (citazioni ripetute) da solo non basta: se scraper_url_download fallisce,
+# l'agente potrebbe scrivere una scusa conversazionale ("Mi manca il testo...") invece di
+# chiamare segnalaerrore — senza nessun link ripetuto da segnalare, invisibile a quel controllo
+# da solo (bug reale osservato il 2026-09-15 su marcotassinaribot, stesso step, stessa causa).
+# "materiale_sufficiente" (lunghezza minima) chiude il buco: sotto soglia, fallisce subito,
+# niente retry (vedi step.ts, eseguiValidatori — combina più validatori sullo stesso output).
+validate: [ripubblica, materiale_sufficiente]
 # Backstop deterministico (2026-09-15): primo step della propria procedura (ripubblica →
 # genera_titoli_ghost → formatta_ghost) — riceve il materiale vero SOLO da qui ("materialeIniziale",
 # preparato da CanaleFlusso.preRun quando il canale gira in automatico dal feed — il caso reale
