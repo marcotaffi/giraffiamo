@@ -20,10 +20,17 @@ opzioni:
   categoryMapping:
       "*": "1"
 
-classificazione: #configurazione del canale automatico
-  includi:
-   -  categories: ["cnv"]
-      type: "feeds"
-      flusso: "RaggruppaSimili"
+# classificazione automatica DISATTIVATA il 2026-09-15 (Tappa 3 della sostituzione con
+# CanaleFlusso — vedi il commento in data/services/ripubblica_giraffiamo.yml per la storia
+# completa): questo canale (Ghost diretto) resta nel codice e resta richiamabile da chat
+# (ghost_giraffiamo_run/_post), ma non riceve più il traffico dal feed — l'ha preso in carico
+# ripubblica_giraffiamo, con la stessa identica classificazione (categoria "cnv", flusso
+# "RaggruppaSimili") più un vero step di pubblicazione in fondo alla sua pipeline. Lasciare
+# ENTRAMBI i blocchi "classificazione" attivi pubblicherebbe ogni articolo due volte.
+# classificazione:
+#   includi:
+#    -  categories: ["cnv"]
+#       type: "feeds"
+#       flusso: "RaggruppaSimili"
 
 

@@ -278,8 +278,8 @@ feeds = [
     try {
         // MARCATORE_DEPLOY_GIRAFFIAMO_2026_09_15: presente solo per verificare che questo file
         // venga davvero ricompilato/ridistribuito — cerca questa stringa nel log dopo un deploy.
-        // Toglila quando il deploy risulta confermato (vedi anche prova_ghost_giraffiamo poco sotto).
-        debug(1, "MARCATORE_DEPLOY_GIRAFFIAMO_2026_09_15: giraffiamo.ts di questa build include prova_ghost_giraffiamo");
+        // Toglila quando il deploy risulta confermato (vedi anche ripubblica_giraffiamo poco sotto).
+        debug(1, "MARCATORE_DEPLOY_GIRAFFIAMO_2026_09_15: giraffiamo.ts di questa build include ripubblica_giraffiamo");
         debug(3, "*Creo i canali:* ");
         //   const procedureManager = new ProcedureManager();
         //   const listaPromptFiles : Files = await procedureManager.elencaFiles("yml");
@@ -310,14 +310,17 @@ feeds = [
         // const NotizieApg23 = await ServiceFactory.create("ripubblicaconorchestratore") as CanaleExtendsServizio;
         NotizieGiraffiamo.start(credenziali);
         //-----------------
-        // PROVA: stesso canale Ghost (stesso sito, stesse credenziali, stessa azione run/post), ma
-        // richiamato tramite il canale generico CanaleFlusso invece che come metodo fisso della
-        // sottoclasse Ghost — vedi taffitools/src/canali/canaleflusso.ts e data/services/
-        // prova_ghost_giraffiamo.yml. Non tocca NotizieGiraffiamo: è un canale a sé, solo per chat
-        // (nessuna classificazione/feed), da provare da Telegram con due azioni separate ("scrivi" e
-        // "invia" del canale "ghost_giraffiamo" in prova_ghost_giraffiamo).
-        const provaGhostFlusso = await ServiceFactory.create("prova_ghost_giraffiamo");
-        provaGhostFlusso.start(credenziali);
+        // ripubblica_giraffiamo: stesso canale Ghost (stesso sito, stesse credenziali, stessa azione
+        // run/post), richiamato tramite il canale generico CanaleFlusso invece che come metodo fisso
+        // della sottoclasse Ghost — vedi taffitools/src/canali/canaleflusso.ts e data/services/
+        // ripubblica_giraffiamo.yml. Dal 2026-09-15 (Tappa 3, cutover completato) è IL publisher
+        // automatico reale per il CNV di giraffiamo.it: NotizieGiraffiamo (sopra) resta avviato e
+        // richiamabile da chat, ma non riceve più traffico dal feed (classificazione disattivata in
+        // ghost_giraffiamo.yml) per evitare pubblicazioni doppie. Chiamabile anche da chat, con tre
+        // azioni separate: "scrivi"/"invia" (singoli step) e "principale" (pipeline completa, scrive e
+        // pubblica per davvero senza conferma — la stessa che gira già dal feed).
+        const ripubblicaGiraffiamoFlusso = await ServiceFactory.create("ripubblica_giraffiamo");
+        ripubblicaGiraffiamoFlusso.start(credenziali);
         //-----------------
         /* VECCHIO SISTEMA
            let EventiApg23 = new Redazione("redazione_marcotassinari@apg23.org");
@@ -460,7 +463,7 @@ feeds = [
         debug(3, "*Aggiungo le inferfacce*");
         await bot.aggiungieInizializzaInterfaccePredefinite(credenziali);
         debug(3, "*Aggiungo i canali al bot*");
-        const elencoCanali = [NotizieGiraffiamo, provaGhostFlusso]; // NotizieMail];
+        const elencoCanali = [NotizieGiraffiamo, ripubblicaGiraffiamoFlusso]; // NotizieMail];
         bot.aggiungiCanali(elencoCanali, credenziali);
         debug(3, "*Aggiungo le fonti e la conoscenza*");
         if (feeds.length > 0)

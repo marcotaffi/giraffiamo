@@ -1,0 +1,6 @@
+name: ripubblica_giraffiamo_scrivi
+description: "Scrive una bozza Ghost (riusa ghost_giraffiamo_run) via CanaleFlusso"
+type: sequenziale
+tasks:
+  - name: ghost_scrivi
+    type: step

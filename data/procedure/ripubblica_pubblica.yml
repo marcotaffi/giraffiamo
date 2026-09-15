@@ -1,0 +1,21 @@
+name: ripubblica_pubblica
+description: >
+  Tappa 3 della sostituzione del canale ghost_giraffiamo con CanaleFlusso (2026-09-15): stessi
+  identici 3 step di scrittura già usati dalla procedura "ripubblica" (condivisa con il vecchio
+  canale Ghost diretto, qui NON toccata per non rischiare di romperla), più un quarto step finale
+  che pubblica per davvero — vedi steps/ghost_pubblica.yml (riusa ghost_giraffiamo_post, stesso
+  servizio Ghost già configurato in data/services/ghost_giraffiamo.yml: stesso sito, stesso
+  autore di default, stesso status "draft"). Usata come flusso "principale" di
+  ripubblica_giraffiamo.yml, quindi eseguita automaticamente dal feed, fino in fondo, senza
+  chiedere conferma — esattamente come faceva prima ghost_giraffiamo con la pipeline Ghost
+  diretta.
+type: sequenziale
+tasks:
+  - name: ripubblica
+    type: step
+  - name: genera_titoli_ghost
+    type: step
+  - name: formatta_ghost
+    type: step
+  - name: ghost_pubblica
+    type: step

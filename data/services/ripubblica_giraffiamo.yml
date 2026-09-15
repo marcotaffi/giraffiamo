@@ -1,0 +1,49 @@
+# Rinominato da "prova_ghost_giraffiamo" il 2026-09-15, a cutover completato (Tappa 3): non è più
+# un canale di prova, è IL publisher automatico reale per il CNV di giraffiamo.it — vedi
+# ghost_giraffiamo.yml (il vecchio canale Ghost diretto, ancora nel codice/richiamabile da chat,
+# ma senza più classificazione automatica) per la storia completa della sostituzione.
+firma: ripubblica_giraffiamo
+servizio: canaleflusso
+destinazione: ghost_giraffiamo
+# Due flussi separati (non uno solo): "scrivi" prepara la bozza, "invia" la pubblica per davvero
+# su un CMS reale — un confine esplicito fra le due azioni, richiamabili singolarmente da chat,
+# invece di una pipeline unica che pubblicherebbe in automatico appena scritta (vedi la
+# discussione su CanaleFlusso: mai una pausa nascosta a metà flusso per un'azione irreversibile,
+# meglio due azioni AI-callable distinte).
+flussi:
+  scrivi: ripubblica_giraffiamo_scrivi
+  invia: ripubblica_giraffiamo_pubblica
+  # "principale":
+  # - Tappa 1 (2026-09-15): puntava alla procedura "ripubblica" già usata dal canale
+  #   ghost_giraffiamo esistente (3 step: scrivi rilancio, genera_titoli_ghost, formatta_ghost),
+  #   TALE QUALE — nessun nuovo file, scriveva l'articolo per confronto ma non pubblicava nulla
+  #   (CanaleFlusso.post() è un pass-through vuoto, a differenza di Ghost.post(): questo canale
+  #   non estende Ghost). Zero rischio di bozze duplicate durante l'osservazione in parallelo.
+  # - Tappa 3 (2026-09-15, cutover): ora punta a "ripubblica_pubblica", una procedura NUOVA che
+  #   riusa gli stessi 3 step di "ripubblica" (mai toccata: resta condivisa e intatta per il
+  #   vecchio canale Ghost diretto, ancora richiamabile da chat) più un quarto step che pubblica
+  #   per davvero (ghost_giraffiamo_post, vedi steps/ghost_pubblica.yml). Da qui in poi questo
+  #   canale non è più "solo osservazione": la classificazione sotto lo rende IL publisher
+  #   automatico reale — contestualmente disattivata quella di ghost_giraffiamo.yml (vedi il suo
+  #   commento), altrimenti lo stesso articolo verrebbe pubblicato due volte.
+  principale: ripubblica_pubblica
+# Tappa 2 (2026-09-15): STESSE categorie di ghost_giraffiamo, per ricevere lo stesso traffico
+# reale in parallelo durante l'osservazione — flusso "Instant" temporaneamente, per rendere i
+# test ripetibili (con "RaggruppaSimili" un test con più fonti forzate insieme, vedi
+# forzaAlmenoUno in taffiserver, aveva unito articoli di fonti del tutto diverse nello stesso
+# gruppo per la sola categoria condivisa).
+# Tappa 3 (2026-09-15, cutover): tornato a "RaggruppaSimili" — la scelta esplicitamente richiesta
+# per la produzione reale. Verificato leggendo flussoraggruppasimili.ts: NON è un raggruppamento
+# grezzo per sola categoria condivisa (quello che sembrava il difetto nel test sopra), ma
+# categoria condivisa E similarità degli embeddings del testo oltre una soglia
+# (mainBrain.similarityThreshold, 0.45 in produzione, più permissiva 0.35 solo in TEST_ONLY) —
+# un'approssimazione ragionevole di "stesso evento", non un raggruppamento a caso. Il
+# comportamento del test precedente è quasi certamente un artefatto del burst di test (molte
+# fonti scollegate forzate nella stessa finestra stretta), non rappresentativo del traffico reale
+# a cadenza naturale. Nessun comportamento nuovo da sviluppare: stesso flusso già in uso da
+# ghost_giraffiamo, zero cambio editoriale rispetto a oggi.
+classificazione:
+  includi:
+   -  categories: ["cnv"]
+      type: "feeds"
+      flusso: "RaggruppaSimili"
