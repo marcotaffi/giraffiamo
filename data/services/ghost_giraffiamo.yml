@@ -22,11 +22,18 @@ opzioni:
 
 # classificazione automatica DISATTIVATA il 2026-09-15 (Tappa 3 della sostituzione con
 # CanaleFlusso — vedi il commento in data/services/ripubblica_giraffiamo.yml per la storia
-# completa): questo canale (Ghost diretto) resta nel codice e resta richiamabile da chat
-# (ghost_giraffiamo_run/_post), ma non riceve più il traffico dal feed — l'ha preso in carico
-# ripubblica_giraffiamo, con la stessa identica classificazione (categoria "cnv", flusso
-# "RaggruppaSimili") più un vero step di pubblicazione in fondo alla sua pipeline. Lasciare
-# ENTRAMBI i blocchi "classificazione" attivi pubblicherebbe ogni articolo due volte.
+# completa): questo canale (Ghost diretto) resta nel codice, non riceve più il traffico dal feed
+# — l'ha preso in carico ripubblica_giraffiamo, con la stessa identica classificazione (categoria
+# "cnv", flusso "RaggruppaSimili") più un vero step di pubblicazione in fondo alla sua pipeline.
+# Lasciare ENTRAMBI i blocchi "classificazione" attivi pubblicherebbe ogni articolo due volte.
+#
+# AGGIORNATO (2026-09-16): "run"/"post" non sono più richiamabili come tool a sé in chat (vedi
+# Ghost.azioniNonEsposteAllAI in taffitools/src/canali/ghost.ts) — restano metodi reali, usati
+# internamente dagli step di ripubblica_giraffiamo (data/steps/ghost_scrivi.yml e
+# ghost_pubblica.yml, risolti per nome via getHandler, non tramite l'elenco tool AI). L'unico
+# percorso chat per scrivere/pubblicare con questo canale è ora ripubblica_giraffiamo (flussi
+# "scrivi"/"invia"). Restano invece richiamabili da chat, tramite questo stesso servizio,
+# "elencaArticoli" ed "elencaRisorse": sono letture, non fanno parte del percorso di scrittura.
 # classificazione:
 #   includi:
 #    -  categories: ["cnv"]

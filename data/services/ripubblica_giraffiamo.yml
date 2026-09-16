@@ -1,7 +1,9 @@
 # Rinominato da "prova_ghost_giraffiamo" il 2026-09-15, a cutover completato (Tappa 3): non è più
 # un canale di prova, è IL publisher automatico reale per il CNV di giraffiamo.it — vedi
-# ghost_giraffiamo.yml (il vecchio canale Ghost diretto, ancora nel codice/richiamabile da chat,
-# ma senza più classificazione automatica) per la storia completa della sostituzione.
+# ghost_giraffiamo.yml (il vecchio canale Ghost diretto, ancora nel codice ma senza più
+# classificazione automatica né azioni "run"/"post" chiamabili direttamente da chat, vedi il suo
+# commento) per la storia completa della sostituzione. Dal 2026-09-16 questo è anche l'UNICO
+# percorso chat per scrivere/pubblicare su questo sito (flussi "scrivi"/"invia" sotto).
 firma: ripubblica_giraffiamo
 servizio: canaleflusso
 destinazione: ghost_giraffiamo

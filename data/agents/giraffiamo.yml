@@ -20,13 +20,20 @@ toolNames:
            # siti esterni" (vedi giraffiamoinstructions.md), questo è solo un secondo modo di
            # cercarci dentro, utile per la chat quando ghost_giraffiamo_elencaArticoli (la via
            # preferita per contenuti del sito, vedi Compito 3) non è la scelta più diretta.
+           # AGGIORNATO (2026-09-16): da questo servizio l'AI vede ora solo le letture
+           # (elencaArticoli, elencaRisorse) — "run"/"post" sono stati tolti dall'elenco tool
+           # chiamabili in chat (vedi Ghost.azioniNonEsposteAllAI in taffitools/src/canali/ghost.ts),
+           # restano solo per l'uso interno degli step di ripubblica_giraffiamo qui sotto.
            - websearch_italia_low
            - ghost_giraffiamo
            # ripubblica_giraffiamo (CanaleFlusso): dal 2026-09-15 è IL publisher automatico reale
            # per il CNV di giraffiamo.it (rinominato da "prova_ghost_giraffiamo" a cutover
-           # completato — vedi data/services/ripubblica_giraffiamo.yml per la storia). Chiamabile
-           # anche da chat: scrivi/invia come step separati, "principale" come pipeline completa
-           # (scrive e pubblica per davvero, senza conferma — stessa che gira già dal feed).
+           # completato — vedi data/services/ripubblica_giraffiamo.yml per la storia). Dal
+           # 2026-09-16 è anche l'UNICO percorso chat per scrivere/pubblicare (vedi
+           # giraffiamoinstructions.md, Compito 2): scrivi/invia come step separati, ciascuno
+           # riusa "run"/"post" di ghost_giraffiamo internamente; "principale" come pipeline
+           # completa (scrive e pubblica per davvero, senza conferma — stessa che gira già dal
+           # feed) non è esposta in chat (vedi opzioni.esponiPrincipale in ripubblica_giraffiamo.yml).
            # Aggiunto il 2026-09-15: il canale era già registrato all'avvio (bot.aggiungiCanali)
            # ma senza questa riga non risultava mai nell'elenco tool dell'AI — verificato nei log.
            # La firma qui è quella PROPRIA del canale (come ghost_giraffiamo sopra), non quella
