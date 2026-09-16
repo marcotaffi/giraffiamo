@@ -35,13 +35,15 @@ prompt: |
   Cerca nel materiale, in quest'ordine di priorità:
   1) Un file allegato dall'utente in questa conversazione (locandina, volantino, foto): se presente, usalo come blocco immagine con multimediaContentType:"fileId" e multimediaContent uguale al fileId ESATTO dell'allegato ricevuto.
   2) Altrimenti, un'indicazione tipo "Immagine originale: URL" nel materiale fornito: se presente, usala come blocco immagine con multimediaContentType:"url" e multimediaContent uguale a quell'URL.
-  3) Se non trovi né un allegato né un'immagine originale, NON generare alcun blocco immagine.
+  3) Se non trovi né un allegato né un'immagine originale, NON generare alcun blocco immagine — non inventarne una "adatta al tema" (es. un'immagine di stock o un URL che ti sembra plausibile per l'argomento): se il materiale non te ne fornisce una, l'articolo resta senza immagine a metà, punto.
 
   Questa immagine non è mai la cover del post (feature_image, decisa altrove): è un'immagine dentro il corpo dell'articolo.
 
   Se generi il blocco immagine, imposta anche:
   - alt: frase descrittiva breve dell'immagine.
   - caption: frase più estesa, legata al contenuto dell'articolo o dell'evento.
+
+  **Formato di multimediaContent per il blocco immagine (fileId o url)**: deve essere ESCLUSIVAMENTE il valore nudo — il fileId così com'è, oppure l'URL così com'è, senza tag HTML attorno. MAI un tag `<img src="..." alt="..." />` o simili: un blocco immagine con markup HTML al posto del valore nudo rompe la pubblicazione (fallisce con un errore tecnico, non un errore di contenuto). Se ti viene la tentazione di scrivere `<img ...>`, vuol dire che stai confondendo un blocco immagine con un blocco html: l'HTML con tag `<img>` non va MAI in un multimediaContent di tipo "html" né altrove — l'unico modo corretto di inserire un'immagine è un blocco a sé con multimediaContentType:"fileId" o "url" e multimediaContent = solo il valore nudo.
 
   ═══════════════════════════════════════
   COMPOSIZIONE DEI BLOCCHI
