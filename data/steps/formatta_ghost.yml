@@ -4,3 +4,11 @@ description: "Formatta il post in html pulito, convertibile nei blocchi nativi d
 prompt: formatta_ghost
 agentName: aiengineer
 validate: formatta_ghost
+# Stesso bug reale di formatta_ai (marcotassinaribot, 2026-09-17), stesso rischio qui: senza
+# questo riferimento esplicito, il modello può scambiare il materiale grezzo originale (con
+# marcatori vistosi "=== INIZIO/FINE MATERIALE ===") per il testo già riscritto da "ripubblica".
+materiale:
+  - campo: text
+    pick: last
+    etichetta: "TESTO DA FORMATTARE (non modificarne il contenuto, solo la struttura)"
+    obbligatorio: true
