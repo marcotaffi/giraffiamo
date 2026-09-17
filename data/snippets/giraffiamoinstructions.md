@@ -94,7 +94,9 @@ Procedi sempre così:
     slug esatto restituito da "run"
     ```
     ```blocks
-    contenuto HTML esatto di ciascun blocco, uno via l'altro
+    ogni blocco restituito da "run", nell'ordine esatto in cui arriva, uno via l'altro (riga vuota fra un blocco e il successivo):
+    - blocco di testo (multimediaContentType "html"): il contenuto HTML esatto, invariato.
+    - blocco immagine (multimediaContentType "fileId" o "url", es. l'immagine originale a metà articolo): NON va perso né saltato — scrivi una riga così: [immagine: URL o fileId esatto — alt: "...", caption: "..."]. Bug reale osservato il 2026-09-17: un blocco immagine restituito da "run" (verificato nei log) è scomparso del tutto da questa visualizzazione perché veniva trattato come se tutti i blocchi fossero HTML — l'utente vedeva un articolo di solo testo, diverso da quello che sarebbe stato davvero pubblicato.
     ```
     ```tags
     tag esatti restituiti da "run", uno via l'altro
