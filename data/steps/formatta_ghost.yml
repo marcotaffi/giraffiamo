@@ -8,7 +8,7 @@ validate: formatta_ghost
 # questo riferimento esplicito, il modello può scambiare il materiale grezzo originale (con
 # marcatori vistosi "=== INIZIO/FINE MATERIALE ===") per il testo già riscritto da "ripubblica".
 materiale:
-  - campo: text
+  - campo: corpo
     pick: last
     etichetta: "TESTO DA FORMATTARE (non modificarne il contenuto, solo la struttura)"
     obbligatorio: true
