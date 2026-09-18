@@ -19,3 +19,9 @@ tasks:
     type: step
   - name: ghost_pubblica
     type: step
+  # (2026-09-18, richiesto da Marco) Notifica via mail dopo ogni pubblicazione automatica dal
+  # feed — solo qui, non nei flussi "scrivi"/"invia" da chat (dove è Marco stesso a pubblicare).
+  - name: componi_notifica_marco
+    type: step
+  - name: invia_notifica_marco
+    type: step

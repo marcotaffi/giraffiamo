@@ -1,0 +1,11 @@
+firma: componimessaggio_notificamarco
+servizio: componimessaggio
+destinazione: notificamarco  # solo un'etichetta per questa istanza, non un indirizzo
+azione: componi
+opzioni:
+  subject: "Giraffiamo ha pubblicato: {{title}}"
+  text: >-
+    È stato pubblicato un nuovo articolo su giraffiamo.it:<br><br>
+    <b>{{title}}</b><br>
+    {{custom_excerpt}}<br><br>
+    https://www.giraffiamo.it/{{slug}}/

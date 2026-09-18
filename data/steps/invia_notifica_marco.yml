@@ -1,0 +1,8 @@
+name: invia_notifica_marco
+type: servizio
+firma: "sendmail_marco@taffi.it_send"
+# (2026-09-18) Invia a marco@taffi.it la mail composta da componi_notifica_marco, ogni volta che
+# il flusso "principale" (feed automatico) pubblica davvero su giraffiamo.it. Nessun file di
+# configurazione servizi separato: stesso pattern minimale di marcotassinaribot/data/steps/
+# invia_luca.yml — senza un file services/sendmail_*.yml esplicito, il servizio usa IFTTT di
+# default (stesso comportamento già in produzione per gli altri invii mail di marcotassinaribot).

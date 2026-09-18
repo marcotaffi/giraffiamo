@@ -10,6 +10,12 @@ const botToken = process.env.TELEGRAM_TOKEN||"";
 //const chatGptApiKey = process.env.OPENAI_API_KEY||"";
 //const assistantID = process.env.ASSISTANT_ID||""; //l'assistente di questo bot
 const iftttKey = process.env.IFTTT_WEBHOOKKEY||"";
+// (2026-09-18) Servono per il provider "gmail" di sendmail (vedi taffitools/src/servizi/
+// mailservice.ts) — ora il default, IFTTT non è attivo. Da impostare in .env prima che l'invio
+// mail funzioni davvero: stesso schema di marcotassinaribot/src/marcotassinaribot.ts.
+const googleClientId = process.env.GOOGLE_CLIENT_ID||"";
+const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET||"";
+const googleRefreshToken = process.env.GOOGLE_REFRESH_TOKEN||"";
 // url del gateway chat del webserver (porta BOT_REGISTRATION_PORT, default 7070): senza,
 // aggiungieInizializzaInterfaccePredefinite non crea la WebChatInterface e il bot non si registra
 // sul ChatGateway — le azioni esterne (vedi data/azioniesterne/) arriverebbero sempre "bot non connesso".
@@ -69,6 +75,9 @@ const credenziali : Credenziali = {
 iftttKey: iftttKey,
 botToken: botToken as string,
 webChatUrl: webChatUrl,
+googleClientId: googleClientId,
+googleClientSecret: googleClientSecret,
+googleRefreshToken: googleRefreshToken,
 //wordpress_sito: "https://www.apg23.org",
 //wordpress_basic_auth: IOOO,
 //categoryMapping,
@@ -353,6 +362,16 @@ feeds = [
     const ripubblicaGiraffiamoFlusso = await ServiceFactory.create("ripubblica_giraffiamo") as CanaleExtendsServizio;
     ripubblicaGiraffiamoFlusso.start(credenziali);
 
+// (2026-09-18) Notifica a marco@taffi.it a ogni pubblicazione automatica dal feed (vedi gli step
+// componi_notifica_marco/invia_notifica_marco in coda a data/procedure/ripubblica_pubblica.yml).
+// Non sono canali (non ricevono feed, non sono AI-callable): vanno registrati con
+// bot.aggiungiServizi, non con bot.aggiungiCanali — stesso schema di marcotassinaribot/src/
+// marcotassinaribot.ts (sendmailLuccitelli/componiMessaggioLuccitelli).
+    const componiNotificaMarco = await ServiceFactory.create("componimessaggio_notificamarco");
+    componiNotificaMarco.start(credenziali);
+    const sendmailMarco = await ServiceFactory.create("sendmail_marco@taffi.it_send");
+    sendmailMarco.start(credenziali);
+
  
 
 
@@ -526,6 +545,8 @@ aiManager.setDefaultParams({ assistant_id: assistantID }, "chatgpt-assistants-ap
     const elencoCanali : CanaleExtendsServizio[]=[NotizieGiraffiamo, ripubblicaGiraffiamoFlusso]; // NotizieMail];
 
    bot.aggiungiCanali(elencoCanali, credenziali);
+
+   bot.aggiungiServizi([componiNotificaMarco, sendmailMarco]);
 
     debug (3, "*Aggiungo le fonti e la conoscenza*")
 

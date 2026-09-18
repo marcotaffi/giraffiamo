@@ -1,0 +1,7 @@
+name: componi_notifica_marco
+type: servizio
+firma: componimessaggio_notificamarco
+# (2026-09-18) Prepara subject/text della mail di notifica a Marco, usando i campi già prodotti
+# da genera_titoli_ghost (title, custom_excerpt, slug) — vedi services/componimessaggio_notificamarco.yml.
+# Va SOLO nel flusso "principale" (feed automatico, vedi procedure/ripubblica_pubblica.yml): non
+# nei flussi "scrivi"/"invia" da chat, dove è Marco stesso a pubblicare e non serve avvisarlo.
