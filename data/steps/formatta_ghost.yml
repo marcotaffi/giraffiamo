@@ -12,3 +12,7 @@ materiale:
     pick: last
     etichetta: "TESTO DA FORMATTARE (non modificarne il contenuto, solo la struttura)"
     obbligatorio: true
+  - campo: immagineFileId
+    pick: last
+    etichetta: "FILEID DELL'IMMAGINE ALLEGATA DA INSERIRE A METÀ ARTICOLO (vuoto se nessuna)"
+    obbligatorio: false

@@ -1,6 +1,15 @@
 name: ripubblica
+# type [corpo, immagineFileId]: campo riservato (vedi buildParamsFromOverride in
+# taffitools/ai/openai/chatgptresponse.ts) — forza un output JSON con esattamente questi due
+# campi stringa, invece del solo testo piatto. "immagineFileId" arriva così come campo a sé,
+# letto da formatta_ghost.yml senza doverlo incorporare-e-poi-ripulire dal testo di "corpo".
+type:
+  - corpo
+  - immagineFileId
 prompt: |
   Agisci come caporedattore per giraffiamo.it. Segui le istruzioni di sistema per capire se il materiale qui sotto arriva dal monitoraggio automatico dei gruppi (rilancio di un evento/notizia, marcato da === INIZIO MATERIALE === / === FINE MATERIALE ===) oppure da una richiesta diretta dell'utente in chat, e comportati di conseguenza.
   Scarica sempre con scraper_url_download ogni URL di pagina originale presente nel prompt sopra, nel materiale o nella cronologia della conversazione, prima di scrivere qualunque testo: vedi le istruzioni di sistema per le regole complete (non basta che il prompt dica che la fonte "potrebbe non essere accessibile" per evitare di provarci tu stesso).
 
-  Fornisci solo il testo pronto per la pubblicazione, senza titoli, conclusioni o commenti introduttivi, formattato in markdown.
+  Restituisci due campi:
+  - "corpo": solo il testo pronto per la pubblicazione, senza titoli, conclusioni o commenti introduttivi, formattato in markdown.
+  - "immagineFileId": se hai ricevuto in questa conversazione un file allegato (locandina, volantino, foto) e lo stai usando come fonte per scrivere (non un'immagine solo decorativa/estranea al contenuto), l'id esatto di quell'allegato così come compare nei suoi metadata in questa conversazione (es. "Metadata file #1: {...\"fileId\":\"...\"}" → copia il valore del campo "fileId" esattamente, senza modificarlo). Se non hai nessun file allegato utile come immagine (es. il materiale è solo un URL scaricato, o non c'è alcuna immagine), lascia questo campo come stringa vuota "".
