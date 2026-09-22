@@ -138,3 +138,6 @@ out
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# immagini generate dal bot (vedi taffitools/src/utils/immaginigenerate.ts), cancellate a vita della chat
+immaginigenerate/
