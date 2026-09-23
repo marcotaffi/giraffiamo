@@ -482,11 +482,16 @@ feeds = [
         bot.aggiungiServizi([componiNotificaMarco, sendmailMarco]);
         debug(3, "*Aggiungo le fonti e la conoscenza*");
         if (feeds.length > 0)
-            bot.addFeeds(feeds); //invia le fonti        
+            bot.addFeeds(feeds); //invia le fonti
         if (news.length > 0)
-            bot.addNews(news); //invia le fonti       
+            bot.addNews(news); //invia le fonti
         if (tags.length > 0)
             bot.setKnowledge(tags); //passo le descrizioni dei miei tag e categorie
+        // Incremento 1 del modello di permessi (taffiserver/README.md): anagrafica in
+        // taffiserver/data/bot/bot-giraffiamo.yml. Se GIRAFFIAMO_TAFFISERVER_SEGRETO non è
+        // impostato, il bot si registra comunque, senza verifica (comportamento invariato).
+        if (process.env.GIRAFFIAMO_TAFFISERVER_SEGRETO)
+            bot.setSegreto(process.env.GIRAFFIAMO_TAFFISERVER_SEGRETO);
         debug(3, "*Avvio il bot*");
         await bot.start(TEST_ONLY); // inizializza i canali e avvia il websocket
         debug(0, "*Bot avviato.*", bot.constructor.name);
