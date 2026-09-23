@@ -141,3 +141,8 @@ out
 
 # immagini generate dal bot (vedi taffitools/src/utils/immaginigenerate.ts), cancellate a vita della chat
 immaginigenerate/
+
+# Provini di stile per la generazione immagini: pesanti e cambiano spesso, si copiano a mano
+# sui server (vedi data/referenceimages/README.md, che resta tracciato).
+data/referenceimages/*
+!data/referenceimages/README.md
