@@ -1,0 +1,15 @@
+agentName: archivista
+agentDescription: "Guarda la cover generata e prepara il nome del file e il testo alternativo con cui pubblicarla"
+apiClient: "gpt-response-dev"
+instructions:
+  - instructions_archivista
+params:
+  # Modello con visione: lo step gli allega l'immagine vera (vedi steps/metadati_cover_evento.yml).
+  model: "gpt-5.4-mini-2026-03-17"
+  tool_choice: "none"
+  temperature: 0.3
+  max_output_tokens: 600
+  type:
+    - immagine_nomefile
+    - immagine_titolo
+    - immagine_alt

@@ -1,0 +1,6 @@
+name: genera_cover_evento
+description: "Genera la cover dell'evento: sei medaglioni a incisione nello stile del sito"
+type: photoeditor
+agentName: photoeditor
+photoEditor: cover_eventi_giraffiamo
+prompt: stile_cover_eventi_giraffiamo

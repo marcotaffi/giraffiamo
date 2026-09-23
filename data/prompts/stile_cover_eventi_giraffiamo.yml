@@ -1,0 +1,30 @@
+name: stile_cover_eventi_giraffiamo
+# Istruzioni FISSE anteposte alla richiesta variabile nelle cover degli EVENTI di giraffiamo.it
+# (per gli articoli si usa invece stile_cover_giraffiamo.yml, acquerello dentro un tondo).
+# Lo schema è sempre lo stesso — sei medaglioni a incisione — e cambiano solo i sei simboli,
+# scelti dall'art director in base all'evento (vedi prompts/genera_prompt_cover_evento.yml).
+# I provini in data/referenceimages/eventi vengono passati al modello insieme a questo testo.
+prompt: >
+  Reproduce the house style of the reference images exactly.
+
+  Layout, always the same: SIX round medallions on a plain ivory background, arranged in a
+  regular grid of three columns and two rows, evenly spaced, all the same size, with generous
+  ivory margins around them. Each medallion is a thin circular outline containing one single
+  symbol, drawn small and centred inside the circle with empty space around it. A delicate
+  sprig of small leaves curves along the outside edge of each circle, overlapping the outline,
+  alternating side from one medallion to the next.
+
+  Technique: fine antique engraving — etched line work, cross-hatching and stippling for the
+  shading, the look of an old botanical or naturalistic plate. Hand-engraved, never
+  photographic, never 3D, never flat vector art.
+
+  Colour: monochrome. Dark sepia brown ink on a warm ivory paper background, nothing else. No
+  other colour, no shading in colour, no coloured background.
+
+  Each medallion holds ONE isolated emblem, not a scene: a single object, animal, plant, pair
+  of hands, profile or simple landscape, drawn large and clear inside its circle. Never a group
+  of figures, never several people interacting. Clear silhouettes, easy to recognise at small size. Faces, when
+  present, are classical profiles, never a recognisable real person.
+
+  Always: no text, no letters, no numbers, no logos, no watermarks, no signature, no frame
+  around the whole image, and exactly six medallions — no more, no fewer.

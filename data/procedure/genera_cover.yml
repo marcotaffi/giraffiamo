@@ -1,12 +1,12 @@
-# FILE DI ESEMPIO — inerte finché nessuno la esegue (per firma o come task).
-# Procedura minima per generare una cover: eseguibile da sola (es. da ProceduraTool,
-# vedi services/proceduratool_coverdesigner.yml) o inseribile come task in una
-# procedura più ampia dopo lo step di scrittura, così promptImmagine arriva dalla
-# storia di sessione (es.):
-#   tasks:
-#     - name: scrivi_articolo_sempre
-#       type: step
-#     - name: genera_cover
-#       type: step
+# Genera una cover nello stile di giraffiamo: prima l'art director sceglie e descrive il
+# soggetto (in base all'articolo o alla richiesta arrivata in chat), poi il generatore disegna
+# l'immagine applicando lo stile della casa e le immagini di riferimento.
+# Eseguibile da sola (es. dal tool di chat proceduratool_coverdesigner) oppure inseribile come
+# task in una procedura più ampia, dopo lo step di scrittura.
 name: genera_cover
-type: step
+type: sequenziale
+tasks:
+  - name: genera_prompt_cover
+    type: step
+  - name: genera_cover
+    type: step

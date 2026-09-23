@@ -1,0 +1,8 @@
+# Tool di chat: genera la cover per il lancio di un EVENTO (sei medaglioni a incisione).
+# Per le cover degli articoli c'è invece proceduratool_coverdesigner.
+firma: "proceduratool_coverdesigner_eventi"
+servizio: "proceduratool"
+destinazione: "coverdesignereventi"
+procedura: "genera_cover_evento"
+azione: esegui
+cosafa: "Generate the cover image for an EVENT of this site, in the site's own engraved-medallion style: six round symbols related to the event. The style and the layout are preconfigured, do not describe them. Pass in 'prompt' the event (title, theme, place, what happens there). The image is shown to the user in chat."

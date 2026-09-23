@@ -17,6 +17,51 @@ tasks:
     type: step
   - name: formatta_ghost
     type: step
+  # Copertina autogenerata, in due stili diversi, solo se nessuno ne ha già indicata una:
+  #  - EVENTO (tag "Eventi" assegnato da genera_titoli_ghost): sei medaglioni a incisione;
+  #  - ARTICOLO: illustrazione ad acquerello dentro un tondo.
+  # Tutti questi task sono "opzionale: true": se la generazione fallisce (API immagini non
+  # raggiungibile, contenuto rifiutato...) l'articolo esce comunque, senza copertina, invece di
+  # restare non pubblicato.
+  - name: genera_prompt_cover_evento
+    type: step
+    opzionale: true
+    condizione: &evento
+      tutte:
+        - campo: tags
+          operatore: contains
+          valore: Eventi
+        - non:
+            campo: feature_image
+            operatore: truthy
+  - name: genera_cover_evento
+    type: step
+    opzionale: true
+    condizione: *evento
+  - name: genera_prompt_cover
+    type: step
+    opzionale: true
+    condizione: &articolo
+      tutte:
+        - campo: tags
+          operatore: notContains
+          valore: Eventi
+        - non:
+            campo: feature_image
+            operatore: truthy
+  - name: genera_cover
+    type: step
+    opzionale: true
+    condizione: *articolo
+  # Nome file e testo alternativo, guardando la copertina appena generata (vale per entrambi
+  # gli stili: se non è stata generata nessuna copertina, il task viene saltato).
+  - name: metadati_cover
+    type: step
+    opzionale: true
+    condizione:
+      campo: immagineGenerata
+      modo: multimedia
+      operatore: exists
   - name: ghost_pubblica
     type: step
   # (2026-09-18, richiesto da Marco) Notifica via mail dopo ogni pubblicazione automatica dal

@@ -1,0 +1,12 @@
+name: genera_prompt_cover_evento
+description: "Sceglie i sei simboli della copertina a partire dall'evento"
+type: prompt
+prompt: genera_prompt_cover_evento
+agentName: artdirector
+materiale:
+  - campo: title
+    etichetta: TITOLO EVENTO
+    obbligatorio: false
+  - campo: custom_excerpt
+    etichetta: SOTTOTITOLO
+    obbligatorio: false

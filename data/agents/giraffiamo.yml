@@ -13,6 +13,14 @@ instructions:
            - giraffiamoinstructions
 toolNames:
            - gestoredate_now_readClock
+           # Genera una cover nello stile del sito e la mostra in chat (procedure/genera_cover.yml).
+           # NB: le cover degli articoli pubblicati automaticamente restano le 3 immagini neutre
+           # scelte dal titolista (vedi instructions_titolista.md): questo tool serve a produrne
+           # una nuova su richiesta, non cambia il flusso automatico.
+           - proceduratool_coverdesigner
+           # Variante per il lancio di un evento: sei medaglioni a incisione con i simboli
+           # dell'evento (procedure/genera_cover_evento.yml).
+           - proceduratool_coverdesigner_eventi
           # - scraper_url_download
            # websearch_italia_low riattivato il 2026-09-15, ma RISTRETTO al solo giraffiamo.it
            # (vedi data/services/websearch_italia_low.yml, opzioni.allowedDomains) — non una

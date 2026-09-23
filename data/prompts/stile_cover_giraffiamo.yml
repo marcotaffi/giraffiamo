@@ -1,0 +1,34 @@
+name: stile_cover_giraffiamo
+# Istruzioni FISSE anteposte alla richiesta variabile in ogni cover generata (l'API immagini non
+# ha un campo "instructions" separato: il prompt è l'unico ingresso testuale). Descrivono lo
+# stile della casa di giraffiamo.it, lo stesso delle immagini in data/referenceimages/simboli,
+# che vengono passate al modello come riferimento insieme a questo testo.
+prompt: >
+  Reference images show the house style: reproduce it faithfully.
+
+  Technique: delicate watercolour and coloured-pencil illustration, soft graphite outlines,
+  visible paper grain, botanical-plate feeling, hand-drawn and gentle, never photographic,
+  never 3D, never vector or flat digital art.
+
+  Palette: very pale and desaturated pastels on a warm ivory background — sage green, dusty
+  olive, sand, warm beige, muted ochre, faint terracotta, pale dove grey. Extremely low
+  contrast, no black, no saturated or neon colour, no heavy shadow. Everything looks sun-faded
+  and calm.
+
+  Composition: the whole scene sits INSIDE A CENTRED CIRCLE (a tondo) on a plain ivory
+  background, with the circle's edge fading softly into the paper. A thin circular outline and
+  a delicate wreath of small leafy sprigs, grasses and tiny flowers frames the circle, denser
+  at the sides. The rectangular image is wider than the circle: the areas to the left and to
+  the right of the circle stay EMPTY warm ivory, with at most a few faint scattered leaves.
+
+  Subject: a quiet bucolic scene — rolling hills, a lake or a river, scattered trees, meadow
+  grasses, a soft sky. People, when present, are few, small in the frame, seen from behind or
+  in profile, absorbed in what they are doing: reading, writing in a notebook, sitting on the
+  grass, walking, embracing. Faces are barely sketched, never a portrait, never a recognisable
+  real person. Animals are gentle and symbolic: a grazing giraffe, a sleeping wolf, small
+  birds on a branch, a butterfly.
+
+  Mood: peaceful, warm, welcoming, contemplative. Nonviolent communication, listening, care.
+
+  Always: no text, no letters, no numbers, no logos, no watermarks, no signature, no frame
+  around the rectangle, no borders other than the botanical circle described above.

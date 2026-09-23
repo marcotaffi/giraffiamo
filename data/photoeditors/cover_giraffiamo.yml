@@ -1,21 +1,23 @@
-# FILE DI ESEMPIO — inerte finché nessuno step lo referenzia con `photoEditor: cover_giraffiamo`.
-# Configurazione del generatore immagini per le cover di giraffiamo.
 name: cover_giraffiamo
-description: "Cover orizzontali per gli articoli, nello stile giraffiamo"
+description: "Cover degli articoli di giraffiamo.it: illustrazione ad acquerello dentro un tondo, stile della casa"
+
 model: gpt-image-2.5-flare   # gpt-image-2.5-flare (economico) | gpt-image-2.5-sunburst (più preciso)
                              # NB: gpt-image-1-mini e gpt-image-1.5 si spengono il 01/12/2026,
                              # gpt-image-1 il 23/10/2026 (deprecations OpenAI).
-size: 1536x1024              # 1024x1024 | 1536x1024 | 1024x1536 | auto
+
+# 1200x624 e non 1200x630: l'API accetta solo misure multiple di 16, e 624 è il valore più
+# vicino a 630 (la proporzione resta quella delle cover di Ghost, 1,91:1).
+size: 1200x624
+
 quality: low                 # low | medium | high | xhigh | max | auto (la voce che pesa di più sul costo)
 output_format: jpeg          # png | jpeg | webp
 
-# Immagini DINAMICHE dell'input (foto inviate su Telegram, immagini degli articoli del
-# gruppo): se true vengono passate al generatore come riferimenti via images.edit.
+# Immagini DINAMICHE dell'input (foto inviate su Telegram, immagini degli articoli del gruppo):
+# false, la cover non deve assomigliare alla foto dell'articolo ma allo stile del sito.
 useReferences: false
 
-# Riferimenti STATICI di stile: sempre usati quando dichiarati (a prescindere da
-# useReferences). URL http(s), file oppure CARTELLE sotto data/ (una cartella vale per tutte le
-# immagini che contiene). Massimo 16 immagini totali (statici + dinamici).
-#referenceImages:
-#  - referenceimages/stile-giraffiamo-1.png
-#  - referenceimages/stile-giraffiamo-2.png
+# Immagini di riferimento dello STILE della casa: tutta la cartella (vedi il README in
+# referenceimages). Bastano poche immagini davvero rappresentative: ognuna costa token in
+# ingresso e il limite è comunque 16.
+referenceImages:
+  - referenceimages/simboli

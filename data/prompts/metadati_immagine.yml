@@ -1,0 +1,9 @@
+name: metadati_immagine
+params:
+  type:
+    - immagine_nomefile
+    - immagine_titolo
+    - immagine_alt
+prompt: >
+  Guarda l'immagine allegata, che è la copertina del contenuto qui sotto, e prepara i campi con
+  cui pubblicarla. Rispondi in JSON con i campi richiesti.

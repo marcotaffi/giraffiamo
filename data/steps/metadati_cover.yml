@@ -1,0 +1,17 @@
+name: metadati_cover
+description: "Guarda la cover generata (evento o articolo) e prepara nome file e testo alternativo"
+type: prompt
+prompt: metadati_immagine
+agentName: archivista
+# Immagine ALLEGATA al prompt, perché l'agente la guardi davvero (vedi "immagini" in step.ts).
+# Scala di priorità: la copertina generata in questo flusso, altrimenti quella indicata.
+immagini:
+  - immagineGenerata
+  - feature_image
+materiale:
+  - campo: title
+    etichetta: TITOLO
+    obbligatorio: false
+  - campo: custom_excerpt
+    etichetta: SOTTOTITOLO
+    obbligatorio: false

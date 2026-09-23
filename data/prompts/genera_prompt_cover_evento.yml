@@ -1,0 +1,26 @@
+name: genera_prompt_cover_evento
+params:
+  type:
+    - promptImmagine
+prompt: >
+  Scegli SEI simboli da disegnare, uno per medaglione, per la copertina dell'evento descritto
+  qui sotto. Non descrivere lo stile grafico né il formato: vengono aggiunti dopo.
+
+  UNO dei sei simboli può richiamare la CITTÀ dell'evento, se c'è qualcosa di davvero
+  rappresentabile e riconoscibile (un monumento, una torre, un profilo urbano caratteristico,
+  un elemento del paesaggio di quel luogo). Se la città non ha un simbolo evidente, o l'evento
+  è online, lascia perdere: meglio sei simboli buoni che uno forzato.
+
+  Gli altri richiamano il tema dell'evento su due registri: bucolico (elementi veri della
+  natura: piante, animali, frutti, acqua, sole, semi) ed emotivo o simbolico (strumenti di
+  lavoro veri, oggetti quotidiani legati a un'emozione: una chiave, una lanterna, un nodo, una
+  bussola, un nido, una scala). Preferisci sempre cose reali e disegnabili a concetti astratti.
+
+  Ogni simbolo è un EMBLEMA, non una scenetta: un solo soggetto isolato per medaglione — un
+  oggetto, un animale, una pianta, un paio di mani, un profilo, un dettaglio del corpo, un
+  piccolo paesaggio. Niente gruppi di persone, niente azioni con più figure: deve restare
+  riconoscibile anche in piccolo. Scegli simboli diversi fra loro, senza ripetizioni.
+
+  Rispondi in JSON con il solo campo "promptImmagine", contenente l'elenco dei sei simboli in
+  inglese, nella forma "The six symbols are, in order: 1) ... 2) ... 3) ... 4) ... 5) ...
+  6) ...". Ogni simbolo in due o tre parole.

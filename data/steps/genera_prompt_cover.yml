@@ -1,0 +1,14 @@
+name: genera_prompt_cover
+description: "Sceglie e descrive il soggetto della cover a partire dall'articolo o dalla richiesta in chat"
+type: prompt
+prompt: genera_prompt_cover
+agentName: artdirector
+# "prompt" (richiesta dalla chat) e "materialeIniziale" (articolo dal feed) entrano da soli nel
+# prompt; title e custom_excerpt aggiungono l'articolo già scritto, quando c'è.
+materiale:
+  - campo: title
+    etichetta: TITOLO ARTICOLO
+    obbligatorio: false
+  - campo: custom_excerpt
+    etichetta: SOTTOTITOLO
+    obbligatorio: false

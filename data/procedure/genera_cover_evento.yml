@@ -1,0 +1,10 @@
+# Cover per il lancio di un evento: l'art director sceglie sei simboli legati all'evento, il
+# generatore li disegna come sei medaglioni a incisione (schema fisso, vedi
+# prompts/stile_cover_eventi_giraffiamo.yml). Per gli articoli si usa invece genera_cover.yml.
+name: genera_cover_evento
+type: sequenziale
+tasks:
+  - name: genera_prompt_cover_evento
+    type: step
+  - name: genera_cover_evento
+    type: step

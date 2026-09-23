@@ -1,0 +1,12 @@
+agentName: artdirector
+agentDescription: "Sceglie il soggetto della cover di un articolo e lo descrive per il generatore di immagini"
+apiClient: "gpt-response-dev"
+instructions:
+  - instructions_artdirector
+params:
+  model: "gpt-5.4-mini-2026-03-17"
+  tool_choice: "none"
+  temperature: 0.7
+  max_output_tokens: 800
+  type:
+    - promptImmagine

@@ -1,10 +1,12 @@
-# FILE DI ESEMPIO — inerte finché la firma non compare nei toolNames di un agente.
-# Tool chiamabile dall'AI in chat (es. da Telegram): genera un'immagine/cover
-# eseguendo la procedura genera_cover in una sessione sandbox isolata.
-# Per attivarlo, aggiungi la firma "proceduratool_coverdesigner" ai toolNames
-# dell'agente di chat (es. agents/giraffiamo.yml).
+# Tool chiamabile dall'AI in chat (es. da Telegram): genera una cover eseguendo la procedura
+# genera_cover in una sessione sandbox isolata. Attivo dal 2026-09-23 (la firma è nei toolNames
+# di agents/giraffiamo.yml).
 firma: "proceduratool_coverdesigner"
 servizio: "proceduratool"
 destinazione: "coverdesigner"
 procedura: "genera_cover"
-cosafa: "Generate a cover image from a textual description. Pass the image description in the 'prompt' field; the visual style is preconfigured. Returns the URL of the generated image."
+cosafa: "Generate a cover image for an article of this site, in the site's own illustration style (the style is preconfigured, do not describe it). Pass in 'prompt' what the cover should depict, or the article it has to illustrate. The image is shown to the user in chat."
+# Senza questa riga il servizio non espone nessun handler e la chiamata dall'AI fallisce con
+# "Azione non definita" (visto in prova il 2026-09-23). Stesso valore dei proceduratool_* di
+# marcotassinaribot.
+azione: esegui

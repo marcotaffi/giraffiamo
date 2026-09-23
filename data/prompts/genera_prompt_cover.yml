@@ -1,0 +1,7 @@
+name: genera_prompt_cover
+params:
+  type:
+    - promptImmagine
+prompt: >
+  Descrivi il soggetto della cover per l'articolo qui sotto. Rispondi in JSON con il solo campo
+  "promptImmagine".

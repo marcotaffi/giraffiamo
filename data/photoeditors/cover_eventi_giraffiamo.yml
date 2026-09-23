@@ -1,0 +1,19 @@
+name: cover_eventi_giraffiamo
+description: "Cover degli eventi di giraffiamo.it: sei medaglioni a incisione, uno per simbolo dell'evento"
+
+model: gpt-image-2.5-flare   # gpt-image-2.5-flare (economico) | gpt-image-2.5-sunburst (più preciso)
+
+# 1200x624 e non 1200x630: l'API accetta solo misure multiple di 16, e 624 è il valore più
+# vicino (la proporzione resta quella delle cover di Ghost, 1,91:1).
+size: 1200x624
+
+# I sei medaglioni sono pieni di tratteggio fine: se il disegno risultasse impastato, alzare a
+# "medium" è il primo rimedio (costa circa 4 volte tanto).
+quality: low
+output_format: jpeg
+
+useReferences: false
+
+# Provini dello stile a incisione: tutta la cartella (vedi il README in referenceimages).
+referenceImages:
+  - referenceimages/eventi
