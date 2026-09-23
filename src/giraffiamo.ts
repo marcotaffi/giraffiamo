@@ -140,14 +140,18 @@ feeds = [
   // indovinare pattern di URL.
   // AGGIORNATO (2026-09-14): il sito ha iniziato a rispondere 403 al controllo giornaliero da
   // produzione (verificato nei log di taffiserver, 12 e 13 settembre, stesso orario ~16:58,
-  // mentre le altre fonti nello stesso ciclo scaricano regolarmente) — sembra un rate-limit/anti-bot
-  // lato loro, non un problema nostro. Intervallo allungato a 4 giorni (contro il default di 24h)
-  // per ridurre la pressione sul loro sito; gli eventi CNV vengono di norma pubblicati con largo
-  // anticipo, quindi non serve controllare più spesso. Regolare qui se il blocco persiste o rientra.
+  // mentre le altre fonti nello stesso ciclo scaricano regolarmente) — sembrava un rate-limit/
+  // anti-bot lato loro. Intervallo allungato a 4 giorni per ridurre la pressione sul loro sito.
+  // CORRETTO (2026-09-23): non era un rate-limit né una questione di frequenza — era lo User-Agent
+  // fisso del parser RSS (Chrome 117 del 2023, tolto lo stesso giorno in feedsmanager.ts):
+  // riprodotto a comando il 403 con quello User-Agent, 200 pulito senza. L'intervallo lungo non
+  // c'entrava con la causa reale, ma resta comunque sensato: gli eventi CNV vengono di norma
+  // pubblicati con largo anticipo, non serve controllare spesissimo. Riportato a 2 giorni ora che
+  // il blocco vero è chiuso.
   hooks: ["https://comunicazionenonviolenta.org/eventi/feed/"],
   categories: ["cnv"],
   lingua: "it",
-  intervalloControllo: 4 * 24 * 60 * 60 * 1000, // 4 giorni
+  intervalloControllo: 2 * 24 * 60 * 60 * 1000, // 2 giorni
  },
  {
   // NUOVA FONTE. Centro Interdisciplinare Scienze per la Pace (Università di Pisa): pagina generale
@@ -175,9 +179,16 @@ feeds = [
   // AGGIORNATO (2026-09-07): il sito rispondeva 403 solo dall'ambiente di test usato per il primo
   // controllo, non dal taffiserver in produzione (verificato dopo il deploy, come segnalato qui).
   // Passato inoltre dallo scraping HTML con filtro al feed RSS dedicato, verificato pulito e attivo.
+  // CORRETTO (2026-09-23): il 403 si ripresentava invece anche in produzione (log di cloud.taffi.it,
+  // 23 settembre) — la verifica del 2026-09-07 non aveva preso lo scenario giusto, o il sito ha
+  // cambiato comportamento nel frattempo. Causa reale: lo User-Agent fisso del parser RSS (Chrome
+  // 117 del 2023), tolto lo stesso giorno in feedsmanager.ts — riprodotto a comando: 403 con quello
+  // User-Agent, 200 pulito senza. Aggiunto un intervallo di 2 giorni, stesso motivo del feed di
+  // comunicazionenonviolenta.org qui sopra (eventi CNV pubblicati con largo anticipo).
   hooks: ["https://artedeldialogo.it/feed/"],
   categories: ["cnv"],
   lingua: "it",
+  intervalloControllo: 2 * 24 * 60 * 60 * 1000, // 2 giorni
  },
  {
   // AGGIORNATO (2026-09-07): passato dallo scraping HTML (filtro /shop/) al feed RSS di questa
