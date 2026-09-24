@@ -1,0 +1,23 @@
+firma: componimessaggio_notificaiscrizione
+servizio: componimessaggio
+destinazione: notificaiscrizione  # solo un'etichetta per questa istanza, non un indirizzo
+azione: componi
+opzioni:
+  subject: "Giraffiamo, nuova compilazione del form: {{email}}"
+  # "Situazione attuale", non "quello che hai appena scritto": i valori arrivano da
+  # Ghost.aggiornaMembro DOPO la scrittura (vedi procedure/iscrizione_preferenze.yml), cioè lo
+  # stato confermato del membro — che per "note" può includere una nota lasciata da una
+  # compilazione precedente anche se questa non ne ha inviata una nuova (Ghost non la cancella,
+  # vedi il commento su ModificaMembroParams.note in taffitools). Il testo è scritto apposta per
+  # restare vero in entrambi i casi, senza dover distinguere "appena scritta" da "già presente".
+  text: >-
+    Situazione attuale dopo una compilazione del form preferenze su giraffiamo.it:<br><br>
+    Email: {{email}}<br>
+    Preferenze indicate: {{labels}}<br>
+    Note sul profilo: {{note}}
+  # Fallback per il placeholder {{note}}: scatta solo quando il membro non ha proprio nessuna
+  # nota (Ghost.aggiornaMembro normalizza "nota mai impostata" a undefined, non più "" — vedi
+  # Ghost.modificaMembro in taffitools). Senza questo default componimessaggio.ts bloccherebbe
+  # l'invio: un placeholder risolto vuoto è considerato un dato mancante a monte (vedi il
+  # commento di testa del servizio), non "campo assente per scelta".
+  note: "(nessuna)"

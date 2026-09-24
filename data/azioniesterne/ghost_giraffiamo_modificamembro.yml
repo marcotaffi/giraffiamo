@@ -2,13 +2,20 @@ firma: ghost_giraffiamo_modificamembro
 bot: bot-giraffiamo
 # Il chiamante nomina SOLO la firma qui sopra. Cosa succede dietro lo decide questa riga, e può
 # cambiare senza toccare il form pubblico (che sta sul sito, non in questo repo).
-# La procedura oggi fa un passo solo — la scrittura su Ghost — ma è il posto dove aggiungere gli
-# altri (mail di conferma, doppio opt-in, log): vedi data/procedure/iscrizione_preferenze.yml.
+# La procedura scrive su Ghost e manda anche una mail di riepilogo a marco@taffi.it: vedi
+# data/procedure/iscrizione_preferenze.yml.
 procedura: iscrizione_preferenze
-# Sincrono: un passo solo, nessuna AI, sta comodamente nei 15 secondi del relay e la persona
-# davanti al form riceve subito l'esito. Se la procedura si allunga (qualunque step che chiami
-# l'AI o mandi mail), passare ad "asincrono": il form riceve un 202 con un requestId e ritira
-# l'esito da GET /azioni/esito.
+# Sincrono (2026-09-24, confermato dopo aver valutato e scartato "asincrono"): il passo mail
+# aggiunto in coda non chiama l'AI, è un template fisso più una singola chiamata all'API Gmail,
+# quindi resta comodo nei 15 secondi del relay — stesso ordine di grandezza della sola scrittura
+# su Ghost che già c'era. "asincrono" romperebbe silenziosamente il form pubblico (fuori da
+# questo repo, vedi data/form-preferenze-newsletter.html): quello script controlla solo se la
+# risposta HTTP è "ok" (un 202 lo è) e non fa polling su GET /azioni/esito, quindi mostrerebbe
+# "salvato con successo" anche quando Ghost fallisce (es. email non trovata) — un fallimento
+# reale mascherato da successo, l'errore in assoluto più insidioso da introdurre in un form
+# pubblico. Se in futuro si aggiunge alla procedura uno step che chiama l'AI (non un semplice
+# invio mail), va rivalutato: quella sì è la categoria di step per cui vale la regola generale
+# "modo: asincrono" (tempi imprevedibili, non solo più lunghi).
 modo: sincrono
 segreto: GHOST_GIRAFFIAMO_MODIFICAMEMBRO_SEGRETO
 parametri:

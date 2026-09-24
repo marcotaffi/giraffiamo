@@ -1,0 +1,8 @@
+name: componi_notifica_iscrizione
+type: servizio
+firma: componimessaggio_notificaiscrizione
+# (2026-09-24, richiesto da Marco) Prepara subject/text della mail di riepilogo a marco@taffi.it
+# per ogni compilazione del form preferenze di giraffiamo.it. Va DOPO ghost_aggiorna_membro
+# apposta: legge email/labels/note così come confermati da Ghost dopo la scrittura, non i
+# parametri grezzi del form — vedi services/componimessaggio_notificaiscrizione.yml e
+# procedure/iscrizione_preferenze.yml.

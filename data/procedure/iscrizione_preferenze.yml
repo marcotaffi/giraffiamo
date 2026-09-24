@@ -3,12 +3,29 @@ description: registra le preferenze indicate da un iscritto nel form pubblico di
 type: sequenziale
 # Stateless: qui non c'è nessuna chat viva da continuare, ogni esecuzione parte pulita.
 stateful: false
-# Oggi un passo solo — la scrittura su Ghost — ed è già il punto: l'azione esterna
-# (azioniesterne/ghost_giraffiamo_modificamembro.yml) nomina QUESTA procedura, non il metodo del
-# canale. Aggiungere un passo (mail di benvenuto, nota scritta dall'AI, log su un altro canale)
+# L'azione esterna (azioniesterne/ghost_giraffiamo_modificamembro.yml) nomina QUESTA procedura,
+# non il metodo del canale: aggiungere un passo (doppio opt-in, log su un altro canale...)
 # significa aggiungere una riga qui, senza toccare il form pubblico né il webserver.
-# ATTENZIONE: se aggiungi step lenti (qualunque cosa chiami l'AI o mandi mail), metti
-# "modo: asincrono" nel permesso, altrimenti il chiamante va in timeout a 15 secondi.
+# (2026-09-24, richiesto da Marco) Da qui in poi la procedura manda anche una mail di riepilogo a
+# marco@taffi.it — solo sul SUCCESSO, però: essendo "sequenziale" un ghost_aggiorna_membro che
+# lancia (es. email non trovata su Ghost) interrompe la procedura prima dei due task di notifica,
+# quindi un tentativo fallito oggi NON genera nessuna mail. Il permesso resta "modo: sincrono"
+# apposta (vedi azioniesterne/ghost_giraffiamo_modificamembro.yml): l'errore di Ghost deve
+# tornare nella stessa risposta HTTP che il form pubblico controlla per mostrare il proprio
+# messaggio di errore mirato.
 tasks:
   - name: ghost_aggiorna_membro
+    type: step
+  # componi_notifica_iscrizione DOPO ghost_aggiorna_membro, apposta: legge email/labels/note
+  # così come CONFERMATI da Ghost (stato reale del membro dopo la scrittura), non i parametri
+  # grezzi del form — per questo il testo della mail parla di "situazione attuale dopo la
+  # compilazione", non di "quello che hai appena scritto": una nota già presente da una
+  # compilazione precedente, se questa non ne manda una nuova, resta quella e va riportata come
+  # tale, non taciuta né spacciata per appena scritta. Ghost.aggiornaMembro normalizza già "nota
+  # mai impostata" a undefined (non più "" — vedi Ghost.modificaMembro in taffitools), quindi il
+  # fallback "note" di services/componimessaggio_notificaiscrizione.yml scatta correttamente solo
+  # quando il membro non ha proprio nessuna nota.
+  - name: componi_notifica_iscrizione
+    type: step
+  - name: invia_notifica_iscrizione
     type: step
