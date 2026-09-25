@@ -49,3 +49,15 @@ classificazione:
    -  categories: ["cnv"]
       type: "feeds"
       flusso: "RaggruppaSimili"
+  # Esclude i propri articoli già pubblicati (2026-09-25, aggiunto insieme alla nuova fonte
+  # https://www.giraffiamo.it/rss/ in giraffiamo.ts, che rende visibile ad altri il proprio output
+  # — vedi taffiserver/README.md, "Modello di permessi"): senza questa esclusione, quella stessa
+  # fonte farebbe ricombaciare un proprio articolo appena pubblicato con "categories: cnv" qui
+  # sopra, e questo flusso proverebbe a ripubblicarlo in automatico (nessuna conferma, vedi il
+  # commento su "principale" sopra). Stesso identico pattern già usato da iooo per escludere
+  # iooo.ai (ripubblicaconorchestratore.yml): match per URL dell'articolo, non per categoria,
+  # quindi resta valido anche se le categorie cambiano.
+  escludi:
+   -  hooks: ["giraffiamo.it"]
+      type: "urls"
+      flusso: "RaggruppaSimili"

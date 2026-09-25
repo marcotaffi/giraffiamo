@@ -277,6 +277,21 @@ feeds = [
       lingua: "it"
      },
     */
+    {
+        // NUOVA FONTE (2026-09-25): il feed del proprio sito, per rendere l'output di giraffiamo
+        // disponibile ad altri bot che vogliano abbonarvisi — vedi taffiserver/README.md, "Modello di
+        // permessi" (destinata a diventare l'unica fonte "pubblico" di giraffiamo, le altre 12 restano
+        // "privato": sono fonti di terzi che giraffiamo cura per sé, non contenuto proprio da
+        // promuovere). Dominio reale https://www.giraffiamo.it (https://giraffiamo.ghost.io fa 302 verso
+        // quello): verificato con curl, /rss/ risponde 200 application/rss+xml con articoli veri.
+        // RICHIEDE l'esclusione aggiunta in ripubblica_giraffiamo.yml (classificazione.escludi,
+        // hooks: ["giraffiamo.it"]) — senza quella, questa fonte farebbe ripubblicare in automatico a
+        // giraffiamo i propri articoli appena usciti (il flusso "principale" pubblica senza conferma).
+        hooks: ["https://www.giraffiamo.it/rss/"],
+        categories: ["cnv"],
+        lingua: "it",
+        visibilita: "pubblico", // unica fonte pubblica di giraffiamo (Incremento 2) — le altre 12 restano "privato" per default, campo assente
+    },
 ];
 /*
   news = [
