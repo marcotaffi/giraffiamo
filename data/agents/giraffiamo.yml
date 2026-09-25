@@ -1,6 +1,11 @@
 agentName: giraffiamo
 agentDescription: "Avatar telegram di Giraffiamo"
 apiClient: "gpt-response-dev"
+# Persona conversazionale del bot (2026-09-25): la sua risposta finale parla all'utente, non è
+# materiale per altri step. Vedi il commento su questo campo in taffitools/src/ai/types.ts —
+# senza, una chiusura discorsiva rischia di essere scambiata per il "corpo" vero scritto da uno
+# step di contenuto (bug reale osservato in produzione lo stesso giorno, su marcotassinaribot).
+agenteConversazionale: true
 params:
   # Prima usavo "gpt-4o-mini": passato a gpt-5.4-mini (pinnato alla data per stabilità
   # e per restare nel gruppo idoneo ai token gratuiti del programma data-sharing OpenAI).
