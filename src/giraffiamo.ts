@@ -398,6 +398,12 @@ feeds = [
     const sendmailMarco = await ServiceFactory.create("sendmail_marco@taffi.it_send");
     sendmailMarco.start(credenziali);
 
+// Lettura dati di rendimento Search Console per giraffiamo.it (vedi
+// taffitools/src/servizi/searchconsoletool.ts), stesso schema di searchconsole_apg23_org_query
+// in marcotassinaribot: stesso refresh token condiviso, stesso account Google.
+    const searchConsoleGiraffiamo = await ServiceFactory.create("searchconsole_giraffiamo_it_query");
+    searchConsoleGiraffiamo.start(credenziali);
+
  
 
 
@@ -572,7 +578,7 @@ aiManager.setDefaultParams({ assistant_id: assistantID }, "chatgpt-assistants-ap
 
    bot.aggiungiCanali(elencoCanali, credenziali);
 
-   bot.aggiungiServizi([componiNotificaMarco, sendmailMarco]);
+   bot.aggiungiServizi([componiNotificaMarco, sendmailMarco, searchConsoleGiraffiamo]);
 
     debug (3, "*Aggiungo le fonti e la conoscenza*")
 

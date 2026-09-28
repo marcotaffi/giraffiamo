@@ -1,0 +1,11 @@
+firma: "searchconsole_giraffiamo_it_query"
+servizio: "searchconsole"
+destinazione: "giraffiamo_it"
+azione: "query"
+opzioni:
+  # Proprietà Search Console da interrogare, formato Dominio (vedi
+  # taffitools/src/servizi/searchconsoletool.ts). Stesso Google Client ID/Secret/refresh token
+  # già usati per sendmail_marco@taffi.it_send: il refresh token è stato rigenerato il
+  # 2026-09-26 (per marcotassinaribot/apg23.org) includendo lo scope webmasters.readonly, e
+  # copre anche questa proprietà perché appartiene allo stesso account Google (marco@taffi.it).
+  siteUrl: "sc-domain:giraffiamo.it"
