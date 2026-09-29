@@ -1,6 +1,50 @@
 name: ripubblica_giraffiamo_pubblica
 description: "Pubblica su Ghost (riusa ghost_giraffiamo_post) via CanaleFlusso"
+# (2026-09-29) Flusso "invia" (pubblicazione chiesta dalla chat). Come il flusso automatico
+# (ripubblica_pubblica.yml), se l'articolo arriva senza copertina ne genera una nello stile del
+# sito, con i provini di data/referenceimages: sei medaglioni per gli eventi (tag "Eventi"),
+# acquerello nel tondo per gli altri articoli. Prima qui c'era solo ghost_pubblica, e un articolo
+# pubblicato dalla chat senza immagine usciva senza copertina. Regola comune dei canali, manuali e
+# automatici (Marco, 29/09): copertina generata quando è richiesta o quando non ce n'è un'altra.
+# Tutti opzionali: se la generazione fallisce l'articolo esce comunque.
 type: sequenziale
 tasks:
+  - name: genera_prompt_cover_evento
+    type: step
+    opzionale: true
+    condizione: &evento
+      tutte:
+        - campo: tags
+          operatore: contains
+          valore: Eventi
+        - non:
+            campo: feature_image
+            operatore: truthy
+  - name: genera_cover_evento
+    type: step
+    opzionale: true
+    condizione: *evento
+  - name: genera_prompt_cover
+    type: step
+    opzionale: true
+    condizione: &articolo
+      tutte:
+        - campo: tags
+          operatore: notContains
+          valore: Eventi
+        - non:
+            campo: feature_image
+            operatore: truthy
+  - name: genera_cover
+    type: step
+    opzionale: true
+    condizione: *articolo
+  - name: metadati_cover
+    type: step
+    opzionale: true
+    condizione:
+      campo: immagineGenerata
+      modo: multimedia
+      operatore: exists
   - name: ghost_pubblica
     type: step
