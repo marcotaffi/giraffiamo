@@ -240,10 +240,16 @@ feeds = [
   // solo CNV), e .../comunicazione-nonviolenta/feed/ è il feed dei COMMENTI a quella pagina
   // (vuoto), non un feed di contenuti — stesso comportamento di default WordPress visto su
   // cisp.unipi.it. Resta lo scraping HTML con filtro.
+  //
+  // CORRETTO (2026-09-29): "/news/" prendeva TUTTE le news del centro sportivo, non solo la CNV —
+  // la pagina ha nel menu/sidebar i link a tennis, massaggi, corsi di danza, ecc. (verificato
+  // scaricando la pagina: 10 link /news/, uno solo sulla CNV). Visto su dev il 28/09: "nuovi corsi
+  // di danza urban, salsa e latin style" raggruppato con due articoli CNV e mandato a giraffiamo
+  // come contenuto da rilanciare. Ora passano solo le news che nominano la CNV nell'indirizzo.
   hooks: ["https://ch4sportingclub.it/news/comunicazione-nonviolenta/"],
   categories: ["cnv"],
   lingua: "it",
-  includiLink: ["/news/"],
+  includiLink: ["nonviolent", "cnv"],
   escludiLink: ["/feed/", "mantenimento-di-acrocirco"],
  },
  {
@@ -284,7 +290,16 @@ feeds = [
   // pubblica sul blog): niente da guadagnare passando al feed. Schema URL delle singole pagine
   // evento non verificato con certezza: nessun filtro includiLink per ora, da restringere dopo
   // il primo giro reale se produce link fuori tema.
-  hooks: ["https://www.giacomopoleschi.com/wp/eventi-workshop/"],
+  //
+  // CORRETTO (2026-09-29): la pagina /wp/eventi-workshop/ non ha MAI prodotto un evento. Gli
+  // eventi li disegna nel browser il plugin EventON (via JavaScript): l'HTML che scarica il
+  // taffiserver contiene solo i link del menu (negozio, referenze, contatti...), mai quelli degli
+  // eventi. EventON però li pubblica come tipo di contenuto WordPress a sé, con un feed RSS
+  // dedicato: /wp/events/feed/ (verificato: 200 application/rss+xml, 10 eventi veri, ognuno con
+  // la sua pagina /wp/events/<slug>/). Contiene anche eventi internazionali in inglese e di temi
+  // vicini alla CNV (consenso sistemico, educazione): li filtra l'agente di scrittura, che scarta
+  // il materiale fuori tema.
+  hooks: ["https://www.giacomopoleschi.com/wp/events/feed/"],
   categories: ["cnv"],
   lingua: "it"
  },
