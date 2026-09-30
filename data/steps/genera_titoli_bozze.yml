@@ -1,0 +1,11 @@
+name: genera_titoli_bozze
+type: prompt
+description: "Genera i campi titolo per una bozza (percorso a bozze)"
+prompt: genera_titoli_bozze
+agentName: titolista_bozze
+materiale:
+  - campo: corpo
+    pick: last
+    etichetta: "TESTO DELL'ARTICOLO (genera i titoli per questo testo)"
+    obbligatorio: true
+cronologia: nessuna

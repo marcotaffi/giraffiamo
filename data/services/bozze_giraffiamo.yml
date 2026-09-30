@@ -1,0 +1,48 @@
+# Bozze di articoli/eventi per giraffiamo.it (2026-09-30, revisione strutturale, stesso schema di
+# marcotassinaribot/data/services/bozze_apg23.yml del 29/09): il servizio con cui la chat scrive,
+# ritocca, vede in anteprima e pubblica — lavorando sulla "bozza n. X", senza mai ricopiare testi o
+# campi da un passaggio all'altro (causa del crash di pubblicazione del 30/09: un riferimento
+# immagine passato come oggetto invece che come stringa — qui "image" è tipizzato dallo schema del
+# tool, non più JSON libero). Un articolo GIÀ pubblicato si modifica aprendolo come bozza collegata
+# (azione "apri"); salvarla lo aggiorna.
+# Sul sito il testo va in card lexical native di Ghost (markdown + eventuale immagine, vedi
+# taffitools/canali/ghost.ts, _testoConImmaginiToLexicalNodes) — non serve un validatore di
+# formato come blocchi_wordpress per apg23, Ghost accetta il markdown direttamente.
+# Vedi taffitools/src/servizi/bozze.ts e utils/blocchighost.ts.
+firma: bozze_giraffiamo
+servizio: bozze
+destinazione: giraffiamo
+opzioni:
+  scrittura: scrivi_giraffiamo
+  revisione: ritocca_giraffiamo
+  anteprima: anteprima_giraffiamo
+  pubblicazione: canaleflusso_ghost_giraffiamo_invia
+  lettura: ghost_giraffiamo_leggiArticolo
+  aggiornamento: ghost_giraffiamo_aggiornaArticolo
+  # Niente "eventi" come tipo a parte: su giraffiamo un evento è solo un post col tag "Eventi",
+  # non un post type diverso (a differenza di apg23).
+  tipiArticolo: [posts]
+  # Copertina su richiesta esplicita, nello stile giusto secondo i tag (evento a medaglioni o
+  # articolo ad acquerello — vedi copertina_giraffiamo.yml). La copertina AUTOMATICA (in
+  # mancanza di un'immagine, stessa scelta di stile) resta quella già generata da
+  # ripubblica_giraffiamo_pubblica.yml alla pubblicazione, non toccata da questa revisione.
+  copertina: copertina_giraffiamo
+  conversione: ghost
+  stati: [draft, publish]
+  campiBrevi:
+    title: titolo dell'articolo
+    excerpt: sottotitolo/estratto che compare nelle anteprime
+    image: >
+      immagine di copertina: il riferimento di un'immagine generata in chat, oppure una delle tre
+      cover fisse previste per l'uso manuale. MAI l'immagine originale dell'articolo o della
+      fonte: quella, se c'è, va nel corpo dell'articolo (il servizio ce la mette da sé scrivendo
+      la bozza), non qui. Vuoto = nessuna scelta esplicita: alla pubblicazione ne viene generata
+      una nello stile del sito (medaglioni per gli eventi, acquerello per gli articoli).
+    imageCredit: autore della foto di copertina (vuoto per una copertina generata)
+    slug: indirizzo finale dell'articolo sul sito
+    tags: >
+      tag dell'articolo, separati da virgola (es. "Eventi, Regione Toscana, Firenze"). Per un
+      evento sempre "Eventi" più regione (o "Formazione online") più, solo in presenza, la
+      provincia — mai il tag "Evento online". Vuoto per un articolo che non è il lancio di un
+      evento, salvo un tag tematico palese.
+  campiSito: [title, excerpt]

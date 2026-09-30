@@ -39,20 +39,14 @@ toolNames:
            # restano solo per l'uso interno degli step di ripubblica_giraffiamo qui sotto.
            - websearch_italia_low
            - ghost_giraffiamo
-           # ripubblica_giraffiamo (CanaleFlusso): dal 2026-09-15 è IL publisher automatico reale
-           # per il CNV di giraffiamo.it (rinominato da "prova_ghost_giraffiamo" a cutover
-           # completato — vedi data/services/ripubblica_giraffiamo.yml per la storia). Dal
-           # 2026-09-16 è anche l'UNICO percorso chat per scrivere/pubblicare (vedi
-           # giraffiamoinstructions.md, Compito 2): scrivi/invia come step separati, ciascuno
-           # riusa "run"/"post" di ghost_giraffiamo internamente; "principale" come pipeline
-           # completa (scrive e pubblica per davvero, senza conferma — stessa che gira già dal
-           # feed) non è esposta in chat (vedi opzioni.esponiPrincipale in ripubblica_giraffiamo.yml).
-           # Aggiunto il 2026-09-15: il canale era già registrato all'avvio (bot.aggiungiCanali)
-           # ma senza questa riga non risultava mai nell'elenco tool dell'AI — verificato nei log.
-           # La firma qui è quella PROPRIA del canale (come ghost_giraffiamo sopra), non quella
-           # delle singole azioni esposte (canaleflusso_ghost_giraffiamo_scrivi/_invia, vedi
-           # CanaleFlusso.generaDescrizione): creaEAvviaServizio cerca prima un servizio già
-           # registrato con .firma identica a questa stringa esatta, lo trova (registrato da
-           # aggiungiCanali) e riusa quello — un'altra firma qui creerebbe invece un servizio
-           # NUOVO, mai configurato, quasi certamente un errore all'avvio.
-           - ripubblica_giraffiamo
+           # bozze_giraffiamo (2026-09-30, revisione strutturale): dal 2026-09-16 al 2026-09-30
+           # il percorso chat per scrivere/pubblicare era ripubblica_giraffiamo (CanaleFlusso),
+           # con scrivi/invia come step separati e il modello che ricopiava i campi a mano fra
+           # l'uno e l'altro — causa di un crash di pubblicazione reale (un riferimento immagine
+           # passato come oggetto invece che come stringa). Sostituito dal servizio generico
+           # "bozze" (stesso di bozze_apg23 in marcotassinaribot): la chat lavora sulla "bozza n.
+           # X" senza mai ricopiare nulla, e un articolo già pubblicato si può ora modificare
+           # aprendolo come bozza collegata (azione "apri"). Vedi data/services/
+           # bozze_giraffiamo.yml. ripubblica_giraffiamo resta registrato (lo usa ancora la
+           # pipeline automatica dal feed), solo non più esposto qui in chat.
+           - bozze_giraffiamo

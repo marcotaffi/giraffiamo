@@ -9,7 +9,10 @@ materiale:
   - campo: title
     etichetta: TITOLO ARTICOLO
     obbligatorio: false
-  - campo: custom_excerpt
+  # "excerpt" in più (2026-09-30): il percorso a bozze (bozze_giraffiamo) passa il sottotitolo
+  # sotto questo nome, non "custom_excerpt" (vedi servizi/bozze.ts, campo fisso per ogni sito) —
+  # il primo dei due non vuoto vince, quindi nessun cambiamento per chi passa custom_excerpt.
+  - campo: [custom_excerpt, excerpt]
     etichetta: SOTTOTITOLO
     obbligatorio: false
 # Cronologia (2026-09-29): questo step lavora solo sul proprio input esplicito (prompt +

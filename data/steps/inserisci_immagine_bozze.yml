@@ -1,0 +1,15 @@
+name: inserisci_immagine_bozze
+type: prompt
+description: "Inserisce nel testo il segnaposto della locandina/foto allegata, se c'è"
+prompt: inserisci_immagine_bozze
+agentName: aiengineer
+materiale:
+  - campo: corpo
+    pick: last
+    etichetta: "TESTO"
+    obbligatorio: true
+  - campo: immagineFileId
+    pick: last
+    etichetta: "RIFERIMENTO DELL'IMMAGINE ALLEGATA DA INSERIRE (vuoto se nessuna)"
+    obbligatorio: false
+cronologia: nessuna

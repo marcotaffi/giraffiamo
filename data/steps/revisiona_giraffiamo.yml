@@ -1,0 +1,19 @@
+name: revisiona_giraffiamo
+type: prompt
+description: "Applica a una bozza la modifica richiesta, cambiando solo ciò che è chiesto"
+prompt: revisiona_giraffiamo
+agentName: revisore_giraffiamo
+richiedeMateriale: true
+materiale:
+  - campo: testoDaModificare
+    pick: last
+    etichetta: "TESTO DELLA BOZZA DA MODIFICARE (lavora solo su questo; se lo cambi, restituiscilo intero)"
+    obbligatorio: true
+  - campo: title
+    pick: last
+    etichetta: "TITOLO ATTUALE"
+    obbligatorio: false
+  - campo: excerpt
+    pick: last
+    etichetta: "SOTTOTITOLO ATTUALE"
+    obbligatorio: false

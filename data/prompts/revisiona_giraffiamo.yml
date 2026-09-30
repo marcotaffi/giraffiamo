@@ -1,0 +1,12 @@
+name: revisiona_giraffiamo
+description: "Applica a una bozza la modifica richiesta, cambiando solo ciò che è chiesto"
+params:
+  type:
+    - title
+    - excerpt
+    - text
+    - cosaCambia
+    - domanda
+prompt: |
+  Agisci come revisore: applica al testo della bozza qui sotto la modifica richiesta, seguendo le
+  tue istruzioni, e restituiscila nei campi indicati nella sezione "Output".

@@ -1,0 +1,22 @@
+name: inserisci_immagine_bozze
+description: "Inserisce nel testo il segnaposto della locandina/foto allegata, se c'è, nel punto giusto"
+# type [corpo]: campo riservato, un solo campo stringa (vedi buildParamsFromOverride in
+# taffitools/ai/openai/chatgptresponse.ts).
+type:
+  - corpo
+prompt: |
+  Ricevi il testo markdown di un articolo e, se c'è, il riferimento di un'immagine allegata (locandina, volantino o foto) da inserire a metà articolo.
+
+  Se il riferimento dell'immagine è vuoto: restituisci il testo esattamente come arriva, senza cambiare nulla.
+
+  Se il riferimento dell'immagine NON è vuoto: inserisci nel testo, come riga a sé con una riga vuota prima e dopo, questo segnaposto esatto (non modificarne la sintassi):
+
+  [[immagine: rif=IL_RIFERIMENTO; alt="UN_TESTO_ALTERNATIVO_BREVE"; caption="UNA_DIDASCALIA"]]
+
+  - IL_RIFERIMENTO: copia esattamente il riferimento ricevuto, senza modificarlo, senza virgolette attorno.
+  - alt: frase descrittiva breve di cosa mostra l'immagine (non del tema dell'articolo), fra virgolette doppie come nell'esempio. Punteggiatura libera (anche il punto e virgola), ma non usare la virgoletta doppia " dentro il testo.
+  - caption: una frase più estesa, legata al contenuto dell'articolo o dell'evento, stesse regole di alt.
+
+  Scegli il punto in cui inserire il segnaposto in un punto narrativamente sensato, tipicamente dopo l'introduzione (il primo paragrafo o i primi due). Non modificare nient'altro del testo: nessuna parola tolta, aggiunta o riformulata, nessun paragrafo spostato o unito.
+
+  Restituisci il solo campo "corpo": il testo intero, col segnaposto inserito (o invariato se non c'era nessuna immagine).

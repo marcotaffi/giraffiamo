@@ -1,0 +1,25 @@
+# Scrive una bozza NUOVA (2026-09-30, percorso a bozze, vedi bozze_giraffiamo.yml): riusa lo
+# scrittore di sempre (step "ripubblica", stesso della pipeline automatica dal feed — NON
+# toccato) e il titolista, ma con un titolista dedicato al percorso a bozze (titolista_bozze:
+# niente più campi feature_image*, sempre e solo copertina generata — vedi le istruzioni dello
+# scrittore/titolista) e uno step in più che inserisce nel testo, se c'è, il segnaposto della
+# locandina/foto allegata (la posizione è una scelta fatta ORA, una volta sola, non a ogni
+# anteprima: vedi inserisci_immagine_bozze.yml). La usa il servizio bozze_giraffiamo (azione
+# "scrivi"), non la chat direttamente.
+name: scrivi_giraffiamo
+description: scrive una bozza per giraffiamo.it dal materiale della conversazione
+type: sequenziale
+tasks:
+  - name: ripubblica
+    type: step
+    opzionale: true
+    # Con un testo già pronto (testoPronto, il servizio bozze lo mette in "corpo") si salta lo
+    # scrittore: lo si usa così com'è.
+    condizione:
+      non:
+        campo: testoPronto
+        operatore: truthy
+  - name: inserisci_immagine_bozze
+    type: step
+  - name: genera_titoli_bozze
+    type: step

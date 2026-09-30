@@ -1,0 +1,32 @@
+# Copertina di una bozza su richiesta esplicita in chat (2026-09-30, percorso a bozze), nello
+# stile giusto secondo il contenuto: sei medaglioni per un evento (tag "Eventi"), acquerello per
+# un articolo — stessa diramazione, stessi step, della copertina generata in automatico alla
+# pubblicazione (vedi ripubblica_giraffiamo_pubblica.yml, non toccata). A differenza di quella,
+# qui la copertina si genera sempre (l'utente l'ha chiesta esplicitamente), non solo quando manca.
+name: copertina_giraffiamo
+description: genera la copertina di una bozza nello stile di giraffiamo.it, evento o articolo secondo i tag
+type: sequenziale
+tasks:
+  - name: genera_prompt_cover_evento
+    type: step
+    opzionale: true
+    condizione: &evento
+      campo: tags
+      operatore: contains
+      valore: Eventi
+  - name: genera_cover_evento
+    type: step
+    opzionale: true
+    condizione: *evento
+  - name: genera_prompt_cover
+    type: step
+    opzionale: true
+    condizione: &articolo
+      non:
+        campo: tags
+        operatore: contains
+        valore: Eventi
+  - name: genera_cover
+    type: step
+    opzionale: true
+    condizione: *articolo

@@ -1,0 +1,7 @@
+# La usa il servizio bozze_giraffiamo (azione "ritocca"), non la chat direttamente.
+name: ritocca_giraffiamo
+description: applica a una bozza la modifica richiesta, cambiando solo ciò che è chiesto
+type: sequenziale
+tasks:
+  - name: revisiona_giraffiamo
+    type: step

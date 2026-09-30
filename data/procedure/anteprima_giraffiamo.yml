@@ -1,0 +1,13 @@
+# Dal testo della bozza (markdown) al contenuto pronto per Ghost (2026-09-30): Ghost supporta le
+# card markdown native (vedi taffitools/canali/ghost.ts, _testoConImmaginiToLexicalNodes), quindi
+# qui non serve nessuna conversione a html — solo una ripulitura leggera, affidata a un agente
+# (impagina_giraffiamo) per restare flessibile, che non tocca mai l'eventuale segnaposto
+# "[[immagine: ...]]"/"[[blocco: ...]]" nel testo: la vera trasformazione (caricare l'immagine su
+# Ghost, costruire le card) avviene nel canale al momento della pubblicazione, non qui. Usata dal
+# servizio bozze_giraffiamo per l'anteprima e prima di pubblicare.
+name: anteprima_giraffiamo
+description: prepara il testo di una bozza per la pubblicazione su giraffiamo.it
+type: sequenziale
+tasks:
+  - name: impagina_giraffiamo
+    type: step

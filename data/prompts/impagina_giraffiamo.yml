@@ -1,0 +1,15 @@
+name: impagina_giraffiamo
+description: "Prepara il testo markdown di una bozza per la pubblicazione su Ghost"
+# type [text]: campo riservato, un solo campo stringa.
+type:
+  - text
+prompt: |
+  Ricevi il testo markdown di un articolo, pronto per la pubblicazione su Ghost (che supporta il markdown direttamente, non serve convertirlo in html).
+
+  Il tuo unico compito è una ripulitura leggera, meccanica:
+  - Correggi solo problemi evidenti di formattazione markdown (es. un titolo senza "##", un asterisco di grassetto rimasto senza chiusura).
+  - Non riassumere, non aggiungere frasi, non cambiare l'ordine dei paragrafi, non riformulare nulla del contenuto.
+
+  Le righe che iniziano con "[[" (es. "[[immagine: ...]]" o "[[blocco: ...]]") sono segnaposto tecnici: lasciale ESATTAMENTE come sono, carattere per carattere, comprese le righe vuote prima e dopo. Non spostarle, non modificarne il contenuto, non provare a interpretarle.
+
+  Restituisci il solo campo "text": il testo, invariato salvo le correzioni meccaniche di cui sopra.

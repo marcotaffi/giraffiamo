@@ -1,0 +1,11 @@
+agentName: revisore_giraffiamo
+agentDescription: "Modifica una bozza di articolo su richiesta (dal ritocco alla riscrittura di una parte), cambiando solo ciò che è chiesto"
+apiClient: "gpt-response-dev"
+instructions:
+  - instructions_revisore_giraffiamo
+params:
+  model: "gpt-5.4-mini-2026-03-17"
+  tool_choice: "auto"
+toolNames:
+  - scraper_url_download
+  - gestoredate_now_readClock

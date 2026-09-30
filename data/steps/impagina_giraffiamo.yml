@@ -1,0 +1,11 @@
+name: impagina_giraffiamo
+type: prompt
+description: "Prepara il testo markdown di una bozza per la pubblicazione su Ghost"
+prompt: impagina_giraffiamo
+agentName: aiengineer
+materiale:
+  - campo: corpo
+    pick: last
+    etichetta: "TESTO"
+    obbligatorio: true
+cronologia: nessuna
