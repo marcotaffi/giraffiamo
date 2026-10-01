@@ -1,5 +1,6 @@
 agentName: titolista_bozze
 agentDescription: "titolista professionale, percorso a bozze"
+apiClient: "gpt-response-dev"
 # (2026-09-30) Copia di titolista.yml per il percorso a bozze (bozze_giraffiamo, vedi
 # procedure/scrivi_giraffiamo.yml): stesse regole di titolo/slug/tag, MA senza i campi
 # feature_image* (la copertina è sempre e solo generata o una delle cover fisse, mai decisa qui —
