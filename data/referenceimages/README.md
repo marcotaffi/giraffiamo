@@ -37,23 +37,27 @@ solo i sei simboli, scelti dall'art director in base all'evento (un emblema per 
 mai una scenetta con più figure).
 La descrizione completa sta in `prompts/stile_cover_eventi_giraffiamo.yml`.
 
-## Dove sono i file (dal 23/09/2026)
+## Dove sono i file (dal 23/09/2026, aggiornato il 01/10/2026)
 
 I provini NON stanno più nel progetto né in git: sono pesanti e cambiano spesso.
 
 - **Originali sul Mac di Marco:** `~/srv/provini/<progetto>/`.
 - **cloud.taffi.it (produzione):** presenti in questa cartella, più una copia in
   `~/referenceimages-backup/<progetto>/`.
-- **Locale e dev.taffi.it:** volutamente ASSENTI, per non pagare i token dei provini a ogni
-  prova (circa 0,3 centesimi a immagine invece di 2-4). Le copertine si generano lo stesso, ma
-  senza lo stile della casa: quello si giudica solo su una copertina fatta in produzione. Il
-  log lo segnala a livello 2.
+- **dev.taffi.it:** presenti anche qui dal 01/10/2026 (copiati da produzione), per poter
+  giudicare le cover (anche quella a medaglioni degli eventi) nello stile vero della casa
+  mentre si lavora su dev, invece di aspettare una prova in produzione.
+- **Locale:** volutamente ASSENTI, per non pagare i token dei provini a ogni prova (circa 0,3
+  centesimi a immagine invece di 2-4). Le copertine si generano lo stesso, ma senza lo stile
+  della casa: quello si giudica su dev o in produzione. Il log lo segnala a livello 2.
 
 Per rimetterli dove servono:
 
 ```bash
 # sul server, dalla copia di sicurezza
 cp -a ~/referenceimages-backup/<progetto>/. /srv/<progetto>/data/referenceimages/
+# da un altro server, via ssh
+ssh marcotaffi@cloud.taffi.it "tar -czf - -C /srv/<progetto>/data referenceimages/<cartella>" | ssh marcotaffi@dev.taffi.it "tar -xzf - -C /srv/<progetto>/data"
 # in locale, dagli originali
 cp -a ~/srv/provini/<progetto>/. ~/srv/<progetto>/data/referenceimages/
 ```
