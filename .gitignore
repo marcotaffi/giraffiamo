@@ -146,3 +146,7 @@ immaginigenerate/
 # sui server (vedi data/referenceimages/README.md, che resta tracciato).
 data/referenceimages/*
 !data/referenceimages/README.md
+
+# audio ricevuti e documenti generati dal bot (vedi taffitools/src/utils/audioricevuti.ts e documentigenerati.ts), cancellati a vita della chat
+audioricevuti/
+documentigenerati/
