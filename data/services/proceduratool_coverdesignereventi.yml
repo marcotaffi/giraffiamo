@@ -1,0 +1,16 @@
+# Tool di chat: genera la cover per il lancio di un EVENTO (sei medaglioni a incisione).
+# Per le cover degli articoli c'è invece proceduratool_coverdesigner.
+# La firma deve avere solo 2 parti (servizio_destinazione, come proceduratool_coverdesigner), non
+# 3: "proceduratool_coverdesigner_eventi" veniva risolta da Servizio.dettagliaRichiesta come
+# servizio="proceduratool" destinazione="coverdesigner" azione="eventi" (3 parti = servizio_
+# destinazione_azione), collidendo con la destinazione "coverdesigner" del tool normale e
+# cercando un metodo "eventi" inesistente sulla classe ProceduraTool — da qui l'errore visto negli
+# log dev del 2026-10-01 ("Metodo eventi non trovato nella classe proceduratool.") ogni volta che
+# l'AI tentava di generare la cover di un evento in chat. Rinominata la firma (e il file) perché
+# coincida con la destinazione, come il tool normale.
+firma: "proceduratool_coverdesignereventi"
+servizio: "proceduratool"
+destinazione: "coverdesignereventi"
+procedura: "genera_cover_evento"
+azione: esegui
+cosafa: "Generate the cover image for an EVENT of this site, in the site's own engraved-medallion style: six round symbols related to the event. The style and the layout are preconfigured, do not describe them. Pass in 'prompt' the event (title, theme, place, what happens there). The image is shown to the user in chat."

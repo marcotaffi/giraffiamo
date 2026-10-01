@@ -24,8 +24,12 @@ toolNames:
            # una nuova su richiesta, non cambia il flusso automatico.
            - proceduratool_coverdesigner
            # Variante per il lancio di un evento: sei medaglioni a incisione con i simboli
-           # dell'evento (procedure/genera_cover_evento.yml).
-           - proceduratool_coverdesigner_eventi
+           # dell'evento (procedure/genera_cover_evento.yml). Firma SENZA "_eventi" in più rispetto
+           # alla destinazione "coverdesignereventi" (vedi data/services/
+           # proceduratool_coverdesignereventi.yml): con 3 parti separate da "_" sarebbe risolta
+           # come servizio_destinazione_azione e collisa con proceduratool_coverdesigner (bug
+           # reale nei log dev del 2026-10-01, "Metodo eventi non trovato").
+           - proceduratool_coverdesignereventi
           # - scraper_url_download
            # websearch_italia_low riattivato il 2026-09-15, ma RISTRETTO al solo giraffiamo.it
            # (vedi data/services/websearch_italia_low.yml, opzioni.allowedDomains) — non una
