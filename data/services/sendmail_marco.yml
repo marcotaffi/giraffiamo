@@ -1,0 +1,4 @@
+firma: "sendmail_marco@taffi.it_send"
+servizio: "sendmail"
+destinazione: "marco@taffi.it"
+azione: "send"

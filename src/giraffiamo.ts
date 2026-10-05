@@ -410,7 +410,12 @@ feeds = [
 // marcotassinaribot.ts (sendmailLuccitelli/componiMessaggioLuccitelli).
     const componiNotificaMarco = await ServiceFactory.create("componimessaggio_notificamarco");
     componiNotificaMarco.start(credenziali);
-    const sendmailMarco = await ServiceFactory.create("sendmail_marco@taffi.it_send");
+    // Notifica della compilazione del form preferenze (step componi_notifica_iscrizione, procedura
+    // iscrizione_preferenze). Non era registrato: la firma ripiegava in silenzio sull'unico
+    // componimessaggio registrato, cioè notificamarco, col modello sbagliato (scoperto il 2026-10-05).
+    const componiNotificaIscrizione = await ServiceFactory.create("componimessaggio_notificaiscrizione");
+    componiNotificaIscrizione.start(credenziali);
+    const sendmailMarco = await ServiceFactory.create("sendmail_marco");
     sendmailMarco.start(credenziali);
 
 // Lettura dati di rendimento Search Console per giraffiamo.it (vedi
@@ -593,7 +598,7 @@ aiManager.setDefaultParams({ assistant_id: assistantID }, "chatgpt-assistants-ap
 
    bot.aggiungiCanali(elencoCanali, credenziali);
 
-   bot.aggiungiServizi([componiNotificaMarco, sendmailMarco, searchConsoleGiraffiamo]);
+   bot.aggiungiServizi([componiNotificaMarco, componiNotificaIscrizione, sendmailMarco, searchConsoleGiraffiamo]);
 
     debug (3, "*Aggiungo le fonti e la conoscenza*")
 
