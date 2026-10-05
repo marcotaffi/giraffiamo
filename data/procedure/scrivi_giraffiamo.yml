@@ -21,5 +21,12 @@ tasks:
         operatore: truthy
   - name: inserisci_immagine_bozze
     type: step
+    # Solo se c'è davvero un'immagine allegata da inserire. Senza, il modello mini riceveva il solo
+    # testo e metteva lo stesso il segnaposto copiando l'esempio del prompt ("rif=IL_RIFERIMENTO",
+    # visto su dev il 2026-10-05): il testo resta quello dello scrittore.
+    condizione:
+      campo: immagineFileId
+      operatore: truthy
+      piuRecente: true   # vale l'ultima dichiarazione dello scrittore, anche vuota (non un allegato di una bozza precedente)
   - name: genera_titoli_bozze
     type: step
