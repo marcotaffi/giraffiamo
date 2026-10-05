@@ -1,5 +1,6 @@
 firma: "ghost_giraffiamo"
 servizio: "ghost"
+registraNelBot: true  # canale: caricato dal bot (richiamabile da chat; non riceve più il feed)
 destinazione: "giraffiamo" #usata per costruire le firme chiamabili da ai
 procedura: "ripubblica" #!!! procedura eseguita dalla run sia dal bot che dal canale
 opzioni:

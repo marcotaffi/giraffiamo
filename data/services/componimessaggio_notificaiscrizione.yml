@@ -1,5 +1,6 @@
 firma: componimessaggio_notificaiscrizione
 servizio: componimessaggio
+registraNelBot: true  # servizio semplice, richiamato per firma dagli step delle procedure
 destinazione: notificaiscrizione  # solo un'etichetta per questa istanza, non un indirizzo
 azione: componi
 opzioni:

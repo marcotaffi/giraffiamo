@@ -6,6 +6,7 @@
 # percorso chat per scrivere/pubblicare su questo sito (flussi "scrivi"/"invia" sotto).
 firma: ripubblica_giraffiamo
 servizio: canaleflusso
+registraNelBot: true  # canale: publisher automatico del CNV, flussi scrivi/invia/principale
 destinazione: ghost_giraffiamo
 # Due flussi separati (non uno solo): "scrivi" prepara la bozza, "invia" la pubblica per davvero
 # su un CMS reale — un confine esplicito fra le due azioni, richiamabili singolarmente da chat,

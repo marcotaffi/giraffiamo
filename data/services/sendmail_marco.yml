@@ -1,4 +1,5 @@
 firma: "sendmail_marco@taffi.it_send"
 servizio: "sendmail"
+registraNelBot: true  # servizio semplice, richiamato per firma dagli step delle procedure
 destinazione: "marco@taffi.it"
 azione: "send"

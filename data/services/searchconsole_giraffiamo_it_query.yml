@@ -1,5 +1,6 @@
 firma: "searchconsole_giraffiamo_it_query"
 servizio: "searchconsole"
+registraNelBot: true  # servizio semplice, richiamato per firma dagli step delle procedure
 destinazione: "giraffiamo_it"
 azione: "query"
 opzioni:

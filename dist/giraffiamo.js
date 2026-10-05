@@ -1,4 +1,4 @@
-import { debug, BotIooo, AIManager, ProcessManager, ServiceFactory } from "taffitools";
+import { debug, BotIooo, AIManager, ProcessManager } from "taffitools";
 import dotenv from 'dotenv';
 dotenv.config();
 const botToken = process.env.TELEGRAM_TOKEN || "";
@@ -352,40 +352,10 @@ feeds = [
        
        */
         //SISTEMA MODERNO
-        const NotizieGiraffiamo = await ServiceFactory.create("ghost_giraffiamo");
-        // const NotizieApg23 = await ServiceFactory.create("ripubblicaconorchestratore") as CanaleExtendsServizio;
-        NotizieGiraffiamo.start(credenziali);
-        //-----------------
-        // ripubblica_giraffiamo: stesso canale Ghost (stesso sito, stesse credenziali, stessa azione
-        // run/post), richiamato tramite il canale generico CanaleFlusso invece che come metodo fisso
-        // della sottoclasse Ghost — vedi taffitools/src/canali/canaleflusso.ts e data/services/
-        // ripubblica_giraffiamo.yml. Dal 2026-09-15 (Tappa 3, cutover completato) è IL publisher
-        // automatico reale per il CNV di giraffiamo.it: NotizieGiraffiamo (sopra) resta avviato e
-        // richiamabile da chat, ma non riceve più traffico dal feed (classificazione disattivata in
-        // ghost_giraffiamo.yml) per evitare pubblicazioni doppie. Chiamabile anche da chat, con tre
-        // azioni separate: "scrivi"/"invia" (singoli step) e "principale" (pipeline completa, scrive e
-        // pubblica per davvero senza conferma — la stessa che gira già dal feed).
-        const ripubblicaGiraffiamoFlusso = await ServiceFactory.create("ripubblica_giraffiamo");
-        ripubblicaGiraffiamoFlusso.start(credenziali);
-        // (2026-09-18) Notifica a marco@taffi.it a ogni pubblicazione automatica dal feed (vedi gli step
-        // componi_notifica_marco/invia_notifica_marco in coda a data/procedure/ripubblica_pubblica.yml).
-        // Non sono canali (non ricevono feed, non sono AI-callable): vanno registrati con
-        // bot.aggiungiServizi, non con bot.aggiungiCanali — stesso schema di marcotassinaribot/src/
-        // marcotassinaribot.ts (sendmailLuccitelli/componiMessaggioLuccitelli).
-        const componiNotificaMarco = await ServiceFactory.create("componimessaggio_notificamarco");
-        componiNotificaMarco.start(credenziali);
-        // Notifica della compilazione del form preferenze (step componi_notifica_iscrizione, procedura
-        // iscrizione_preferenze). Non era registrato: la firma ripiegava in silenzio sull'unico
-        // componimessaggio registrato, cioè notificamarco, col modello sbagliato (scoperto il 2026-10-05).
-        const componiNotificaIscrizione = await ServiceFactory.create("componimessaggio_notificaiscrizione");
-        componiNotificaIscrizione.start(credenziali);
-        const sendmailMarco = await ServiceFactory.create("sendmail_marco");
-        sendmailMarco.start(credenziali);
-        // Lettura dati di rendimento Search Console per giraffiamo.it (vedi
-        // taffitools/src/servizi/searchconsoletool.ts), stesso schema di searchconsole_apg23_org_query
-        // in marcotassinaribot: stesso refresh token condiviso, stesso account Google.
-        const searchConsoleGiraffiamo = await ServiceFactory.create("searchconsole_giraffiamo_it_query");
-        searchConsoleGiraffiamo.start(credenziali);
+        // I canali e i servizi del bot non si creano più qui a mano: sono i file di data/services con
+        // `registraNelBot: true` (vedi bot.aggiungiServiziDaFile più sotto; il perché di ciascuno è nel
+        // commento del suo file, es. ripubblica_giraffiamo.yml per il publisher automatico del CNV).
+        // Quali agenti usano un servizio lo decidono i toolNames dei loro file.
         //-----------------
         /* VECCHIO SISTEMA
            let EventiApg23 = new Redazione("redazione_marcotassinari@apg23.org");
@@ -527,10 +497,8 @@ feeds = [
         const bot = new BotIooo(aiManager, "giraffiamo");
         debug(3, "*Aggiungo le inferfacce*");
         await bot.aggiungieInizializzaInterfaccePredefinite(credenziali);
-        debug(3, "*Aggiungo i canali al bot*");
-        const elencoCanali = [NotizieGiraffiamo, ripubblicaGiraffiamoFlusso]; // NotizieMail];
-        bot.aggiungiCanali(elencoCanali, credenziali);
-        bot.aggiungiServizi([componiNotificaMarco, componiNotificaIscrizione, sendmailMarco, searchConsoleGiraffiamo]);
+        debug(3, "*Carico canali e servizi del bot dai file*");
+        await bot.aggiungiServiziDaFile(credenziali);
         debug(3, "*Aggiungo le fonti e la conoscenza*");
         if (feeds.length > 0)
             bot.addFeeds(feeds); //invia le fonti

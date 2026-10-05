@@ -1,5 +1,9 @@
+# (2026-09-18) Notifica a marco@taffi.it a ogni pubblicazione automatica dal feed (step
+# componi_notifica_marco/invia_notifica_marco in coda a data/procedure/ripubblica_pubblica.yml).
+# Non è un canale (non riceve feed, non è AI-callable): è un servizio semplice del registro del bot.
 firma: componimessaggio_notificamarco
 servizio: componimessaggio
+registraNelBot: true  # servizio semplice, richiamato per firma dagli step delle procedure
 destinazione: notificamarco  # solo un'etichetta per questa istanza, non un indirizzo
 azione: componi
 opzioni:

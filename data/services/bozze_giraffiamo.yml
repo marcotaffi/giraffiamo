@@ -16,7 +16,7 @@ opzioni:
   scrittura: scrivi_giraffiamo
   revisione: ritocca_giraffiamo
   anteprima: anteprima_giraffiamo
-  pubblicazione: canaleflusso_ghost_giraffiamo_invia
+  pubblicazione: ripubblica_giraffiamo_invia
   lettura: ghost_giraffiamo_leggiArticolo
   aggiornamento: ghost_giraffiamo_aggiornaArticolo
   # Niente "eventi" come tipo a parte: su giraffiamo un evento è solo un post col tag "Eventi",

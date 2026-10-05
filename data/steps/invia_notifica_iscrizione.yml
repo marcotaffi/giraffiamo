@@ -1,6 +1,6 @@
 name: invia_notifica_iscrizione
 type: servizio
-firma: "sendmail_marco@taffi.it_send"
+firma: "sendmail_marco"
 # (2026-09-24, richiesto da Marco) Invia a marco@taffi.it la mail di riepilogo composta da
 # componi_notifica_iscrizione, ogni volta che il form preferenze di giraffiamo.it viene
 # compilato. Nessun file services/sendmail_*.yml esplicito: stesso pattern minimale di
