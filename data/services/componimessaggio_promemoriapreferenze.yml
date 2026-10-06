@@ -1,10 +1,14 @@
-# (2026-10-06) Compone la mail di promemoria a chi è iscritto su Ghost ma non ha ancora scelto le
-# preferenze (procedura _promemoria_preferenze, ingresso _promemoria_preferenze). Il destinatario è
-# l'email del membro, che arriva dai dati dell'elemento. Servizio semplice, non AI-callable.
+# (2026-10-06) Compone la mail di promemoria a chi è iscritto alla newsletter "Gli eventi" ma non ha
+# ancora scelto le preferenze (procedura _promemoria_preferenze, ingresso _promemoria_preferenze). Il
+# destinatario è l'email del membro, che arriva dai dati dell'elemento. Servizio semplice, non AI-callable.
 #
-# TESTO IN BOZZA, da riscrivere come vuoi tu. Due protezioni già attive: componimessaggio rifiuta di
-# comporre se un {{campo}} risulta vuoto, quindi finché "linkPreferenze" resta "" NESSUNA mail parte
-# (compare l'errore "il campo linkPreferenze vuoto" invece di una mail senza link).
+# TESTO IN BOZZA (deciso da Marco il 06/10: tenerlo, si rivede poi). Aspetto: i font e i colori di
+# giraffiamo.it — Lora per il titolo e Inter per il testo (nei client di posta i font web non si
+# caricano: ripiego su Georgia e Helvetica), accento #e4ab41, testo #15171a, sfondo avorio #f9f4ef come
+# quello del logo, testo grande (20px). HTML in stile inline e a tabelle, che è ciò che i client di
+# posta capiscono. Il logo è quello del sito (storage.ghost.io).
+# Protezione: componimessaggio rifiuta di comporre se un {{campo}} risulta vuoto, quindi senza
+# "linkPreferenze" o senza l'email del membro NESSUNA mail parte.
 firma: componimessaggio_promemoriapreferenze
 servizio: componimessaggio
 registraNelBot: true
@@ -13,13 +17,23 @@ azione: componi
 opzioni:
   to: "{{email}}"
   subject: "Giraffiamo: scegli cosa vuoi ricevere"
-  # DA COMPILARE con l'indirizzo del form delle preferenze (quello di data/azioniesterne/
-  # ghost_giraffiamo_modificamembro.yml, che sta sul sito). Vuoto = nessuna mail.
-  linkPreferenze: ""
-  text: >-
-    Ciao,<br><br>
-    ti scriviamo perché non hai ancora scelto le tue preferenze su Giraffiamo: dicci da dove vieni e
-    cosa ti interessa, così potremo segnalarti solo ciò che fa per te.<br><br>
-    Ci vuole un minuto: <a href="{{linkPreferenze}}">scegli le tue preferenze</a>.<br><br>
-    Grazie,<br>
-    la redazione di Giraffiamo
+  # La pagina del form: la vede solo chi ha fatto il login (per questo la mail lo ricorda).
+  linkPreferenze: "https://www.giraffiamo.it/personalizza-newsletter/"
+  text: |-
+    <div style="margin:0;padding:0;background:#f9f4ef;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="background:#f9f4ef;">
+    <tr><td align="center" style="padding:32px 16px;">
+    <table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0" style="width:100%;max-width:600px;">
+    <tr><td align="center" style="padding:0 0 8px 0;"><img src="https://storage.ghost.io/c/22/e1/22e1b97c-0430-4390-9fd1-cab0a431acac/content/images/2026/05/dire_cio_che_conta_logo.png" width="150" alt="Giraffiamo!" style="display:block;border:0;width:150px;max-width:100%;height:auto;"></td></tr>
+    <tr><td align="center" style="padding:8px 8px 0 8px;font-family:Lora,Georgia,'Times New Roman',serif;font-size:30px;line-height:1.25;font-weight:bold;color:#15171a;">Scegli cosa vuoi ricevere</td></tr>
+    <tr><td align="center" style="padding:14px 0 6px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td width="56" height="3" style="width:56px;height:3px;line-height:3px;font-size:3px;background:#e4ab41;">&nbsp;</td></tr></table></td></tr>
+    <tr><td style="padding:18px 8px 0 8px;font-family:Inter,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:20px;line-height:1.6;color:#15171a;">Ciao,<br><br>
+    ti scriviamo perché non hai ancora scelto le tue preferenze su Giraffiamo: dicci da dove vieni e cosa ti interessa, così potremo segnalarti solo ciò che fa per te.<br><br>
+    Ci vuole un minuto:</td></tr>
+    <tr><td align="center" style="padding:22px 8px 10px 8px;"><a href="{{linkPreferenze}}" style="display:inline-block;background:#e4ab41;color:#15171a;font-family:Inter,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:20px;font-weight:bold;line-height:1.2;text-decoration:none;padding:16px 30px;border-radius:6px;">Scegli le tue preferenze</a></td></tr>
+    <tr><td align="center" style="padding:0 8px 0 8px;font-family:Inter,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:15px;line-height:1.5;color:#737373;">Per aprire la pagina devi aver effettuato l'accesso al sito con la tua email.</td></tr>
+    <tr><td style="padding:26px 8px 0 8px;font-family:Inter,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:20px;line-height:1.6;color:#15171a;">Grazie,<br>la redazione di Giraffiamo</td></tr>
+    </table>
+    </td></tr>
+    </table>
+    </div>

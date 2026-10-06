@@ -1,14 +1,17 @@
 # Promemoria mensile delle preferenze (fase F3 di TODO.md §8). INERTE (inizia per "_"): per attivarlo
-# rinomina in promemoria_preferenze.yml, metti INGRESSI=on nel .env e riavvia. PRIMA compila
-# "linkPreferenze" in services/componimessaggio_promemoriapreferenze.yml (finché è vuoto non parte
-# nessuna mail) e rivedi il testo. Provalo su dev: lì SendMail manda tutto a marco@taffi.it e l'elenco
-# è limitato a 3 membri (vedi Ghost.elencaMembri, "max").
+# rinomina in promemoria_preferenze.yml, metti INGRESSI=on nel .env e riavvia. In dev provalo con una
+# cadenza più fitta (vedi data/ingressi/LEGGIMI.md, "Prova su dev"): lì SendMail manda tutto a
+# marco@taffi.it con oggetto "[TEST per ...]" e l'elenco è limitato a 3 membri.
 #
-# Il primo di ogni mese alle 9 prende da Ghost i membri SENZA nessuna label (cioè che non hanno compilato
-# il form delle preferenze) e manda a ciascuno UNA mail. "unaVolta": ogni membro è segnato servito prima
-# dell'invio, quindi un crash a metà non manda due volte la stessa mail (chi fallisce finisce in
-# dead-letter e arriva un avviso). "ripetiOgniScadenza": sono gli stessi membri ogni mese, quindi l'elenco
-# dei già serviti riparte a ogni scadenza.
+# Il primo di ogni mese alle 9 prende da Ghost gli iscritti alla newsletter "Gli eventi" che non hanno
+# NESSUNA label (cioè che non hanno compilato il form delle preferenze) e manda a ciascuno UNA mail.
+# Mail di SERVIZIO: consenso già dato, disiscrizione gestita su Ghost, nessun link di disiscrizione
+# (deciso da Marco il 06/10/2026). "unaVolta": ogni membro è segnato servito prima dell'invio, quindi un
+# crash a metà non manda due volte la stessa mail (chi fallisce finisce in dead-letter e arriva un
+# avviso). "ripetiOgniScadenza": sono gli stessi membri ogni mese, quindi l'elenco dei già serviti
+# riparte a ogni scadenza.
+#
+# Numeri del 06/10/2026: 35 membri, 34 iscritti a "Gli eventi", 11 senza label (2 di questi hanno una nota).
 sorgente: ghost_giraffiamo_elencaMembri
 quando: "0 9 1 * *"
 recuperaEntro: 3d
@@ -17,8 +20,8 @@ consegna: unaVolta
 ripetiOgniScadenza: true
 suErrore: sendmail_marco
 parametri:
-  senzaLabel: true
-  # DECISIONE DA PRENDERE: "subscribed:true" esclude chi si è disiscritto dalla newsletter su Ghost (il
-  # membro resta registrato ma ha detto di non voler mail). Senza questa riga la mail arriva anche a loro.
-  # Se sono mail di servizio e vanno a tutti, togli la riga.
-  filtro: "subscribed:true"
+  filtro: "newsletters.slug:eventi"   # solo gli iscritti alla newsletter "Gli eventi"
+  senzaLabel: true                    # e che non hanno nessuna label
+  # DECISIONE APERTA: il form delle preferenze scrive anche una nota. Chi ha una nota ma nessuna label
+  # potrebbe aver compilato il form scegliendo nulla (oggi 2 persone su 11). Togli il "#" per escluderli.
+  # senzaNota: true

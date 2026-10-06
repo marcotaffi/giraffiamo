@@ -6,13 +6,13 @@ davanti sono bozze e vengono ignorati.
 
 **Spento di default.** Il gestore parte solo se nel `.env` del bot c'è `INGRESSI=on`; senza, questa
 cartella non viene nemmeno letta. Se un file non è valido il bot non parte e l'errore li elenca tutti.
-Descrizione completa, garanzie e limiti: `taffitools/docs/ingressi.md`.
+Descrizione completa, tutte le cadenze possibili, garanzie e limiti: `taffitools/docs/ingressi.md`.
 
 ## Campi
 
 ```yaml
 sorgente: orologio              # "orologio", o l'id_azione di un servizio del bot (es. ghost_giraffiamo_elencaMembri)
-quando: "0 9 1 * *"             # cron a 5 campi: qui, il primo del mese alle 9
+quando: "0 9 1 * *"             # cron a 5 campi (o @daily, @weekly, @monthly...): qui, il primo del mese alle 9
 fuso: Europe/Rome               # opzionale, default Europe/Rome
 recuperaEntro: 3d               # opzionale: se il bot era spento alla scadenza, la recupera entro
                                 # questo tempo (30s, 15m, 3h, 2d), una volta sola. Default: non recupera
@@ -49,20 +49,38 @@ di notifica che il flusso automatico già usa (nessuna AI, nessuna scrittura su 
 ## Promemoria delle preferenze (F3, inerte)
 
 `_promemoria_preferenze.yml` + `data/procedure/_promemoria_preferenze.yml` + i servizi `sendmail_generic` e
-`componimessaggio_promemoriapreferenze`: il primo di ogni mese alle 9 una mail a ogni membro Ghost SENZA
-label (che non ha compilato il form delle preferenze). Prima di accenderlo:
+`componimessaggio_promemoriapreferenze`: il primo di ogni mese alle 9 una mail a ogni iscritto alla newsletter
+**"Gli eventi"** che non ha **nessuna label** (cioè non ha compilato il form delle preferenze). Mail di servizio:
+consenso già dato, disiscrizione su Ghost, nessun link di disiscrizione (deciso il 06/10/2026).
 
-1. **Compila `linkPreferenze`** in `services/componimessaggio_promemoriapreferenze.yml` e riscrivi il testo
-   (è una bozza). Finché il link è vuoto non parte nessuna mail: il servizio rifiuta di comporre un messaggio
-   con un campo vuoto.
-2. **Decidi `filtro: "subscribed:true"`** nei parametri: esclude chi si è disiscritto dalla newsletter su Ghost.
-   Togli la riga se le mail di servizio devono arrivare a tutti.
-3. Prova su dev: lì SendMail manda tutto a marco@taffi.it con oggetto "[TEST per ...]" e l'elenco è limitato a
-   3 membri. Rinomina in `promemoria_preferenze.yml`, `INGRESSI=on`, riavvia, attendi la scadenza (per vederla
-   subito cambia `quando` in `"*/3 * * * *"`).
+- **Il testo** è in `services/componimessaggio_promemoriapreferenze.yml`: HTML con i font (Lora, Inter), i colori
+  (accento `#e4ab41`, testo `#15171a`, sfondo avorio del logo) e il logo di giraffiamo.it, testo grande. È la
+  bozza concordata, da rivedere. Il pulsante porta a https://www.giraffiamo.it/personalizza-newsletter/ (si vede
+  solo dopo il login: la mail lo ricorda).
+- **Il filtro** è `newsletters.slug:eventi` (le newsletter di Ghost sono "Gli eventi" = `eventi` e "Podcast e
+  approfondimenti tematici" = `default-newsletter`) più `senzaLabel: true`. Il 06/10/2026: 35 membri, 34 iscritti a
+  "Gli eventi", **11 senza label** (2 di loro hanno una nota già scritta: se vuoi escluderli, `senzaNota: true`).
+- **Produzione**: giraffiamo su cloud ha `DEBUG_LEVEL=5`, e da 5 in su SendMail simula (le mail vanno a Marco).
+  Per mandarle davvero serve ≤ 4.
 
-La procedura ha il `_` davanti perché in giraffiamo ogni procedura di `data/procedure` diventa un comando
-Telegram, e questa manda mail vere a molte persone.
+### Prova su dev del promemoria
+
+In dev le mail vanno tutte a marco@taffi.it con oggetto `[TEST per <indirizzo vero>]` e l'elenco è limitato a 3
+membri. Si prova con i dati veri, con una cadenza fitta in un file non tracciato da git:
+
+```bash
+cd /srv/giraffiamo/data/ingressi
+cp _promemoria_preferenze.yml prova_dev.yml
+sed -i 's#^quando:.*#quando: "*/10 * * * *"#' prova_dev.yml
+# INGRESSI=on nel .env di giraffiamo, riavvia; arrivano 3 mail ogni 10 minuti.
+# A prova finita:  rm prova_dev.yml  e riavvia.
+```
+
+La procedura ha il `_` davanti perché in giraffiamo ogni procedura di `data/procedure` diventa un comando Telegram,
+e questa manda mail vere a molte persone. Per l'uso vero in produzione: rinomina `_promemoria_preferenze.yml` in
+`promemoria_preferenze.yml` e metti `INGRESSI=on`.
+
+Guida completa (cadenze, agenda, garanzie, dove agganciarsi): `taffitools/docs/ingressi.md`.
 
 `_esempio.yml` mostra solo il formato. Un `INGRESSI=on` con file non validi ferma il bot all'avvio, con
 l'elenco di tutti i file sbagliati: è voluto.
