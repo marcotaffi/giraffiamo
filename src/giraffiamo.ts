@@ -562,6 +562,12 @@ aiManager.setDefaultParams({ assistant_id: assistantID }, "chatgpt-assistants-ap
   debug(3, "*Carico canali e servizi del bot dai file*");
    await bot.aggiungiServiziDaFile(credenziali);
 
+  // Sistema degli ingressi (TODO.md §8, taffitools/docs/ingressi.md): procedure che partono da sole
+  // alle scadenze di data/ingressi/*.yml. SPENTO finché nel .env di giraffiamo non c'è INGRESSI=on;
+  // spento o senza file in data/ingressi non cambia nulla. Dopo i servizi: avvisi e sorgenti li usano.
+  debug(3, "*Carico gli ingressi del bot (se accesi)*");
+   await bot.aggiungiIngressiDaFile({ suErrore: "sendmail_marco" });
+
     debug (3, "*Aggiungo le fonti e la conoscenza*")
 
      if (feeds.length>0) bot.addFeeds(feeds); //invia le fonti

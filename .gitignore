@@ -150,3 +150,9 @@ data/referenceimages/*
 # audio ricevuti e documenti generati dal bot (vedi taffitools/src/utils/audioricevuti.ts e documentigenerati.ts), cancellati a vita della chat
 audioricevuti/
 documentigenerati/
+
+# Sistema degli ingressi (taffitools/docs/ingressi.md): segnalibri, id già serviti e agenda delle
+# scadenze, più la dead-letter delle richieste fallite. Sono dati di esercizio, non codice: non vanno
+# in git né sovrascritti da un pull. Chi collega un altro bot agli ingressi deve aggiungerle al suo.
+data/stato-ingressi/
+data/deadletter-ingressi/

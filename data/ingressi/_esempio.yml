@@ -1,0 +1,9 @@
+# Esempio inerte (inizia per "_": ignorato). Vedi LEGGIMI.md in questa cartella.
+# Il primo del mese alle 9 (ora italiana) lancia la procedura una volta sola. La procedura riceve
+# nei dati: "occorrenza" (la scadenza), "ingresso_id", "ingresso_tipo: tick" e i `parametri`.
+sorgente: orologio
+quando: "0 9 1 * *"
+recuperaEntro: 3d
+procedura: nome_di_una_procedura_esistente
+parametri:
+  esempio: valore

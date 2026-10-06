@@ -1,0 +1,13 @@
+# KIT DI PROVA per dev (inerte: inizia per "_"). Per usarlo: rinomina in prova.yml, metti INGRESSI=on nel
+# .env di giraffiamo e riavvia. Ogni 3 minuti lancia la procedura prova_ingressi: una mail di prova a
+# marco@taffi.it (in dev il destinatario è comunque sempre Marco, oggetto "[TEST per ...]"). In log si
+# cerca "Ingresso" e "prova@" (id dell'ingresso + scadenza). RIMETTI il "_" (o cancellalo) a prova finita.
+# Vedi LEGGIMI.md per il copione completo.
+sorgente: orologio
+quando: "*/3 * * * *"
+recuperaEntro: 10m
+procedura: prova_ingressi
+parametri:
+  title: "PROVA ingressi (non è un articolo)"
+  custom_excerpt: "Mail di prova del sistema degli ingressi: se la leggi, un ingresso a cadenza ha lanciato una procedura vera."
+  slug: "prova-ingressi"

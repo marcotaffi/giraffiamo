@@ -1,0 +1,16 @@
+name: prova_ingressi
+description: prova del sistema degli ingressi (taffitools/docs/ingressi.md) — manda una mail di prova a Marco
+type: sequenziale
+# Stateless: nessuna chat viva, ogni esecuzione parte pulita.
+stateful: false
+# (2026-10-06) Procedura SOLO per provare su dev che un ingresso a cadenza (data/ingressi/_prova.yml)
+# lancia davvero una procedura con i suoi servizi: riusa i due passi di notifica che il flusso
+# "principale" già usa in produzione (ripubblica_pubblica.yml), senza AI né scritture su Ghost. I
+# campi title / custom_excerpt / slug che il modello della mail si aspetta arrivano dai `parametri`
+# dell'ingresso (finiscono nei dati del tick). In dev (TEST_ONLY) SendMail la manda comunque, ma
+# a marco@taffi.it e con l'oggetto marcato "[TEST per ...]".
+tasks:
+  - name: componi_notifica_marco
+    type: step
+  - name: invia_notifica_marco
+    type: step
