@@ -11,7 +11,7 @@ Descrizione completa, garanzie e limiti: `taffitools/docs/ingressi.md`.
 ## Campi
 
 ```yaml
-sorgente: orologio              # "orologio", o una sorgente registrata (dalla fase F3: azioni dei servizi)
+sorgente: orologio              # "orologio", o l'id_azione di un servizio del bot (es. ghost_giraffiamo_elencaMembri)
 quando: "0 9 1 * *"             # cron a 5 campi: qui, il primo del mese alle 9
 fuso: Europe/Rome               # opzionale, default Europe/Rome
 recuperaEntro: 3d               # opzionale: se il bot era spento alla scadenza, la recupera entro
@@ -19,6 +19,8 @@ recuperaEntro: 3d               # opzionale: se il bot era spento alla scadenza,
 procedura: promemoria_preferenze
 modo: perElemento               # perElemento (default) | tutti (una sola esecuzione con la lista)
 consegna: almenoUnaVolta        # almenoUnaVolta (default) | unaVolta — vedi sotto
+ripetiOgniScadenza: false       # true = la sorgente ripresenta gli STESSI elementi a ogni scadenza (es. i
+                                # membri Ghost): i già serviti si azzerano a ogni scadenza
 timeout: 900                    # secondi, opzionale
 parametri: {}                   # passati alla sorgente e, per l'orologio, ai dati del tick
 suErrore: sendmail_marco        # opzionale: servizio da avvisare se fallisce (default: quello del main)
@@ -43,6 +45,24 @@ di notifica che il flusso automatico già usa (nessuna AI, nessuna scrittura su 
 3. Riavvio a metà: spegni il bot dopo una scadenza e riaccendilo prima della successiva → nessuna mail in
    più. Spegnilo oltre una scadenza (entro 10 minuti) e riaccendilo → UNA sola mail di recupero.
 4. A prova finita rimetti il `_` davanti a `prova.yml` (o cancellalo) e riavvia.
+
+## Promemoria delle preferenze (F3, inerte)
+
+`_promemoria_preferenze.yml` + `data/procedure/_promemoria_preferenze.yml` + i servizi `sendmail_generic` e
+`componimessaggio_promemoriapreferenze`: il primo di ogni mese alle 9 una mail a ogni membro Ghost SENZA
+label (che non ha compilato il form delle preferenze). Prima di accenderlo:
+
+1. **Compila `linkPreferenze`** in `services/componimessaggio_promemoriapreferenze.yml` e riscrivi il testo
+   (è una bozza). Finché il link è vuoto non parte nessuna mail: il servizio rifiuta di comporre un messaggio
+   con un campo vuoto.
+2. **Decidi `filtro: "subscribed:true"`** nei parametri: esclude chi si è disiscritto dalla newsletter su Ghost.
+   Togli la riga se le mail di servizio devono arrivare a tutti.
+3. Prova su dev: lì SendMail manda tutto a marco@taffi.it con oggetto "[TEST per ...]" e l'elenco è limitato a
+   3 membri. Rinomina in `promemoria_preferenze.yml`, `INGRESSI=on`, riavvia, attendi la scadenza (per vederla
+   subito cambia `quando` in `"*/3 * * * *"`).
+
+La procedura ha il `_` davanti perché in giraffiamo ogni procedura di `data/procedure` diventa un comando
+Telegram, e questa manda mail vere a molte persone.
 
 `_esempio.yml` mostra solo il formato. Un `INGRESSI=on` con file non validi ferma il bot all'avvio, con
 l'elenco di tutti i file sbagliati: è voluto.
