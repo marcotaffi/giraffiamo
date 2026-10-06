@@ -13,20 +13,21 @@ vengono caricati tutti i file con `registraNelBot: true` (non spenti con `attiva
 con `_` davanti). Se uno non parte il bot non parte e l'errore li elenca tutti. Negli step (`firma:`) e
 nelle opzioni dei servizi che chiamano altri servizi (es. `pubblicazione` di bozze) si scrive l'id del
 servizio, o `id_azione`: `ripubblica_giraffiamo_invia`, `sendmail_marco`. Il formato storico
-`servizio_destinazione_azione` funziona ancora ma nel log compare un avviso.
+`servizio_destinazione_azione` e il ripiego sul solo nome del servizio sono stati tolti (2026-10-06):
+una firma che non corrisponde a un id, a `id_azione` o al nome di un tool esposto è "non trovata".
 
 Nei `toolNames` di un agente ogni voce è un id (tutte le azioni del servizio esposte all'AI) oppure
 `id_azione` (una sola azione di quel servizio). I servizi standard della libreria
 (`taffitools/data/services`: `gestoredate_now_readClock`, `scraper_url_download`,
 `segnalaerrore_run_segnala`, `websearch_italia_low`) si elencano senza avere un file nel bot; un file
-del bot con lo stesso nome li sovrascrive. Creare un servizio senza file (ricavandolo dalla firma
-`servizio_destinazione_azione`) funziona ancora ma è deprecato e nel log compare un avviso.
+del bot con lo stesso nome li sovrascrive. Un servizio non si crea più dalla sola firma: serve sempre il
+suo file (nel bot o nel catalogo), altrimenti l'errore elenca i servizi configurati.
 
 ## Campi
 
 | campo             | obbl. | descrizione                                                     |
 |-------------------|-------|-----------------------------------------------------------------|
-| `firma`           | sì    | firma del servizio (formato storico `servizio_destinazione_azione`); per convenzione uguale al nome del file. L'identità resta il nome del file |
+| `firma`           | no    | facoltativa (se manca vale il nome del file, l'id). Alcune classi la leggono, es. `Console` (`console_info_log`). L'identità è sempre il nome del file |
 | `servizio`        | sì    | tipo di servizio (es. `ghost`, `wordpress`, `mail`, `proceduratool`…) |
 | `destinazione`    | no    | destinazione (es. il nome del sito): usata per costruire le firme chiamabili dall'AI |
 | `azione`          | no    | eventuale azione specifica                                      |
