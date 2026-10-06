@@ -1,0 +1,6 @@
+name: componi_promemoria_preferenze
+type: servizio
+description: "Compone la mail di promemoria delle preferenze per un membro Ghost"
+# Legge `email` dai dati dell'elemento (membro) e riempie il modello di
+# services/componimessaggio_promemoriapreferenze.yml: produce to/subject/text per l'invio.
+firma: componimessaggio_promemoriapreferenze

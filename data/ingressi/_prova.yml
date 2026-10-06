@@ -6,7 +6,7 @@
 sorgente: orologio
 quando: "*/3 * * * *"
 recuperaEntro: 10m
-procedura: prova_ingressi
+procedura: _prova_ingressi
 parametri:
   title: "PROVA ingressi (non è un articolo)"
   custom_excerpt: "Mail di prova del sistema degli ingressi: se la leggi, un ingresso a cadenza ha lanciato una procedura vera."

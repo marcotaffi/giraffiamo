@@ -3,6 +3,9 @@ description: prova del sistema degli ingressi (taffitools/docs/ingressi.md) — 
 type: sequenziale
 # Stateless: nessuna chat viva, ogni esecuzione parte pulita.
 stateful: false
+# Il "_" nel nome del file è voluto: in giraffiamo ogni procedura di data/procedure diventa un comando
+# Telegram, e questa non deve comparire nel menù del bot. Si carica comunque per nome (procedura:
+# _prova_ingressi nell'ingresso).
 # (2026-10-06) Procedura SOLO per provare su dev che un ingresso a cadenza (data/ingressi/_prova.yml)
 # lancia davvero una procedura con i suoi servizi: riusa i due passi di notifica che il flusso
 # "principale" già usa in produzione (ripubblica_pubblica.yml), senza AI né scritture su Ghost. I

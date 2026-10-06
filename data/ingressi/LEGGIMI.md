@@ -32,7 +32,8 @@ successiva (e gli altri, già serviti, si saltano). Per ciò che si può ripeter
 
 ## Prova su dev (kit pronto)
 
-`_prova.yml` + `data/procedure/prova_ingressi.yml`: ogni 3 minuti una mail di prova a Marco, con i passi
+`_prova.yml` + `data/procedure/_prova_ingressi.yml` (il `_` la tiene fuori dai comandi Telegram, che
+elencano tutte le procedure): ogni 3 minuti una mail di prova a Marco, con i passi
 di notifica che il flusso automatico già usa (nessuna AI, nessuna scrittura su Ghost).
 
 1. Rinomina `_prova.yml` in `prova.yml`, metti `INGRESSI=on` nel `.env` di giraffiamo, riavvia.

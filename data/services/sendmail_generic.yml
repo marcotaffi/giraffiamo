@@ -1,0 +1,9 @@
+firma: "sendmail_generic_send"
+servizio: "sendmail"
+registraNelBot: true  # servizio semplice, richiamato per id dagli step (es. invia_promemoria_preferenze)
+# (2026-10-06) Invio mail con destinatario variabile: il campo "to" arriva dai dati dello step, non da
+# qui (con destinazione "generic", se "to" manca l'invio fallisce invece di finire a qualcuno per
+# sbaglio). Serve alle mail a un elenco di iscritti (ingressi/_promemoria_preferenze.yml). Nessuno
+# degli agenti lo elenca nei toolNames: non è un tool della chat. Provider Gmail, come sendmail_marco.
+destinazione: "generic"
+azione: "send"

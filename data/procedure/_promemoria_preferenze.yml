@@ -1,0 +1,14 @@
+name: promemoria_preferenze
+description: manda a un membro Ghost senza preferenze la mail che gli chiede di sceglierle
+type: sequenziale
+# Stateless: nessuna chat viva, ogni esecuzione parte pulita.
+stateful: false
+# Il "_" nel nome del file è voluto: in giraffiamo ogni procedura di data/procedure diventa un comando
+# Telegram, e questa manda mail vere a molte persone: non deve poter partire da una chat. Si carica
+# comunque per nome (procedura: _promemoria_preferenze nell'ingresso).
+# Una esecuzione = UN membro (ingresso con modo: perElemento): riceve email, nome, labels... dai dati.
+tasks:
+  - name: componi_promemoria_preferenze
+    type: step
+  - name: invia_promemoria_preferenze
+    type: step

@@ -1,0 +1,25 @@
+# (2026-10-06) Compone la mail di promemoria a chi è iscritto su Ghost ma non ha ancora scelto le
+# preferenze (procedura _promemoria_preferenze, ingresso _promemoria_preferenze). Il destinatario è
+# l'email del membro, che arriva dai dati dell'elemento. Servizio semplice, non AI-callable.
+#
+# TESTO IN BOZZA, da riscrivere come vuoi tu. Due protezioni già attive: componimessaggio rifiuta di
+# comporre se un {{campo}} risulta vuoto, quindi finché "linkPreferenze" resta "" NESSUNA mail parte
+# (compare l'errore "il campo linkPreferenze vuoto" invece di una mail senza link).
+firma: componimessaggio_promemoriapreferenze
+servizio: componimessaggio
+registraNelBot: true
+destinazione: promemoriapreferenze  # solo un'etichetta per questa istanza, non un indirizzo
+azione: componi
+opzioni:
+  to: "{{email}}"
+  subject: "Giraffiamo: scegli cosa vuoi ricevere"
+  # DA COMPILARE con l'indirizzo del form delle preferenze (quello di data/azioniesterne/
+  # ghost_giraffiamo_modificamembro.yml, che sta sul sito). Vuoto = nessuna mail.
+  linkPreferenze: ""
+  text: >-
+    Ciao,<br><br>
+    ti scriviamo perché non hai ancora scelto le tue preferenze su Giraffiamo: dicci da dove vieni e
+    cosa ti interessa, così potremo segnalarti solo ciò che fa per te.<br><br>
+    Ci vuole un minuto: <a href="{{linkPreferenze}}">scegli le tue preferenze</a>.<br><br>
+    Grazie,<br>
+    la redazione di Giraffiamo
