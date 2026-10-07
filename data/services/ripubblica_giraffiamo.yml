@@ -39,7 +39,7 @@ flussi:
 # per la produzione reale. Verificato leggendo flussoraggruppasimili.ts: NON è un raggruppamento
 # grezzo per sola categoria condivisa (quello che sembrava il difetto nel test sopra), ma
 # categoria condivisa E similarità degli embeddings del testo oltre una soglia
-# (mainBrain.similarityThreshold, 0.45 in produzione, più permissiva 0.35 solo in TEST_ONLY) —
+# (mainBrain.similarityThreshold, 0.45 in produzione, più permissiva 0.35 solo con MODALITA non reale) —
 # un'approssimazione ragionevole di "stesso evento", non un raggruppamento a caso. Il
 # comportamento del test precedente è quasi certamente un artefatto del burst di test (molte
 # fonti scollegate forzate nella stessa finestra stretta), non rappresentativo del traffico reale

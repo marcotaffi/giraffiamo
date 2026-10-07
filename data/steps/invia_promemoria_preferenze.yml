@@ -1,6 +1,6 @@
 name: invia_promemoria_preferenze
 type: servizio
 description: "Invia la mail di promemoria al membro (to/subject/text composti dal passo precedente)"
-# sendmail_generic: il destinatario è il campo `to` composto dal passo precedente. In dev (TEST_ONLY)
-# SendMail reindirizza la mail a marco@taffi.it con oggetto "[TEST per ...]".
+# sendmail_generic: il destinatario è il campo `to` composto dal passo precedente. Con MODALITA
+# `sicuro` o `simulato` SendMail reindirizza la mail a marco@taffi.it con oggetto "[TEST per ...]".
 firma: sendmail_generic

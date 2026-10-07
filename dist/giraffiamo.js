@@ -20,9 +20,7 @@ const webChatUrl = process.env.WEBCHAT_URL || "";
 //const SERPHOUSE = process.env['SERPHOUSE'];  //solo per debug
 //const SEOZOOM = process.env['SEOZOOM'];  //solo per debug
 ProcessManager.getInstance().setDebugLevel(process.env.DEBUG_LEVEL);
-const TEST_ONLY = !!process.env['TEST_ONLY'] && process.env['TEST_ONLY'] !== "false";
-if (TEST_ONLY)
-    debug(2, "Sono in test e quindi faccio tutto senza pubblicare");
+ProcessManager.getInstance().setModalita(process.env.MODALITA); // reale | sicuro | simulato: senza, il bot non parte
 /*
  
 const promptsArticolo : PromptArticolo = {
@@ -70,7 +68,6 @@ const credenziali = {
     //wordpress_sito: "https://www.apg23.org",
     //wordpress_basic_auth: IOOO,
     //categoryMapping,
-    test_only: TEST_ONLY,
 };
 let tags = [];
 let feeds = [];
@@ -517,7 +514,7 @@ feeds = [
         if (process.env.GIRAFFIAMO_TAFFISERVER_SEGRETO)
             bot.setSegreto(process.env.GIRAFFIAMO_TAFFISERVER_SEGRETO);
         debug(3, "*Avvio il bot*");
-        await bot.start(TEST_ONLY); // inizializza i canali e avvia il websocket
+        await bot.start(); // inizializza i canali e avvia il websocket
         debug(0, "*Bot avviato.*", bot.constructor.name);
     }
     catch (error) {

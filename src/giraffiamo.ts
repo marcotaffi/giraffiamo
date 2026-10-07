@@ -26,9 +26,8 @@ const webChatUrl = process.env.WEBCHAT_URL||"";
 //const SERPHOUSE = process.env['SERPHOUSE'];  //solo per debug
 //const SEOZOOM = process.env['SEOZOOM'];  //solo per debug
 ProcessManager.getInstance().setDebugLevel(process.env.DEBUG_LEVEL);
+ProcessManager.getInstance().setModalita(process.env.MODALITA); // reale | sicuro | simulato: senza, il bot non parte
 
-const TEST_ONLY: boolean = !!process.env['TEST_ONLY'] && process.env['TEST_ONLY'] !== "false";
-if (TEST_ONLY) debug(2, "Sono in test e quindi faccio tutto senza pubblicare");
 
 
 /*
@@ -81,7 +80,6 @@ googleRefreshToken: googleRefreshToken,
 //wordpress_sito: "https://www.apg23.org",
 //wordpress_basic_auth: IOOO,
 //categoryMapping,
-test_only: TEST_ONLY,
 };
  
 
@@ -581,7 +579,7 @@ aiManager.setDefaultParams({ assistant_id: assistantID }, "chatgpt-assistants-ap
 
       debug(3, "*Avvio il bot*");
 
-       await bot.start(TEST_ONLY); // inizializza i canali e avvia il websocket
+       await bot.start(); // inizializza i canali e avvia il websocket
 
       
         debug(0,"*Bot avviato.*", bot.constructor.name);

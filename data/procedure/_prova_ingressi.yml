@@ -10,7 +10,7 @@ stateful: false
 # lancia davvero una procedura con i suoi servizi: riusa i due passi di notifica che il flusso
 # "principale" già usa in produzione (ripubblica_pubblica.yml), senza AI né scritture su Ghost. I
 # campi title / custom_excerpt / slug che il modello della mail si aspetta arrivano dai `parametri`
-# dell'ingresso (finiscono nei dati del tick). In dev (TEST_ONLY) SendMail la manda comunque, ma
+# dell'ingresso (finiscono nei dati del tick). Con MODALITA=sicuro SendMail la manda davvero, ma
 # a marco@taffi.it e con l'oggetto marcato "[TEST per ...]".
 tasks:
   - name: componi_notifica_marco

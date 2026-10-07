@@ -60,13 +60,14 @@ consenso già dato, disiscrizione su Ghost, nessun link di disiscrizione (deciso
 - **Il filtro** è `newsletters.slug:eventi` (le newsletter di Ghost sono "Gli eventi" = `eventi` e "Podcast e
   approfondimenti tematici" = `default-newsletter`) più `senzaLabel: true`. Il 06/10/2026: 35 membri, 34 iscritti a
   "Gli eventi", **11 senza label** (2 di loro hanno una nota già scritta: se vuoi escluderli, `senzaNota: true`).
-- **Produzione**: giraffiamo su cloud ha `DEBUG_LEVEL=5`, e da 5 in su SendMail simula (le mail vanno a Marco).
-  Per mandarle davvero serve ≤ 4.
+- **Produzione**: le mail partono davvero ai destinatari solo con `MODALITA=reale` nel `.env` (con `sicuro` vanno
+  tutte a Marco, con `simulato` non parte nulla). Il `DEBUG_LEVEL` regola solo i log.
 
 ### Prova su dev del promemoria
 
-In dev le mail vanno tutte a marco@taffi.it con oggetto `[TEST per <indirizzo vero>]` e l'elenco è limitato a 3
-membri. Si prova con i dati veri, con una cadenza fitta in un file non tracciato da git:
+Con `MODALITA=sicuro` nel `.env` le mail partono davvero ma vanno tutte a marco@taffi.it con oggetto
+`[TEST per <indirizzo vero>]`, l'elenco è limitato a 3 membri e le scritture su Ghost sono simulate (con `simulato`
+il flusso gira ma non parte nessuna mail). Si prova con i dati veri, con una cadenza fitta in un file non tracciato da git:
 
 ```bash
 cd /srv/giraffiamo/data/ingressi
