@@ -7,3 +7,9 @@ registraNelBot: true  # servizio semplice, richiamato per id dagli step (es. inv
 # degli agenti lo elenca nei toolNames: non è un tool della chat. Provider Gmail, come sendmail_marco.
 destinazione: "generic"
 azione: "send"
+opzioni:
+  # (2026-10-07, richiesto da Marco) Copia NASCOSTA (bcc) di ogni mail a Marco: i destinatari non vedono il suo
+  # indirizzo. Le mail oggi sono solo i promemoria delle preferenze (una per membro). Per una copia visibile si
+  # scrive `cc` al posto di `bcc`. Con MODALITA diversa da `reale` cc/bcc vengono azzerati (la mail va comunque
+  # solo a Marco, vedi SendMail.send), quindi in dev non si duplica nulla.
+  bcc: "marco@taffi.it"

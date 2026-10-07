@@ -7,6 +7,9 @@
 # caricano: ripiego su Georgia e Helvetica), accento #e4ab41, testo #15171a, sfondo avorio #f9f4ef come
 # quello del logo, testo grande (20px). HTML in stile inline e a tabelle, che è ciò che i client di
 # posta capiscono. Il logo è quello del sito (storage.ghost.io).
+# SALUTO: "Ciao Barbara," se Ghost conosce il nome del membro (`nomeProprio`, la prima parola del suo nome),
+# altrimenti "Ciao,". Neutro apposta: dal nome non si può sapere se scrivere "Cara" o "Caro". Per cambiare la
+# formula basta modificare la riga col saluto (es. "Gentile{{#nomeProprio}} {{nomeProprio}}{{/nomeProprio}},").
 # Protezione: componimessaggio rifiuta di comporre se un {{campo}} risulta vuoto, quindi senza
 # "linkPreferenze" o senza l'email del membro NESSUNA mail parte.
 firma: componimessaggio_promemoriapreferenze
@@ -27,7 +30,7 @@ opzioni:
     <tr><td align="center" style="padding:0 0 8px 0;"><img src="https://storage.ghost.io/c/22/e1/22e1b97c-0430-4390-9fd1-cab0a431acac/content/images/2026/05/dire_cio_che_conta_logo.png" width="150" alt="Giraffiamo!" style="display:block;border:0;width:150px;max-width:100%;height:auto;"></td></tr>
     <tr><td align="center" style="padding:8px 8px 0 8px;font-family:Lora,Georgia,'Times New Roman',serif;font-size:30px;line-height:1.25;font-weight:bold;color:#15171a;">Scegli cosa vuoi ricevere</td></tr>
     <tr><td align="center" style="padding:14px 0 6px 0;"><table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr><td width="56" height="3" style="width:56px;height:3px;line-height:3px;font-size:3px;background:#e4ab41;">&nbsp;</td></tr></table></td></tr>
-    <tr><td style="padding:18px 8px 0 8px;font-family:Inter,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:20px;line-height:1.6;color:#15171a;">Ciao,<br><br>
+    <tr><td style="padding:18px 8px 0 8px;font-family:Inter,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:20px;line-height:1.6;color:#15171a;">Ciao{{#nomeProprio}} {{nomeProprio}}{{/nomeProprio}},<br><br>
     ti scriviamo perché non hai ancora scelto le tue preferenze su Giraffiamo: dicci da dove vieni e cosa ti interessa, così potremo segnalarti solo ciò che fa per te.<br><br>
     Ci vuole un minuto:</td></tr>
     <tr><td align="center" style="padding:22px 8px 10px 8px;"><a href="{{linkPreferenze}}" style="display:inline-block;background:#e4ab41;color:#15171a;font-family:Inter,'Helvetica Neue',Helvetica,Arial,sans-serif;font-size:20px;font-weight:bold;line-height:1.2;text-decoration:none;padding:16px 30px;border-radius:6px;">Scegli le tue preferenze</a></td></tr>

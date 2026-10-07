@@ -3,7 +3,7 @@
 # cadenza più fitta (vedi data/ingressi/LEGGIMI.md, "Prova su dev"): lì SendMail manda tutto a
 # marco@taffi.it con oggetto "[TEST per ...]" e l'elenco è limitato a 3 membri.
 #
-# Il primo di ogni mese alle 9 prende da Ghost gli iscritti alla newsletter "Gli eventi" che non hanno
+# Il 15 di ogni mese alle 9 prende da Ghost gli iscritti alla newsletter "Gli eventi" che non hanno
 # NESSUNA label (cioè che non hanno compilato il form delle preferenze) e manda a ciascuno UNA mail.
 # Mail di SERVIZIO: consenso già dato, disiscrizione gestita su Ghost, nessun link di disiscrizione
 # (deciso da Marco il 06/10/2026). "unaVolta": ogni membro è segnato servito prima dell'invio, quindi un
@@ -12,8 +12,16 @@
 # riparte a ogni scadenza.
 #
 # Numeri del 06/10/2026: 35 membri, 34 iscritti a "Gli eventi", 11 senza label (2 di questi hanno una nota).
+#
+# PRIMO INVIO: attivare questo file NON manda nulla subito. Al primo avvio il bot salva "adesso" come punto di partenza e
+# il primo invio è la prima scadenza della cadenza DOPO quel momento. Con "0 9 15 * *" è il 15 del mese (se il bot parte
+# entro il 15 alle 9; altrimenti il 15 del mese dopo). Per un altro giorno cambia il terzo campo (da 1 a 28).
+# Il timer è salvato su file (data/stato-ingressi/, fuori da git): sopravvive ai riavvii e ai deploy, e dopo l'invio si
+# ripete alla stessa data del mese dopo. Se il bot è spento alle 9, recuperaEntro (3 giorni) lo manda al ritorno.
+# Se il bot si ferma MENTRE spedisce, al riavvio il giro riprende da dove era (chi l'ha già ricevuta non la riceve due volte).
+# Ogni mail ha Marco in copia nascosta (bcc, vedi services/sendmail_generic.yml) e il saluto "Ciao Barbara," se il nome c'è.
 sorgente: ghost_giraffiamo_elencaMembri
-quando: "0 9 1 * *"
+quando: "0 9 15 * *"   # il 15 di ogni mese alle 9 (scelto il 07/10/2026: primo invio il 15 ottobre, circa una settimana dopo l'attivazione)
 recuperaEntro: 3d
 procedura: _promemoria_preferenze
 consegna: unaVolta

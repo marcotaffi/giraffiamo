@@ -60,6 +60,12 @@ consenso già dato, disiscrizione su Ghost, nessun link di disiscrizione (deciso
 - **Il filtro** è `newsletters.slug:eventi` (le newsletter di Ghost sono "Gli eventi" = `eventi` e "Podcast e
   approfondimenti tematici" = `default-newsletter`) più `senzaLabel: true`. Il 06/10/2026: 35 membri, 34 iscritti a
   "Gli eventi", **11 senza label** (2 di loro hanno una nota già scritta: se vuoi escluderli, `senzaNota: true`).
+- **Saluto e copia**: "Ciao Barbara," se Ghost ha il nome del membro (la sua prima parola), altrimenti "Ciao,". Neutro
+  apposta: dal nome non si sa se scrivere "Cara" o "Caro". Marco è in **copia nascosta** (bcc) di ogni mail
+  (`services/sendmail_generic.yml`); `cc` al posto di `bcc` per una copia visibile.
+- **Primo invio**: attivare il file non manda nulla subito. Il primo invio è la prima scadenza DOPO l'avvio del bot: con
+  `0 9 1 * *` il 1° del mese dopo; per farlo partire fra qualche giorno si sceglie il giorno nella cadenza (es. `0 9 15 * *`,
+  da 1 a 28). Il timer è salvato su file e si ripete ogni mese; se il bot si ferma mentre spedisce, il giro riprende.
 - **Produzione**: le mail partono davvero ai destinatari solo con `MODALITA=reale` nel `.env` (con `sicuro` vanno
   tutte a Marco, con `simulato` non parte nulla). Il `DEBUG_LEVEL` regola solo i log.
 
