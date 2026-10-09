@@ -156,3 +156,6 @@ documentigenerati/
 # in git né sovrascritti da un pull. Chi collega un altro bot agli ingressi deve aggiungerle al suo.
 data/stato-ingressi/
 data/deadletter-ingressi/
+
+# porta locale del processo (taffitools system/socketsistema.ts)
+run/
