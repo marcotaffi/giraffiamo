@@ -3,8 +3,9 @@ description: "Sceglie e descrive il soggetto della cover a partire dall'articolo
 type: prompt
 prompt: genera_prompt_cover
 agentName: artdirector
-# "prompt" (richiesta dalla chat) e "materialeIniziale" (articolo dal feed) entrano da soli nel
-# prompt; title e custom_excerpt aggiungono l'articolo già scritto, quando c'è.
+# Nel prompt entra solo ciò che è elencato qui (2026-10-09, vedi taffitools
+# docs/passaggio-contenuti.md). Prima "prompt" e "materialeIniziale" entravano da soli: ora sono
+# elencati in fondo, così il comportamento resta quello di prima.
 materiale:
   - campo: title
     etichetta: TITOLO ARTICOLO
@@ -14,6 +15,15 @@ materiale:
   # il primo dei due non vuoto vince, quindi nessun cambiamento per chi passa custom_excerpt.
   - campo: [custom_excerpt, excerpt]
     etichetta: SOTTOTITOLO
+    obbligatorio: false
+  # La richiesta dalla chat o dal tool della copertina ("passa in prompt cosa deve rappresentare").
+  - campo: prompt
+    etichetta: "RICHIESTA PER LA COPERTINA (se c'è, seguila)"
+    obbligatorio: false
+  # Sul percorso automatico è l'unico testo dell'articolo che questo step riceve (ha già i suoi
+  # marcatori "=== INIZIO/FINE MATERIALE ===", niente etichetta).
+  - campo: materialeIniziale
+    modo: text
     obbligatorio: false
 # Cronologia (2026-09-29): questo step lavora solo sul proprio input esplicito (prompt +
 # materiale dichiarato qui). Il resto della conversazione per lui è rumore e rischia di mescolare

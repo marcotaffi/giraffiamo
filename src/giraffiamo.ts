@@ -551,6 +551,9 @@ aiManager.setDefaultParams({ assistant_id: assistantID }, "chatgpt-assistants-ap
   debug (3, "*Definisco il bot*")
 
   const bot = new BotIooo(aiManager, "giraffiamo");
+  // SIGTERM/SIGINT = chiusura ordinata (aspetta il lavoro in corso, fa partire le risposte, salva); errore non
+  // gestito = log, chiusura, uscita con codice 1. Vedi BotIooo.stop e TODO.md §10 (P0).
+  bot.gestisciChiusura();
 
   debug (3, "*Aggiungo le inferfacce*")
 

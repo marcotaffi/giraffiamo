@@ -492,6 +492,9 @@ feeds = [
         */
         debug(3, "*Definisco il bot*");
         const bot = new BotIooo(aiManager, "giraffiamo");
+        // SIGTERM/SIGINT = chiusura ordinata (aspetta il lavoro in corso, fa partire le risposte, salva); errore non
+        // gestito = log, chiusura, uscita con codice 1. Vedi BotIooo.stop e TODO.md §10 (P0).
+        bot.gestisciChiusura();
         debug(3, "*Aggiungo le inferfacce*");
         await bot.aggiungieInizializzaInterfaccePredefinite(credenziali);
         debug(3, "*Carico canali e servizi del bot dai file*");

@@ -4,7 +4,13 @@ description: "Applica a una bozza la modifica richiesta, cambiando solo ciò che
 prompt: revisiona_giraffiamo
 agentName: revisore_giraffiamo
 richiedeMateriale: true
+# La richiesta va elencata qui: con "materiale" dichiarato nel prompt entra solo ciò che è
+# elencato (2026-10-09, vedi taffitools docs/passaggio-contenuti.md).
 materiale:
+  - campo: prompt
+    pick: last
+    etichetta: "RICHIESTA DI MODIFICA"
+    obbligatorio: true
   - campo: testoDaModificare
     pick: last
     etichetta: "TESTO DELLA BOZZA DA MODIFICARE (lavora solo su questo; se lo cambi, restituiscilo intero)"
